@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPlants } from './actions/fetchPlants';
 import LoginButton from './components/LoginButton';
+import LogoutButton from './components/LogoutButton';
 import CollectionsContainer from './containers/CollectionsContainer';
 import PlantsContainer from './containers/PlantsContainer';
 import UsersContainer from './containers/UsersContainer';
@@ -17,6 +18,7 @@ class App extends React.Component {
       <CollectionsContainer />
       <UsersContainer />
       <LoginButton />
+      <LogoutButton />
     </div>
     );
   }
