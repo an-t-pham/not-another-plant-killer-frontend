@@ -1,11 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fetchPlants } from './actions/fetchPlants';
 
 class App extends React.Component {
-  componentDidMount() {
-    fetch('http://localhost:3000/api/v1/plants')
-    .then(resp => resp.json())
-    .then(r => console.log(r.data[0].attributes.light.ideal_location))
-  }
+  // componentDidMount() {
+  //   this.props.fetchPlants({type: 'FETCH_PLANT', payload: {name: 'testing'}})
+  // }
   render() {
     return (
     <div className="App">
@@ -15,4 +15,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(null, {fetchPlants})(App);
