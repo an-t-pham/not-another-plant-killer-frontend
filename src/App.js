@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPlants } from './actions/fetchPlants';
+import CollectionsContainer from './containers/CollectionsContainer';
+import PlantsContainer from './containers/PlantsContainer';
+import UsersContainer from './containers/UsersContainer';
 
 class App extends React.Component {
   // componentDidMount() {
@@ -9,7 +12,9 @@ class App extends React.Component {
   render() {
     return (
     <div className="App">
-     App
+      <PlantsContainer />
+      <CollectionsContainer />
+      <UsersContainer />
     </div>
     );
   }
