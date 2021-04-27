@@ -16,6 +16,8 @@ ReactDOM.render(
     domain="an-tp.eu.auth0.com"
     clientId="ODD637c2s38AAswbXggHMg8CEVVbl0IQ"
     redirectUri={window.location.origin}
+    audience="https://an-tp.eu.auth0.com/api/v2/"
+    scope="read:current_user update:current_user_metadata"
   >
     <Provider store={store}>
       <App />
