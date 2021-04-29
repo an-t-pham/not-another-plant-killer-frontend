@@ -23,6 +23,13 @@ const NavBar = () => {
         >
           Your Collections
         </NavLink>
+
+        <NavLink 
+          style={{ marginRight: '10px' }} 
+          to= `/users/${user.sub}/`
+        >
+          Your Garden
+        </NavLink>
       </div>
     );
 };

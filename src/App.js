@@ -6,10 +6,9 @@ import CollectionsContainer from './containers/CollectionsContainer';
 import PlantsContainer from './containers/PlantsContainer';
 import UsersContainer from './containers/UsersContainer';
 
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
+import { Router, Route, Switch} from 'react-router-dom';
+import { Auth0Provider, withAuthenticationRequired } from '@auth0/auth0-react';
+import { createBrowserHistory } from 'history';
 import NavBar from './components/NavBar';
 import LogoutButton from './components/LogoutButton';
 
@@ -27,12 +26,45 @@ class App extends React.Component {
 
       <Router>
         <div>
-          <NavBar />
-          <Route exact path="/" render={() => <div>Home</div>} />
+         
+          {/* <Route>exact path="/" render={() => (
+                    <div>
+                      <LoginButton />
+                    </div>     
+                )
+             }     
+          } </Route> 
           <Route path='/plants' render={() => <PlantsContainer/>} />
-          <LoginButton />
+          
           <LogoutButton />
-        </div>
+        </div> */}
+
+        <div>
+        <NavBar />
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/topics">Topics</Link>
+          </li>
+        </ul>
+
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/topics">
+            <Topics />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
       </Router>
       
     </div>

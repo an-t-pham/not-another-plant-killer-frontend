@@ -1,34 +1,17 @@
 import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useApiRequest } from "../api";
 
 const LoginButton = () => {
-    const { loginWithRedirect, getAccessTokenSilently } = useAuth0();
+    const { loginWithRedirect } = useAuth0();
+    const apiRequest = useApiRequest();
 
     useEffect(() => {
         const getUserMetadata = async () => {
-          const domain = "an-tp.eu.auth0.com";
-      
-          try {
-            const accessToken = await getAccessTokenSilently({
-              audience: `https://${domain}/api/v2/`,
-              scope: "read:current_user",
-            });
-      
-            const userDetailsByIdUrl = `http://localhost:3000/private`;
-      
-            const metadataResponse = await fetch(userDetailsByIdUrl, {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              }
-            });
-      
-            const test = await metadataResponse.json();
-            console.log(test)
-           
-          } catch (e) {
-            console.log(e.message);
-          }
-        };
+            const response = await apiRequest("/private")
+            console.log(response);
+        }
+ 
       
         getUserMetadata();
       }, []);
