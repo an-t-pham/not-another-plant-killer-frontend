@@ -17,6 +17,7 @@ import Profile from './components/Profile';
 import PlantsContainer from './containers/PlantsContainer';
 import Collections from './components/Collections';
 import Collection from './components/Collection';
+import UsersContainer from './containers/UsersContainer';
 
 const history = createBrowserHistory();
 
@@ -47,12 +48,12 @@ class App extends React.Component {
 
       <Router history={history}>
          <Switch>
-            <Route exact path="/" render={() => <div> <NavBar /> <LoginButton /> </div> }/> 
+            <Route exact path="/" render={() => <div> <NavBar /> </div> }/> 
             <Route path="/plants" render={() => <PlantsContainer/>} />
-            <ProtectedRoute path="/profile" component={Profile} />
-            <ProtectedRoute path="/profile/plants" component={UserPlants} />
-            <ProtectedRoute path="/profile/collections" component={Collections} />
-            <ProtectedRoute path="/profile/collection/:id" component={Collection} />
+            <ProtectedRoute exact path="/profile" component={Profile} />
+            <ProtectedRoute exact path="/profile/plants" component={UserPlants} />
+            <ProtectedRoute exact path="/profile/collections" component={Collections} />
+            <ProtectedRoute exact path="/profile/collection/:id" component={Collection} />
          </Switch>
       </Router>
       </Auth0Provider>
