@@ -1,9 +1,10 @@
 import React from 'react';
 import PlantInput from '../components/PlantInput';
 import Plants from '../components/Plants';
+import { connect } from 'react-redux';
 
 
-export default class PlantsContainer extends React.Component {
+ class PlantsContainer extends React.Component {
     render() {
         return (
            <div>
@@ -13,3 +14,11 @@ export default class PlantsContainer extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        plants: state.plants
+    }
+}
+
+export default connect(mapStateToProps)(PlantsContainer)
