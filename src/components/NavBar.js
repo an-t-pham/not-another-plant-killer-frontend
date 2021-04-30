@@ -26,7 +26,7 @@ const NavBar = () => {
 
         <NavLink 
           style={{ marginRight: '10px' }} 
-          to= `/users/${user.sub}/`
+          to= "users/:id/plants"
         >
           Your Garden
         </NavLink>

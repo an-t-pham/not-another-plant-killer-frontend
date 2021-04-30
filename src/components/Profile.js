@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useApiRequest } from "../api";
+import LogoutButton from "./LogoutButton";
 
 const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
@@ -19,7 +20,7 @@ const Profile = () => {
     };
   
     getUserMetadata();
-  }, []);
+  }, [apiRequest, user.sub]);
 
   return (
     isAuthenticated && (
@@ -33,6 +34,8 @@ const Profile = () => {
         ) : (
           "No user metadata defined"
         )}
+
+        <LogoutButton />
       </div>
     )
   );

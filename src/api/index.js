@@ -27,7 +27,7 @@ export const useApiRequest = () => {
         } catch (e) {
             console.log(e.message);
         }
-    }, []) 
+    }, [getAccessTokenSilently]) 
    
    return request;
 }
