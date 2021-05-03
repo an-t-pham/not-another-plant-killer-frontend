@@ -1,21 +1,12 @@
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-    users: usersReducer,
     collections: collectionsReducer,
     plants: plantsReducer
 });
 
 export default rootReducer;
 
-function usersReducer(state = [], action) {
-    switch(action.type) {
-        case "ADD_USER":
-            return [...state, action.user];
-        default:
-            return state;
-    }
-}
 
 function collectionsReducer(state = [], action) {
    let idx;
@@ -33,9 +24,11 @@ function collectionsReducer(state = [], action) {
 }
 
 function plantsReducer(state = [], action) {
+
+
     switch(action.type) {
         case "FETCH_PLANTS":
-            return [...state];
+            return action.payload;
 
         case "ADD_PLANT":
             return [...state, action.plant];

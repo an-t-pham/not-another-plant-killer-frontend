@@ -15,6 +15,7 @@ import LoginButton from './components/LoginButton';
 import UserPlants from './components/UserPlants';
 import Profile from './components/Profile';
 import PlantsContainer from './containers/PlantsContainer';
+import Plants from './components/Plants';
 import Collections from './components/Collections';
 import Collection from './components/Collection';
 import UsersContainer from './containers/UsersContainer';
@@ -49,7 +50,7 @@ class App extends React.Component {
       <Router history={history}>
          <Switch>
             <Route exact path="/" render={() => <div> <NavBar /> </div> }/> 
-            <Route path="/plants" render={() => <PlantsContainer/>} />
+            <Route path="/plants" render={() => <PlantsContainer />} />
             <ProtectedRoute exact path="/profile" component={Profile} />
             <ProtectedRoute exact path="/profile/plants" component={UserPlants} />
             <ProtectedRoute exact path="/profile/collections" component={Collections} />
