@@ -14,7 +14,7 @@ import { fetchPlants } from '../actions/fetchPlants';
     render() {
         return (
            <div>
-               <PlantInput />
+               <PlantInput /><br /> <br />
                <Plants plants={this.props.plants}/>
            </div>
         )
