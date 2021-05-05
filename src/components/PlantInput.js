@@ -10,7 +10,7 @@ import { addPlant } from '../actions/addPlant';
         size_pot: "",
         pet_friendly: false,
         water: "1",
-        light: "1"
+        light: 1
     }
 
     handleChange = (e) => {
@@ -33,7 +33,7 @@ import { addPlant } from '../actions/addPlant';
 
     handleLightLevel = (e) => {
         this.setState({
-            light: e.target.value
+            light: parseInt(e.target.value)
         })
     }
 
@@ -42,7 +42,12 @@ import { addPlant } from '../actions/addPlant';
         this.props.addPlant(this.state);
     }
 
+    
+   
+
     render() {
+       console.log(this.props.lights)
+       console.log(this.state.light)
         return (
            <div>
                <form onSubmit={this.handleSubmit}>
@@ -67,14 +72,13 @@ import { addPlant } from '../actions/addPlant';
                       <label>Level 4 - Water every two to three days, less in winter.</label><br /> 
 
                     <p>Light Condition:</p>
-                      <input type="radio" id="1" name="light" checked={this.state.light === "1"} alue="1" onChange={this.handleLightLevel} />
-                      <label>Level 1 - Prefers indirect sunlight.</label><br />
-                      <input type="radio" id="2" name="light" checked={this.state.light === "2"} value="2" onChange={this.handleLightLevel} />
-                      <label>Level 2 - Thrives in moderate sunlight.</label><br />
-                      <input type="radio" id="3" name="light" checked={this.state.light === "3"} value="3" onChange={this.handleLightLevel} />
-                      <label>Level 3 - Loves bright but indirect sunlight.</label><br />
-                      <input type="radio" id="4" name="light" checked={this.state.light === "4"} value="4" onChange={this.handleLightLevel} />
-                      <label>Level 4 - Flourishes in bright sunlight.</label><br /> 
+                      { this.props.lights && this.props.lights.map(light => (
+                        <div key={light.id}>
+                            <input type="radio" name="light" checked={this.state.light === light.attributes.level} value={light.attributes.level} onChange={this.handleLightLevel} />
+                            <label>Level {light.attributes.level} - {light.attributes.description}.</label>
+                            <br />
+                        </div>)
+                        )}
 
                    <input type="submit" value="Submit" />
                  
