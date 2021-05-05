@@ -4,6 +4,7 @@ import Plants from '../components/Plants';
 import { connect } from 'react-redux';
 import { fetchPlants } from '../actions/fetchPlants';
 import { fetchLights } from '../actions/fetchLights';
+import { fetchWaters } from '../actions/fetchWaters';
 
 
  class PlantsContainer extends React.Component {
@@ -11,12 +12,13 @@ import { fetchLights } from '../actions/fetchLights';
     componentDidMount() {
         this.props.fetchPlants()
         this.props.fetchLights()
+        this.props.fetchWaters()
     }
     
     render() {
         return (
            <div>
-               <PlantInput lights={this.props.lights}/><br /> <br />
+               <PlantInput lights={this.props.lights} waters={this.props.waters} /><br /> <br />
                <Plants plants={this.props.plants}/>
            </div>
         )
@@ -26,8 +28,9 @@ import { fetchLights } from '../actions/fetchLights';
 const mapStateToProps = state => {
     return {
         plants: state.plants,
-        lights: state.lights
+        lights: state.lights,
+        waters: state.waters
     }
 }
 
-export default connect(mapStateToProps, { fetchPlants, fetchLights })(PlantsContainer)
+export default connect(mapStateToProps, { fetchPlants, fetchLights, fetchWaters })(PlantsContainer)

@@ -3,7 +3,8 @@ import { combineReducers } from 'redux';
 const rootReducer = combineReducers({
     collections: collectionsReducer,
     plants: plantsReducer,
-    lights: lightsReducer
+    lights: lightsReducer,
+    waters: watersReducer
 });
 
 export default rootReducer;
@@ -41,6 +42,17 @@ function plantsReducer(state = [], action) {
 function lightsReducer(state = [], action) {
     switch(action.type) {
          case "FETCH_LIGHTS":
+             return action.payload;
+             
+         default:
+             return state;
+     }
+ 
+ }
+
+ function watersReducer(state = [], action) {
+    switch(action.type) {
+         case "FETCH_WATERS":
              return action.payload;
              
          default:

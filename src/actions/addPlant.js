@@ -8,11 +8,11 @@ export const addPlant = (data) => {
             method: 'POST',
             body: JSON.stringify(data)
         })
-        // .then(resp => resp.json())
-        // .then(plant => dispatch({
-        //     type: 'ADD_PLANT',
-        //     payload: plant
-        // }))
+        .then(resp => resp.json())
+        .then(plant => dispatch({
+            type: 'ADD_PLANT',
+            payload: plant.data
+        }))
     }
     
 }

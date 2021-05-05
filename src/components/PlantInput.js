@@ -10,7 +10,7 @@ import { addPlant } from '../actions/addPlant';
         size_pot: "",
         pet_friendly: false,
         water: "1",
-        light: 1
+        light: "1"
     }
 
     handleChange = (e) => {
@@ -33,7 +33,7 @@ import { addPlant } from '../actions/addPlant';
 
     handleLightLevel = (e) => {
         this.setState({
-            light: parseInt(e.target.value)
+            light: e.target.value
         })
     }
 
@@ -46,8 +46,7 @@ import { addPlant } from '../actions/addPlant';
    
 
     render() {
-       console.log(this.props.lights)
-       console.log(this.state.light)
+        console.log(this.props.waters)
         return (
            <div>
                <form onSubmit={this.handleSubmit}>
@@ -62,20 +61,19 @@ import { addPlant } from '../actions/addPlant';
                    <label>Pet Friendly: </label>
                    <input type="checkbox" name="pet_friendly" onChange={this.handleChecked} checked={this.state.pet_friendly} /><br/>
                    <p>Watering:</p>
-                      <input type="radio" id="1" name="water1" checked={this.state.water === "1"} value="1" onChange={this.handleWaterLevel} />
-                      <label>Level 1 - Water once or twice a month, less in winter.</label><br />
-                      <input type="radio" id="2" name="water2" checked={this.state.water === "2"} value="2" onChange={this.handleWaterLevel} />
-                      <label>Level 2 - Water once a week, much less in winter.</label><br />
-                      <input type="radio" id="3" name="water3" checked={this.state.water === "3"} value="3" onChange={this.handleWaterLevel} />
-                      <label>Level 3 - Water twice a week during summer, once a week during winter.</label><br />
-                      <input type="radio" id="4" name="water4" checked={this.state.water === "4"} value="4" onChange={this.handleWaterLevel} />
-                      <label>Level 4 - Water every two to three days, less in winter.</label><br /> 
+                   { this.props.waters && this.props.waters.map(water => (
+                        <div key={water.id}>
+                            <input type="radio" name="water" checked={this.state.water === water.id} value={water.id} onChange={this.handleWaterLevel} />
+                            <label>Level {water.attributes.level} - {water.attributes.description}.</label>
+                            <br />
+                        </div>)
+                        )}
 
                     <p>Light Condition:</p>
                       { this.props.lights && this.props.lights.map(light => (
                         <div key={light.id}>
-                            <input type="radio" name="light" checked={this.state.light === light.attributes.level} value={light.attributes.level} onChange={this.handleLightLevel} />
-                            <label>Level {light.attributes.level} - {light.attributes.description}.</label>
+                            <input type="radio" name="light" checked={this.state.light === light.id} value={light.id} onChange={this.handleLightLevel} />
+                            <label>Level {light.attributes.level} - {light.attributes.description}. Ideal location: {light.attributes.ideal_location} </label>
                             <br />
                         </div>)
                         )}
@@ -87,5 +85,15 @@ import { addPlant } from '../actions/addPlant';
         )
     }
 }
+
+// const mapDispatchToProps = (dispatch, props) => {
+//     return {
+//         addPlant: (plantData) => {
+//            console.log(plantData)
+//            return dispatch(addPlant(plantData))
+//         }
+//     }
+
+// }
 
 export default connect(null, { addPlant }) (PlantInput);
