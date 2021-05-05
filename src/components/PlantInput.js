@@ -86,14 +86,4 @@ import { addPlant } from '../actions/addPlant';
     }
 }
 
-// const mapDispatchToProps = (dispatch, props) => {
-//     return {
-//         addPlant: (plantData) => {
-//            console.log(plantData)
-//            return dispatch(addPlant(plantData))
-//         }
-//     }
-
-// }
-
 export default connect(null, { addPlant }) (PlantInput);
