@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { addPlant } from '../actions/addPlant';
+
  class PlantInput extends React.Component {
 
     state = {
@@ -46,7 +45,7 @@ import { addPlant } from '../actions/addPlant';
    
 
     render() {
-        console.log(this.props.waters)
+     
         return (
            <div>
                <form onSubmit={this.handleSubmit}>
@@ -86,4 +85,4 @@ import { addPlant } from '../actions/addPlant';
     }
 }
 
-export default connect(null, { addPlant }) (PlantInput);
+export default PlantInput;
