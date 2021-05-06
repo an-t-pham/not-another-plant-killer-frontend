@@ -6,6 +6,7 @@ import { fetchPlants } from '../actions/fetchPlants';
 import { fetchLights } from '../actions/fetchLights';
 import { fetchWaters } from '../actions/fetchWaters';
 import { addPlant } from '../actions/addPlant';
+import { NavBar } from '../components/NavBar';
 
 
  class PlantsContainer extends React.Component {
@@ -19,6 +20,7 @@ import { addPlant } from '../actions/addPlant';
     render() {
         return (
            <div>
+               <NavBar />
                <PlantInput lights={this.props.lights} waters={this.props.waters} addPlant={this.props.addPlant} /><br /> <br />
                <Plants plants={this.props.plants}/>
            </div>
