@@ -26,12 +26,13 @@ function collectionsReducer(state = [], action) {
 }
 
 function plantsReducer(state = [], action) {
+    console.log(action.payload)
    switch(action.type) {
         case "FETCH_PLANTS":
             return action.payload;
 
         case "ADD_PLANT":
-            return [...state, action.plant];
+            return [...state, action.payload];
 
         default:
             return state;
