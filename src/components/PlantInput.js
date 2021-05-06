@@ -39,6 +39,15 @@ import React from 'react';
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.addPlant(this.state);
+        this.setState({
+           name: "",
+           aka: "",
+           description: "",
+           size_pot: "",
+           pet_friendly: false,
+           water: "1",
+           light: "1"
+        })
     }
 
     
