@@ -1,11 +1,10 @@
 import React from 'react';
-
+import Plant from './Plant';
 
 const Plants = ( {plants} ) => {
-    
     return (
         <div>
-           {plants.map(plant => <li key={plant.id}>Name: {plant.attributes.name} - AKA: {plant.attributes.aka}</li>)}
+           <ul>{plants.map(plant => <Plant plant={plant}/>)}</ul>
         </div>
     )
 }
