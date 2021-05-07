@@ -1,6 +1,6 @@
 import React from 'react';
-import CollectionInput from '../components/CollectionInput';
-import Collections from '../components/Collections';
+import CollectionInput from '../collection/CollectionInput';
+import Collections from '../collection/Collections';
 
 export default class CollectionsContainer extends React.Component {
     render() {

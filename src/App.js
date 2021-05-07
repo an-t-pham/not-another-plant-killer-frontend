@@ -7,12 +7,12 @@ import { withAuthenticationRequired } from '@auth0/auth0-react';
 
 
 import LoginButton from './components/LoginButton';
-import UserPlants from './components/UserPlants';
+import UserPlants from './plant/UserPlants';
 import Profile from './components/Profile';
 import PlantsContainer from './containers/PlantsContainer';
-import Collections from './components/Collections';
-import Collection from './components/Collection';
-import PlantInput from './components/PlantInput';
+import Collections from './collection/Collections';
+import Collection from './collection/Collection';
+import PlantInput from './plant/PlantInput';
 
 
   const ProtectedRoute = ({ component, ...args }) => (
@@ -26,9 +26,8 @@ class App extends React.Component {
       <div className="App">
          <Switch>
             <Route exact path="/" render={() => <div> <LoginButton /> </div> }/> 
+            <ProtectedRoute path="/plants" component={PlantsContainer} />
             <ProtectedRoute exact path="/profile" component={Profile} />
-            <ProtectedRoute exact path="/plants" component={PlantsContainer} />
-            <ProtectedRoute exact path="/plant/new" component={PlantInput} />
             <ProtectedRoute exact path="/profile/garden" component={UserPlants} />
             <ProtectedRoute exact path="/profile/collections" component={Collections} />
             <ProtectedRoute exact path="/profile/collection/:id" component={Collection} />
