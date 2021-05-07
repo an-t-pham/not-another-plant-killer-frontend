@@ -23,10 +23,6 @@ import { Route, Switch} from 'react-router-dom';
         return (
            <div>
                 <Switch>
-               {/* 
-               <NavBar />
-               <Plants plants={this.props.plants} />
-               <PlantInput lights={this.props.lights} waters={this.props.waters} addPlant={this.props.addPlant} /> */}
                 <Route exact path="/plants" render={() =><Plants plants={this.props.plants} /> } />
                 <Route exact path="/plants/new" render={() =><PlantInput lights={this.props.lights} waters={this.props.waters} addPlant={this.props.addPlant} /> }/>
                 </Switch>

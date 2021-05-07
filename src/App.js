@@ -13,6 +13,7 @@ import PlantsContainer from './containers/PlantsContainer';
 import Collections from './collection/Collections';
 import Collection from './collection/Collection';
 import PlantInput from './plant/PlantInput';
+import { NavBar } from './components/NavBar';
 
 
   const ProtectedRoute = ({ component, ...args }) => (
@@ -24,6 +25,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <NavBar />
          <Switch>
             <Route exact path="/" render={() => <div> <LoginButton /> </div> }/> 
             <ProtectedRoute path="/plants" component={PlantsContainer} />
