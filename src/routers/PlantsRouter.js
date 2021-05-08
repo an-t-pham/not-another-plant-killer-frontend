@@ -1,12 +1,12 @@
 import React from 'react';
-import PlantInput from '../plant/PlantInput';
-import Plants from '../plant/Plants';
+import PlantInput from '../plants/PlantInput';
+import PlantsContainer from '../plants/PlantsContainer';
 import { connect } from 'react-redux';
 import { fetchPlants } from '../actions/fetchPlants';
 import { fetchLights } from '../actions/fetchLights';
 import { fetchWaters } from '../actions/fetchWaters';
 import { addPlant } from '../actions/addPlant';
-import { NavBar } from '../components/NavBar';
+
 
 import { Route, Switch} from 'react-router-dom';
 
@@ -18,13 +18,14 @@ import { Route, Switch} from 'react-router-dom';
         this.props.fetchLights()
         this.props.fetchWaters()
     }
-    
+
     render() {
         return (
            <div>
                 <Switch>
-                <Route exact path="/plants" render={() =><Plants plants={this.props.plants} /> } />
-                <Route exact path="/plants/new" render={() =><PlantInput lights={this.props.lights} waters={this.props.waters} addPlant={this.props.addPlant} /> }/>
+                <Route exact path="/plants" render={() =><PlantsContainer plants={this.props.plants} /> } />
+                <Route path="/plants/:id" render={() => <Plant />}/>
+                <Route  path="/plants/new" render={() =><PlantInput lights={this.props.lights} waters={this.props.waters} addPlant={this.props.addPlant} /> }/>
                 </Switch>
            </div>
         )

@@ -14,14 +14,7 @@ export const NavBar = () => {
                     style={{ marginRight: '10px' }} 
                     to="/profile"
                   >
-                    Your Profile
-                  </NavLink>
-
-                  <NavLink 
-                    style={{ marginRight: '10px' }} 
-                    to="/plants"
-                  >
-                    Plants
+                    Profile
                   </NavLink>
             
                   <NavLink 
@@ -30,11 +23,20 @@ export const NavBar = () => {
                   >
                     Your Garden
                   </NavLink>
+
                   <NavLink 
                     style={{ marginRight: '10px' }} 
                     to="/profile/collections"
                   >
-                    Collections
+                    Your Collections
+                  </NavLink>
+
+
+                  <NavLink 
+                    style={{ marginRight: '10px' }} 
+                    to="/plants"
+                  >
+                    All Plants
                   </NavLink>
               
                   <LogoutButton />
