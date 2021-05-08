@@ -11,7 +11,6 @@ import UserPlants from './plants/UserPlants';
 import Profile from './components/Profile';
 import Collections from './collection/Collections';
 import Collection from './collection/Collection';
-import PlantInput from './plants/PlantInput';
 import { NavBar } from './components/NavBar';
 import PlantsRouter from './routers/PlantsRouter';
 

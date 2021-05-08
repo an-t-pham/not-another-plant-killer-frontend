@@ -1,6 +1,15 @@
 import React from 'react';
+import { fetchLights } from '../actions/fetchLights';
+import { fetchWaters } from '../actions/fetchWaters';
+import { addPlant } from '../actions/addPlant';
+import { connect } from 'react-redux';
 
  class PlantInput extends React.Component {
+
+    componentDidMount() {
+        this.props.fetchLights()
+        this.props.fetchWaters()
+    }
 
     state = {
         name: "",
@@ -99,4 +108,11 @@ import React from 'react';
     }
 }
 
-export default PlantInput;
+const mapStateToProps = state => {
+    return {
+        lights: state.lights,
+        waters: state.waters
+    }
+}
+
+export default connect(mapStateToProps, { fetchLights, fetchWaters, addPlant })(PlantInput);
