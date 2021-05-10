@@ -2,12 +2,7 @@ import React from 'react';
 
 
 const Plant = ( {plant} ) => {
- 
-   
-    // console.log(props)
-    // let plants = props.plants ? plants : null;
-    // let plantSlug = props.match ? props.match.params.slug : null;
-    // let plant = plants.find(plant => plant.attributes.slug === plantSlug) ;
+
     if(!plant) return null;
     
 
@@ -25,7 +20,7 @@ const Plant = ( {plant} ) => {
                     - Ideal Location: {plant.attributes.light.ideal_location}
                  
         </div>
-    //   <div>plant</div>
+
     )
 }
 
