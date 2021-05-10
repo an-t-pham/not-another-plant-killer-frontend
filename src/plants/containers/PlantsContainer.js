@@ -3,6 +3,8 @@ import { fetchPlants } from '../../actions/fetchPlants';
 import { connect } from 'react-redux';
 
 import Plants from '../Plants';
+import Plant from '../Plant';
+import PlantContainer from './PlantContainer';
 
 
 
@@ -13,6 +15,7 @@ class PlantsContainer extends React.Component {
    }
 
   render() {
+    
     return (
        <div>
             <Plants plants={this.props.plants} /> 
