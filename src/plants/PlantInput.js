@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
     state = {
         name: "",
         aka: "",
+        image_url: "",
         description: "",
         size_pot: "",
         pet_friendly: false,
@@ -51,6 +52,7 @@ import { connect } from 'react-redux';
         this.setState({
            name: "",
            aka: "",
+           image_url: "",
            description: "",
            size_pot: "",
            pet_friendly: false,
@@ -72,6 +74,9 @@ import { connect } from 'react-redux';
                    <br />
                    <label>AKA: </label>
                    <input type="text" placeholder="aka" name="aka" value={this.state.aka} onChange={this.handleChange} /><br/>
+                   <br />
+                   <label>Image URL: </label>
+                   <input type="text" placeholder="Image URL" name="image_url" value={this.state.image_url} onChange={this.handleChange} /><br/>
                    <br />
                    <label>Description: </label>
                    <input type="text" placeholder="Description" name="description" value={this.state.description} onChange={this.handleChange} /><br/>
