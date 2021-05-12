@@ -5,7 +5,7 @@ const Plant = ( {plant} ) => {
 
     if(!plant) return null;
     
-
+      // {plant ? null : <Redirect to="/plants" />}
     return (
         <div>
                  <img src={plant.attributes.image_url} width="600" alt={plant.attributes.name}/> <br />

@@ -15,8 +15,8 @@ const Plants = ( {plants} ) => {
                     </Link>))
                 } 
             </ul>
-            <h3>Add a new plant</h3>
-            <PlantInput />
+            {/* <h3>Add a new plant</h3>
+            <PlantInput /> */}
         </div>
     )
 }
