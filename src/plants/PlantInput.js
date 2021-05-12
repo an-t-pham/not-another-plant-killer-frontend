@@ -1,14 +1,22 @@
 import React from 'react';
 import { fetchLights } from '../actions/fetchLights';
 import { fetchWaters } from '../actions/fetchWaters';
-import { addPlant } from '../actions/addPlant';
 import { connect } from 'react-redux';
 
  class PlantInput extends React.Component {
 
     componentDidMount() {
+        console.log(this.props.plant)
+       
         this.props.fetchLights()
         this.props.fetchWaters()
+        this.props.plant && (
+            this.setState({
+                ...this.props.plant.attributes,
+                water: "" + this.props.plant.attributes.water.level,
+                light: "" + this.props.plant.attributes.light.level
+            })
+        )
     }
 
     state = {
@@ -46,29 +54,43 @@ import { connect } from 'react-redux';
         })
     }
 
-    handleSubmit = (e) => {
+    // handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     this.props.addPlant(this.state);
+    //     this.setState({
+    //        name: "",
+    //        aka: "",
+    //        image_url: "",
+    //        description: "",
+    //        size_pot: "",
+    //        pet_friendly: false,
+    //        water: "1",
+    //        light: "1"
+    //     })
+    // }
+
+    onSubmit = (e) => {
         e.preventDefault();
-        this.props.addPlant(this.state);
+        this.props.handleSubmit(this.state);
         this.setState({
-           name: "",
-           aka: "",
-           image_url: "",
-           description: "",
-           size_pot: "",
-           pet_friendly: false,
-           water: "1",
-           light: "1"
-        })
+            name: "",
+            aka: "",
+            image_url: "",
+            description: "",
+            size_pot: "",
+            pet_friendly: false,
+            water: "1",
+            light: "1"
+         })
     }
 
     
    
 
     render() {
-     
         return (
            <div>
-               <form onSubmit={this.handleSubmit}>
+               <form onSubmit={this.onSubmit}>
                    <label>Plant Name: </label>
                    <input type="text" placeholder="Name" name="name" value={this.state.name} onChange={this.handleChange}/><br/>
                    <br />
@@ -89,7 +111,7 @@ import { connect } from 'react-redux';
                    <p>Watering:</p>
                    { this.props.waters && this.props.waters.map(water => (
                         <div key={water.id}>
-                            <input type="radio" name="water" checked={this.state.water === water.id} value={water.id} onChange={this.handleWaterLevel} />
+                            <input type="radio" name="water" checked={this.state.water === "" + water.attributes.level} value={water.attributes.level} onChange={this.handleWaterLevel} />
                             <label>Level {water.attributes.level} - {water.attributes.description}.</label>
                             <br />
                         </div>)
@@ -98,7 +120,7 @@ import { connect } from 'react-redux';
                     <p>Light Condition:</p>
                       { this.props.lights && this.props.lights.map(light => (
                         <div key={light.id}>
-                            <input type="radio" name="light" checked={this.state.light === light.id} value={light.id} onChange={this.handleLightLevel} />
+                            <input type="radio" name="light" checked={this.state.light === "" + light.attributes.level} value={light.attributes.level} onChange={this.handleLightLevel} />
                             <label>Level {light.attributes.level} - {light.attributes.description}. Ideal location: {light.attributes.ideal_location} </label>
                             <br />
                         </div>)
@@ -120,4 +142,5 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchLights, fetchWaters, addPlant })(PlantInput);
+
+export default connect(mapStateToProps, {fetchLights, fetchWaters})(PlantInput);
