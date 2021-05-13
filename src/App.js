@@ -9,8 +9,8 @@ import {  withAuthenticationRequired } from '@auth0/auth0-react';
 import LoginButton from './components/LoginButton';
 import UserPlants from './plants/UserPlants';
 import Profile from './components/Profile';
-import Collections from './collection/Collections';
-import Collection from './collection/Collection';
+import Collections from './collections/Collections';
+import Collection from './collections/Collection';
 import { NavBar } from './components/NavBar';
 import PlantsRouter from './routers/PlantsRouter';
 
@@ -31,7 +31,7 @@ class App extends React.Component {
             <ProtectedRoute exact path="/profile" component={Profile} />
             <ProtectedRoute exact path="/profile/garden" component={UserPlants} />
             <ProtectedRoute exact path="/profile/collections" component={Collections} />
-            <ProtectedRoute exact path="/profile/collection/:id" component={Collection} />
+            <ProtectedRoute exact path="/profile/collections/:id" component={Collection} />
          </Switch>
     </div>
     );

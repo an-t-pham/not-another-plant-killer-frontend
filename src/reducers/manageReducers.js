@@ -35,9 +35,13 @@ function plantsReducer(state = [], action) {
             return [...state, action.payload];
 
         case "EDIT_PLANT":
-            console.log(action.payload)
             const plants = state.filter(p => p.id !== action.payload.id);
             return [...plants, action.payload];
+
+        case "DELETE_PLANT":
+            const remainedPlants = state.filter(p => p.id !== action.payload);
+            return [...remainedPlants];
+
         default:
             return state;
     }
