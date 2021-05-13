@@ -1,4 +1,4 @@
-export const addUser = (user) => {
+export const fetchUser = (user) => {
     return (dispatch) => {
         fetch('http://localhost:3000/api/v1/users', {
             headers: {
@@ -10,7 +10,7 @@ export const addUser = (user) => {
         })
         .then(resp => resp.json())
         .then(user => dispatch({
-            type: 'ADD_USER',
+            type: 'FETCH_USER',
             payload: user.data
         }))
     }

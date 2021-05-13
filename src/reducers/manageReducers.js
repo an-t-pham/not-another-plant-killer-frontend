@@ -10,10 +10,11 @@ const rootReducer = combineReducers({
 
 export default rootReducer;
 
-function usersReducer(state = [], action) {
+function usersReducer(state = null, action) {
+
     switch(action.type) {
-         case "ADD_USER":
-             return [...state, action.payload];
+         case "FETCH_USER":
+             return action.payload;
              
          default:
              return state;
@@ -22,8 +23,9 @@ function usersReducer(state = [], action) {
  }
 function collectionsReducer(state = [], action) {
     switch(action.type) {
-        case "FETCH_COLLECTIONS":
-            return action.payload;
+        case "FETCH_USER":
+            console.log(action.payload)
+            return action.payload.attributes.collections;
 
         case "ADD_COLLECTION":
             return [...state, action.payload];
