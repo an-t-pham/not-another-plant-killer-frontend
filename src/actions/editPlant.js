@@ -1,4 +1,4 @@
-export const editPlant = (data, id) => {
+export const editPlant = (plant, id) => {
     return (dispatch) => {
         fetch(`http://localhost:3000/api/v1/plants/${id}`, {
             headers: {
@@ -6,7 +6,7 @@ export const editPlant = (data, id) => {
                 'Accept': 'application/json'
             },
             method: 'PATCH',
-            body: JSON.stringify(data)
+            body: JSON.stringify(plant)
         })
         .then(resp => resp.json())
         .then(plant => dispatch({

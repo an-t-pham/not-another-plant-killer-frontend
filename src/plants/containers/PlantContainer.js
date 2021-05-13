@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Plant from '../Plant';
 import PlantInput from '../PlantInput';
 import { editPlant } from '../../actions/editPlant';
+import { deletePlant } from '../../actions/deletePlant';
 
 
 class PlantContainer extends React.Component {
@@ -25,14 +26,23 @@ class PlantContainer extends React.Component {
         })
     }
 
+     deletePlant = () => {
+        const plant = this.findPlant();
+        this.props.deletePlant(plant.id);
+        this.props.history.push("/plants");
+        
+     }
+
   render() {
      const plant = this.findPlant();
+     console.log(this.props.history)
     return (
      
        <div>
             <Plant plant={plant}/> 
             <button onClick={() => this.setState({showEditForm: true}) }>Edit </button>
             { this.state.showEditForm && <PlantInput plant={plant} handleSubmit={this.handleSubmit} /> }
+            <button onClick={this.deletePlant}> Delete </button>
        </div>
     )
   }
@@ -46,4 +56,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { editPlant }) (PlantContainer);
+export default connect(mapStateToProps, { editPlant, deletePlant }) (PlantContainer);

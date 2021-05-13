@@ -1,13 +1,14 @@
 import React from 'react';
-
+import { Redirect } from 'react-router';
 
 const Plant = ( {plant} ) => {
 
-    if(!plant) return null;
+    if(!plant) return null && <Redirect to="/plants" />;
     
-      // {plant ? null : <Redirect to="/plants" />}
+    
     return (
         <div>
+          
                  <img src={plant.attributes.image_url} width="600" alt={plant.attributes.name}/> <br />
                  1. Name: {plant.attributes.formatted_name} (aka: {plant.attributes.aka})<br />
                  2. Description: {plant.attributes.description}<br />
