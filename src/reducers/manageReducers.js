@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
+    users: usersReducer,
     collections: collectionsReducer,
     plants: plantsReducer,
     lights: lightsReducer,
@@ -9,7 +10,16 @@ const rootReducer = combineReducers({
 
 export default rootReducer;
 
-
+function usersReducer(state = [], action) {
+    switch(action.type) {
+         case "ADD_USER":
+             return [...state, action.payload];
+             
+         default:
+             return state;
+     }
+ 
+ }
 function collectionsReducer(state = [], action) {
     switch(action.type) {
         case "FETCH_COLLECTIONS":
@@ -18,9 +28,9 @@ function collectionsReducer(state = [], action) {
         case "ADD_COLLECTION":
             return [...state, action.payload];
 
-        // case "REMOVE_COLLECTION":
-        //     idx = state.findIndex(collection => collection.id === action.id)
-        //     return [...state.slice(0, idx), ...state.slice(idx+1)];
+        case "REMOVE_COLLECTION":
+            const collections = state.filter(c => c.id !== action.payload);
+            return [...collections];
 
         default:
             return state;
