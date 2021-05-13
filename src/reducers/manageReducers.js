@@ -11,10 +11,12 @@ export default rootReducer;
 
 
 function collectionsReducer(state = [], action) {
-//    let idx;
     switch(action.type) {
-        // case "ADD_COLLECTION":
-        //     return [...state, action.collection];
+        case "FETCH_COLLECTIONS":
+            return action.payload;
+
+        case "ADD_COLLECTION":
+            return [...state, action.payload];
 
         // case "REMOVE_COLLECTION":
         //     idx = state.findIndex(collection => collection.id === action.id)
@@ -26,7 +28,6 @@ function collectionsReducer(state = [], action) {
 }
 
 function plantsReducer(state = [], action) {
-    
    switch(action.type) {
         case "FETCH_PLANTS":
             return action.payload;

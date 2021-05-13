@@ -3,7 +3,7 @@ import React from 'react';
 // import { connect } from 'react-redux';
 
 import Collections from '../Collections';
-// import { addPlant } from '../../actions/addPlant';
+import { addCollection } from '../../actions/addCollection';
 import CollectionInput from '../CollectionInput';
 
 
