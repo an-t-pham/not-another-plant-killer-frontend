@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-    users: usersReducer,
+    user: usersReducer,
     collections: collectionsReducer,
     plants: plantsReducer,
     lights: lightsReducer,
@@ -24,7 +24,6 @@ function usersReducer(state = null, action) {
 function collectionsReducer(state = [], action) {
     switch(action.type) {
         case "FETCH_USER":
-            console.log(action.payload)
             return action.payload.attributes.collections;
 
         case "ADD_COLLECTION":

@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 
  class PlantInput extends React.Component {
 
-    componentDidMount() {
-        console.log(this.props.plant)
-       
+    componentDidMount() { 
         this.props.fetchLights()
         this.props.fetchWaters()
         this.props.plant && (
@@ -32,42 +30,27 @@ import { connect } from 'react-redux';
 
     handleChange = (e) => {
        this.setState({
-        [e.target.name]: e.target.value
+         [e.target.name]: e.target.value
        })
     }
 
     handleChecked = (e) => {
         this.setState({
-            pet_friendly: e.target.checked
-           })
+          pet_friendly: e.target.checked
+        })
     }
 
     handleWaterLevel = (e) => {
         this.setState({
-            water: e.target.value
+          water: e.target.value
         })
     }
 
     handleLightLevel = (e) => {
         this.setState({
-            light: e.target.value
+          light: e.target.value
         })
     }
-
-    // handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     this.props.addPlant(this.state);
-    //     this.setState({
-    //        name: "",
-    //        aka: "",
-    //        image_url: "",
-    //        description: "",
-    //        size_pot: "",
-    //        pet_friendly: false,
-    //        water: "1",
-    //        light: "1"
-    //     })
-    // }
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -89,7 +72,6 @@ import { connect } from 'react-redux';
 
     render() {
         return (
-           <div>
                <form onSubmit={this.onSubmit}>
                    <label>Plant Name: </label>
                    <input type="text" placeholder="Name" name="name" value={this.state.name} onChange={this.handleChange}/><br/>
@@ -130,7 +112,6 @@ import { connect } from 'react-redux';
                    <input type="submit" value="Submit" />
                  
                </form>
-           </div>
         )
     }
 }

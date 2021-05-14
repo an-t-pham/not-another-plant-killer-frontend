@@ -1,6 +1,6 @@
 import React from 'react';
 // import { fetchPlants } from '../../actions/fetchPlants';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import Collections from '../Collections';
 import { addCollection } from '../../actions/addCollection';
@@ -10,15 +10,11 @@ import CollectionInput from '../CollectionInput';
 class PlantsContainer extends React.Component {
 
   state = {
-    showForm: false
+    showCForm: false
  }
-
-   componentDidMount() {
-     this.props.fetchCollections()
-   }
  
    handleSubmit = (collectionData) => {
-    this.props.addCollection(collectionData);
+    this.props.addCollection(collectionData, this.props.user.id);
     this.setState({
         showForm: false
     })
@@ -28,8 +24,8 @@ class PlantsContainer extends React.Component {
     return (
        <div>
             <Collections collections={this.props.collections} /> 
-            <button onClick={() => this.setState({showForm: true}) }>Create new Collection </button>
-            { this.state.showForm && <CollectionInput handleSubmit={this.handleSubmit} /> }
+            <button onClick={() => this.setState({showCForm: true}) }>Create new Collection </button>
+            { this.state.showCForm && <CollectionInput handleSubmit={this.handleSubmit} /> }
        </div>
     )
   }
@@ -39,8 +35,8 @@ class PlantsContainer extends React.Component {
 const mapStateToProps = state => {
     return {
         collections: state.collections,
-        
+        user: state.user
     }
 }
 
-export default connect(mapStateToProps, { fetchCollections, addCollection })(PlantsContainer)
+export default connect(mapStateToProps, { addCollection })(PlantsContainer)

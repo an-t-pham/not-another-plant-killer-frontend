@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { fetchUser } from "../actions/fetchUser"; 
 import { connect } from "react-redux";
@@ -7,14 +7,6 @@ import { connect } from "react-redux";
 const Profile = (props) => {
   const { user, isAuthenticated } = useAuth0();
  
-  useEffect(() => {
-    if (user && !props.user) {
-      props.fetchUser({
-        name: user.name,
-        email: user.email
-      });
-    }
-  }, [user, props.user])
 
   if (!props.user) return null; 
    
@@ -32,7 +24,7 @@ const Profile = (props) => {
 
 const mapStateToProps = state => {
   return {
-    user: state.users
+    user: state.user
   }
 }
 

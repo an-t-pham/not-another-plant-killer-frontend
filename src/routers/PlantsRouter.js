@@ -13,7 +13,7 @@ import UserPlants from '../plants/UserPlants';
         return (
            <div>
                 <Switch>
-                <Route exact path="/plants" render={() =><PlantsContainer plants={this.props.plants} /> } />
+                <Route exact path="/plants" render={() =><PlantsContainer /> } />
                 <Route path="/plants/:slug"  render={(routerProps) =><PlantContainer {...routerProps}/> }/>
                 <Route path="/plants/your-garden" render={() => <UserPlants/> }/>
                 </Switch>
