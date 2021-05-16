@@ -1,5 +1,4 @@
 import React from 'react';
-// import { fetchPlants } from '../../actions/fetchPlants';
 import { connect } from 'react-redux';
 
 import Collections from '../Collections';
@@ -7,7 +6,7 @@ import { addCollection } from '../../actions/addCollection';
 import CollectionInput from '../CollectionInput';
 
 
-class PlantsContainer extends React.Component {
+class CollectionsContainer extends React.Component {
 
   state = {
     showCForm: false
@@ -39,4 +38,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { addCollection })(PlantsContainer)
+export default connect(mapStateToProps, { addCollection })(CollectionsContainer)

@@ -11,7 +11,7 @@ export const addCollection = (collection, user_id) => {
         .then(resp => resp.json())
         .then(collection => dispatch({
             type: 'ADD_COLLECTION',
-            payload: collection.data
+            payload: collection.data.attributes
         }))
     }
     

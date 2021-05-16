@@ -1,9 +1,13 @@
 import React from 'react';
 
-const Collection = (props) => {
+import { Redirect } from 'react-router';
+
+const Collection = ( {collection} ) => {
+    if(!collection) return null && <Redirect to="profile/collections" />;
+
     return (
         <div>
-            Collection
+            Name: {collection.name}
         </div>
     )
 }

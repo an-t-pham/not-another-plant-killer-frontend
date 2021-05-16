@@ -10,8 +10,8 @@ export default class ProfileRouter extends React.Component {
            <div>
                <Switch>
                  <Route exact path="/profile" component={Profile} />
-                 <Route path="/profile/collections" render={() =><CollectionsContainer /> } />
-                 <Route path="/profile/collections/:slug"  render={(routerProps) =><CollectionContainer {...routerProps}/> }/>
+                 <Route exact path="/profile/collections" render={() =><CollectionsContainer /> } />
+                 <Route exact path="/profile/collections/:slug"  render={(routerProps) =><CollectionContainer {...routerProps}/> }/>
                </Switch>
            </div>
         )

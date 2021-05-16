@@ -22,6 +22,7 @@ function usersReducer(state = null, action) {
  
  }
 function collectionsReducer(state = [], action) {
+    console.log(action.payload)
     switch(action.type) {
         case "FETCH_USER":
             return action.payload.attributes.collections;

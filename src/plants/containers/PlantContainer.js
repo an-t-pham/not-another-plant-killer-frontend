@@ -35,7 +35,6 @@ class PlantContainer extends React.Component {
 
   render() {
      const plant = this.findPlant();
-     console.log(this.props.history)
     return (
      
        <div>
