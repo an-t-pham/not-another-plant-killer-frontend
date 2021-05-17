@@ -1,4 +1,5 @@
 import React from 'react';
+import AddPlantToCollection from './AddPlantToCollection';
 
 import { Redirect } from 'react-router';
 
@@ -8,6 +9,7 @@ const Collection = ( {collection} ) => {
     return (
         <div>
             Name: {collection.name}
+            <AddPlantToCollection />
         </div>
     )
 }

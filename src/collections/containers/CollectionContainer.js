@@ -13,7 +13,6 @@ class CollectionContainer extends React.Component {
         showEditForm: false
      }
      findCollection = () => {
-        console.log(this.props.match)
         let collectionSlug = this.props.match && (this.props.match.params.slug);
         let collection = this.props.collections && (this.props.collections.find(collection => collection.slug === collectionSlug)) ;
         return collection
