@@ -23,15 +23,20 @@ function usersReducer(state = null, action) {
  }
 function collectionsReducer(state = [], action) {
     switch(action.type) {
-        case "FETCH_USER":
-            return action.payload.attributes.collections;
+        case "FETCH_COLLECTIONS":
+            return action.payload
 
         case "ADD_COLLECTION":
             return [...state, action.payload];
 
-        case "REMOVE_COLLECTION":
-            const collections = state.filter(c => c.id !== action.payload);
-            return [...collections];
+        case "ADD_PLANT_TO_COLLECTION":
+            console.log(action.payload)
+            const collections = state.filter(c => c.id !== action.payload.id)
+            return [...collections, action.payload];
+
+        // case "REMOVE_COLLECTION":
+        //     const collections = state.filter(c => c.id !== action.payload);
+        //     return [...collections];
 
         default:
             return state;
