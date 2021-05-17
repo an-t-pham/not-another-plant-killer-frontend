@@ -4,7 +4,7 @@ import { addPlantToCollection } from '../actions/addPlantToCollection';
 
 class AddPlantToCollection extends React.Component {
     state = {
-        plantId: this.props.plants[0].id
+        plantId: this.props.plants[0]
     };
     
   
@@ -15,6 +15,7 @@ class AddPlantToCollection extends React.Component {
     }
   
     handleSubmit = event => {
+        console.log(this.props.plants)
       event.preventDefault();
       const thePlant = this.props.plants.find(plant => plant.id === this.state.plantId);
       this.props.addPlantToCollection(this.props.user.id, this.props.collection.id, thePlant);

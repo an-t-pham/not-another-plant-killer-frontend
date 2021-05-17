@@ -6,10 +6,10 @@ const Collections = ( {collections} ) => {
         <div>
             <ul>
                 {collections.map(collection => collection && (
-                    <Link to={`/profile/collections/${collection.slug}`} key={collection.id}>
+                    <Link to={`/profile/collections/${collection.attributes.slug}`} key={collection.id}>
                         <li>
                             {/* <img src={plant.attributes.image_url} width="300" alt={plant.attributes.name}/> <br /> */}
-                            {collection.name}
+                            {collection.attributes.name}
                         </li>
                     </Link>))
                 } 

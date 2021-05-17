@@ -30,7 +30,6 @@ function collectionsReducer(state = [], action) {
             return [...state, action.payload];
 
         case "ADD_PLANT_TO_COLLECTION":
-            console.log(action.payload)
             const collections = state.filter(c => c.id !== action.payload.id)
             return [...collections, action.payload];
 

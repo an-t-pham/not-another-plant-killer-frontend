@@ -20,11 +20,11 @@ class PlantsContainer extends React.Component {
    handleSubmit = (plantData) => {
     this.props.addPlant(plantData);
     this.setState({
-        showForm: false
+      showForm: false
     })
-}
+  }
+
   render() {
-    
     return (
        <div>
             <Plants plants={this.props.plants} /> 
@@ -43,4 +43,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchPlants, addPlant })(PlantsContainer)
+export default connect(mapStateToProps, { fetchPlants, addPlant })(PlantsContainer);

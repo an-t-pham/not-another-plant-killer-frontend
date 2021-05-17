@@ -14,7 +14,7 @@ class CollectionContainer extends React.Component {
      }
      findCollection = () => {
         let collectionSlug = this.props.match && (this.props.match.params.slug);
-        let collection = this.props.collections && (this.props.collections.find(collection => collection.slug === collectionSlug)) ;
+        let collection = this.props.collections && (this.props.collections.find(collection => collection.attributes.slug === collectionSlug)) ;
         return collection
      }
     //  handleSubmit = (collectionData) => {
@@ -38,7 +38,7 @@ class CollectionContainer extends React.Component {
     return (
       
        <div>
-            <Collection collection={collection}/> 
+            <Collection collection={collection}/>
             <button onClick={() => this.setState({showEditForm: true}) }>Edit </button>
             { this.state.showEditForm && <CollectionInput collection={collection} handleSubmit={this.handleSubmit} /> }
             {/* <button onClick={this.deleteCollection}> Delete </button> */}
