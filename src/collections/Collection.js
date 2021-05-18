@@ -12,7 +12,7 @@ const Collection = ( {collection} ) => {
         <div>
             Collection Name: {collection.attributes.name} <br />
             Plants: <br /> {collection.attributes.plants.length > 0 ? (collection.attributes.plants.map(plant => 
-                  <Link to={`/plants/${plant.slug}`} key={plant.id}>
+                  <Link to={`/plants/${plant.slug}`} key={`${plant.id}` + `${collection.id}`}>
                 
                       <img src={plant.image_url} width="300" alt={plant.name}/> <br />
                       {plant.name} <br />

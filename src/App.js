@@ -7,14 +7,13 @@ import {  withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
 
 
 import LoginButton from './components/LoginButton';
-import UserPlants from './plants/UserPlants';
+
 import ProfileRouter from './routers/ProfileRouter';
-import Collections from './collections/Collections';
-import Collection from './collections/Collection';
 import { NavBar } from './components/NavBar';
 import PlantsRouter from './routers/PlantsRouter';
 import { connect, useDispatch } from 'react-redux';
 import { fetchUser } from './actions/fetchUser';
+import { fetchPlants } from './actions/fetchPlants';
 
 
   export const ProtectedRoute = (props) => {
@@ -33,8 +32,13 @@ import { fetchUser } from './actions/fetchUser';
       return <Route component={withAuthenticationRequired(props.component)} {...props} />
     }
 
+   
 class App extends React.Component {
   
+  componentDidMount() {
+    this.props.fetchPlants()
+  }
+
   render() {
     return (
       <div className="App">
@@ -43,13 +47,16 @@ class App extends React.Component {
             <Route exact path="/" render={() => <div> <LoginButton /> </div> }/> 
             <ProtectedRoute path="/plants" component={PlantsRouter} />
             <ProtectedRoute path="/profile" component={ProfileRouter} />
-            {/* <ProtectedRoute exact path="/profile/garden" component={UserPlants} />
-            <ProtectedRoute exact path="/profile/collections" component={Collections} />
-            <ProtectedRoute exact path="/profile/collections/:id" component={Collection} /> */}
          </Switch>
     </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+      plants: state.plants,    
+  }
+}
+
+export default connect(mapStateToProps, { fetchPlants })(App);
