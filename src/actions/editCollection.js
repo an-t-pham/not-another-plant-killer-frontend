@@ -1,4 +1,4 @@
-export const editPlant = (user_id, collection_id, collection) => {
+export const editCollection = (user_id, collection_id, collection) => {
     return (dispatch) => {
         fetch(`http://localhost:3000/api/v1/users/${user_id}/collections/${collection_id}`, {
             headers: {
@@ -10,7 +10,7 @@ export const editPlant = (user_id, collection_id, collection) => {
         })
         .then(resp => resp.json())
         .then(collection => dispatch({
-            type: 'EDIT_COLLECTION',
+            type: 'ADD_PLANT_OR_EDIT_COLLECTION',
             payload: collection.data
         }))
     }

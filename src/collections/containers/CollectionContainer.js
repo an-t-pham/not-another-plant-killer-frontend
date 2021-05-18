@@ -4,15 +4,14 @@ import { connect } from 'react-redux';
 import Collection from '../Collection';
 import CollectionInput from '../CollectionInput';
 
-// import { editCollection } from '../../actions/editPlant';
 import { deleteCollection } from '../../actions/deleteCollection';
 import { fetchCollections } from '../../actions/fetchCollections';
+import { editCollection } from '../../actions/editCollection';
 
 
 class CollectionContainer extends React.Component {
 
      componentDidUpdate() {
-       console.log(this.props.user)
        if (this.props.user && this.props.collections.length === 0) {
          return this.props.fetchCollections(this.props.user.id)
        } 
@@ -30,13 +29,14 @@ class CollectionContainer extends React.Component {
       return collection
     }
 
-    //  handleSubmit = (collectionData) => {
-    //     const collection = this.findCollection();
-    //     this.props.editCollection(collectiontData, collection.id);
-    //     this.setState({
-    //         showEditForm: false
-    //     })
-    // }
+     handleSubmit = (collectionData) => {
+        const collection = this.findCollection();
+        this.props.user && (this.props.editCollection(this.props.user.id, collection.id, collectionData));
+        this.props.history.push("/profile/collections");
+        this.setState({
+            showEditForm: false
+        })
+    }
 
      deleteCollection = () => {
         const collection = this.findCollection();
@@ -69,4 +69,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { fetchCollections, deleteCollection }) (CollectionContainer);
+export default connect(mapStateToProps, { fetchCollections, editCollection, deleteCollection }) (CollectionContainer);

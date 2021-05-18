@@ -10,7 +10,7 @@ export const addPlantToCollection = (user_id, collection_id, plant) => {
         })
         .then(resp => resp.json())
         .then(collection =>  dispatch({
-            type: 'ADD_PLANT_TO_COLLECTION',
+            type: 'ADD_PLANT_OR_EDIT_COLLECTION',
             payload: collection.data
         }))
     }

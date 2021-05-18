@@ -29,7 +29,7 @@ function collectionsReducer(state = [], action) {
         case "ADD_COLLECTION":
             return [...state, action.payload];
 
-        case "ADD_PLANT_TO_COLLECTION":
+        case "ADD_PLANT_OR_EDIT_COLLECTION":
             const collections = state.filter(c => c.id !== action.payload.id)
             return [...collections, action.payload];
 

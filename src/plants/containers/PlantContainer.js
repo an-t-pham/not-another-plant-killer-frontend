@@ -22,6 +22,7 @@ class PlantContainer extends React.Component {
      handleSubmit = (plantData) => {
         const plant = this.findPlant();
         this.props.editPlant(plantData, plant.id);
+        this.props.history.push("/plants");
         this.setState({
             showEditForm: false
         })
@@ -31,7 +32,6 @@ class PlantContainer extends React.Component {
         const plant = this.findPlant();
         this.props.deletePlant(plant.id);
         this.props.history.push("/plants");
-        
      }
 
   render() {
