@@ -9,12 +9,10 @@ export const addPlantToCollection = (user_id, collection_id, plant) => {
             body: JSON.stringify(plant)
         })
         .then(resp => resp.json())
-        .then(collection => 
-        { console.log(collection)
-            dispatch({
+        .then(collection =>  dispatch({
             type: 'ADD_PLANT_TO_COLLECTION',
             payload: collection.data
-        })})
+        }))
     }
     
 }

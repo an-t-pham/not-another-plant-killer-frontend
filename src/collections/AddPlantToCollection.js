@@ -4,7 +4,7 @@ import { addPlantToCollection } from '../actions/addPlantToCollection';
 
 class AddPlantToCollection extends React.Component {
     state = {
-        plantId: this.props.plants[0]
+        plantId: this.props.plants[0].id
     };
     
   
@@ -15,7 +15,6 @@ class AddPlantToCollection extends React.Component {
     }
   
     handleSubmit = event => {
-        console.log(this.props.plants)
       event.preventDefault();
       const thePlant = this.props.plants.find(plant => plant.id === this.state.plantId);
       this.props.addPlantToCollection(this.props.user.id, this.props.collection.id, thePlant);
@@ -25,15 +24,16 @@ class AddPlantToCollection extends React.Component {
     }
   
     render() {
+        const plantOptions = this.props.plants && this.props.plants.map(plant => (
+            <option name={plant.attributes.name} value={plant.id}>{plant.attributes.name}</option>
+         ))
       return (
         <form onSubmit={this.handleSubmit}>
           <label>
             Add a Plant:
-            <select value={this.state.plant} onChange={this.handleChange}>
-                { this.props.plants && this.props.plants.map(plant => (
-                   <option name={plant.attributes.name} value={plant.id}>{plant.attributes.name}</option>
-                    )
-                )}
+            <select value={this.state.plantId} onChange={this.handleChange}>
+            <option value="">Select a Plant</option>
+                {plantOptions}
             </select>
           </label>
         

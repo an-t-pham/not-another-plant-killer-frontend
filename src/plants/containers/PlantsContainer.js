@@ -1,5 +1,4 @@
 import React from 'react';
-import { fetchPlants } from '../../actions/fetchPlants';
 import { connect } from 'react-redux';
 
 import Plants from '../Plants';
@@ -13,9 +12,6 @@ class PlantsContainer extends React.Component {
     showForm: false
  }
 
-  //  componentDidMount() {
-  //    this.props.fetchPlants()
-  //  }
  
    handleSubmit = (plantData) => {
     this.props.addPlant(plantData);

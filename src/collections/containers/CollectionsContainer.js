@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchCollections } from '../../actions/fetchCollections';
 import Collections from '../Collections';
 import { addCollection } from '../../actions/addCollection';
+
 import CollectionInput from '../CollectionInput';
 
 
@@ -25,11 +26,11 @@ class CollectionsContainer extends React.Component {
   }
  
    handleSubmit = (collectionData) => {
-    this.props.addCollection(collectionData, this.props.user.id);
-    this.setState({
-        showForm: false
-    })
-}
+      this.props.addCollection(collectionData, this.props.user.id);
+      this.setState({
+         showForm: false
+      })
+   }
   render() {
     
     return (

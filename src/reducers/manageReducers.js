@@ -33,9 +33,10 @@ function collectionsReducer(state = [], action) {
             const collections = state.filter(c => c.id !== action.payload.id)
             return [...collections, action.payload];
 
-        // case "REMOVE_COLLECTION":
-        //     const collections = state.filter(c => c.id !== action.payload);
-        //     return [...collections];
+        case "DELETE_COLLECTION":
+            const remainedCollections = state.filter(c => c.id !== action.payload);
+            console.log(remainedCollections)
+            return [...remainedCollections];
 
         default:
             return state;

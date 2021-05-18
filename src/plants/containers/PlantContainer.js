@@ -11,13 +11,14 @@ class PlantContainer extends React.Component {
     
     state = {
         showEditForm: false
-     }
+    }
      
-     findPlant = () => {
-        let plantSlug = this.props.match && (this.props.match.params.slug);
-        let plant = this.props.plants && (this.props.plants.find(plant => plant.attributes.slug === plantSlug)) ;
-        return plant
-     }
+    findPlant = () => {
+      let plantSlug = this.props.match && (this.props.match.params.slug);
+      let plant = this.props.plants && (this.props.plants.find(plant => plant.attributes.slug === plantSlug)) ;
+      return plant
+    }
+
      handleSubmit = (plantData) => {
         const plant = this.findPlant();
         this.props.editPlant(plantData, plant.id);
@@ -35,6 +36,7 @@ class PlantContainer extends React.Component {
 
   render() {
      const plant = this.findPlant();
+
     return (
      
        <div>
