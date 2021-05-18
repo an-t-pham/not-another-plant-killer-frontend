@@ -29,6 +29,7 @@ class CollectionContainer extends React.Component {
       let collection = this.props.collections && (this.props.collections.find(collection => collection.attributes.slug === collectionSlug)) ;
       return collection
     }
+
     //  handleSubmit = (collectionData) => {
     //     const collection = this.findCollection();
     //     this.props.editCollection(collectiontData, collection.id);
