@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-// import LoginButton from './LoginButton';
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from './LogoutButton';
 
@@ -16,13 +15,7 @@ export const NavBar = () => {
                   >
                     Profile
                   </NavLink>
-            
-                  <NavLink 
-                    style={{ marginRight: '10px' }} 
-                    to="/profile/garden"
-                  >
-                    Your Garden
-                  </NavLink>
+        
 
                   <NavLink 
                     style={{ marginRight: '10px' }} 
