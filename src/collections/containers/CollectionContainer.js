@@ -7,6 +7,7 @@ import CollectionInput from '../CollectionInput';
 import { deleteCollection } from '../../actions/deleteCollection';
 import { fetchCollections } from '../../actions/fetchCollections';
 import { editCollection } from '../../actions/editCollection';
+import { deletePlantfromCollection } from '../../actions/deletePlantfromCollection';
 
 
 class CollectionContainer extends React.Component {
@@ -41,8 +42,13 @@ class CollectionContainer extends React.Component {
      deleteCollection = () => {
         const collection = this.findCollection();
         this.props.deleteCollection(this.props.user.id, collection.id);
-        console.log(this.props.collections)
         this.props.history.push("/profile/collections");
+     }
+
+     deletePlantfromCollection = (plantData) => {
+       const collection = this.findCollection();
+       this.props.user && (this.props.deletePlantfromCollection(this.props.user.id, collection.id, plantData));
+       this.props.history.push("/profile/collections");
      }
 
   render() {
@@ -51,10 +57,10 @@ class CollectionContainer extends React.Component {
     return (
       
        <div>
-            <Collection collection={collection}/>
-            <button onClick={() => this.setState({showEditForm: true}) }>Edit </button>
+            <Collection collection={collection} deletePlantfromCollection={this.deletePlantfromCollection}/>
+            <button onClick={() => this.setState({showEditForm: true}) }>Edit Collection</button>
             { this.state.showEditForm && <CollectionInput collection={collection} handleSubmit={this.handleSubmit} /> }
-            <button onClick={this.deleteCollection}> Delete </button>
+            <button onClick={this.deleteCollection}> Delete Collection</button>
        </div>
     )
   }
@@ -69,4 +75,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { fetchCollections, editCollection, deleteCollection }) (CollectionContainer);
+export default connect(mapStateToProps, { fetchCollections, editCollection, deleteCollection, deletePlantfromCollection }) (CollectionContainer);

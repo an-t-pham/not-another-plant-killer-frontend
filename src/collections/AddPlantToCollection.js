@@ -25,7 +25,7 @@ class AddPlantToCollection extends React.Component {
   
     render() {
         const plantOptions = this.props.plants && this.props.plants.map(plant => (
-            <option name={plant.attributes.name} value={plant.id}>{plant.attributes.name}</option>
+            <option name={plant.attributes.name} value={plant.id} key={`${plant.id}` + 'new'}>{plant.attributes.name}</option>
          ))
       return (
         <form onSubmit={this.handleSubmit}>

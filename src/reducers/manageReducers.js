@@ -29,13 +29,16 @@ function collectionsReducer(state = [], action) {
         case "ADD_COLLECTION":
             return [...state, action.payload];
 
-        case "ADD_PLANT_OR_EDIT_COLLECTION":
+        case "ADD_OR_DELETE_PLANT_OR_EDIT_COLLECTION":
             const collections = state.filter(c => c.id !== action.payload.id)
             return [...collections, action.payload];
 
+        // case "DELETE_PLANT_FROM_COLLECTION":
+        //     const theCollections = state.map(c => c.plants.filter(p => p.id !== action.payload))
+        //     return [...theCollections];
+
         case "DELETE_COLLECTION":
             const remainedCollections = state.filter(c => c.id !== action.payload);
-            console.log(remainedCollections)
             return [...remainedCollections];
 
         default:

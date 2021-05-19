@@ -32,7 +32,6 @@ class CollectionsContainer extends React.Component {
       })
    }
   render() {
-    
     return (
        <div>
             <Collections collections={this.props.collections} /> 
