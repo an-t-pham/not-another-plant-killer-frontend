@@ -1,26 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Route, Switch} from 'react-router-dom';
 
 
-import {  withAuthenticationRequired } from '@auth0/auth0-react';
+import {  withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
 
 
 import LoginButton from './components/LoginButton';
-import UserPlants from './plants/UserPlants';
-import Profile from './components/Profile';
-import Collections from './collections/Collections';
-import Collection from './collections/Collection';
+
+import ProfileRouter from './routers/ProfileRouter';
 import { NavBar } from './components/NavBar';
 import PlantsRouter from './routers/PlantsRouter';
+import { connect, useDispatch } from 'react-redux';
+import { fetchUser } from './actions/fetchUser';
+import { fetchPlants } from './actions/fetchPlants';
 
 
-  const ProtectedRoute = ({ component, ...args }) => (
-  <Route component={withAuthenticationRequired(component)} {...args} />
-);
+  export const ProtectedRoute = (props) => {
+    const { user } = useAuth0();
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+       if (user) {
+         dispatch(fetchUser({
+           name: user.name,
+           email: user.email
+          }));
+        }
+     }, [user])
+
+      return <Route component={withAuthenticationRequired(props.component)} {...props} />
+    }
+
+   
 class App extends React.Component {
- 
+  
+  componentDidMount() {
+    this.props.fetchPlants()
+  }
+
   render() {
     return (
       <div className="App">
@@ -28,14 +46,17 @@ class App extends React.Component {
          <Switch>
             <Route exact path="/" render={() => <div> <LoginButton /> </div> }/> 
             <ProtectedRoute path="/plants" component={PlantsRouter} />
-            <ProtectedRoute exact path="/profile" component={Profile} />
-            <ProtectedRoute exact path="/profile/garden" component={UserPlants} />
-            <ProtectedRoute exact path="/profile/collections" component={Collections} />
-            <ProtectedRoute exact path="/profile/collections/:id" component={Collection} />
+            <ProtectedRoute path="/profile" component={ProfileRouter} />
          </Switch>
     </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+      plants: state.plants,    
+  }
+}
+
+export default connect(mapStateToProps, { fetchPlants })(App);

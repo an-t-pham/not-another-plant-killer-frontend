@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
+    user: usersReducer,
     collections: collectionsReducer,
     plants: plantsReducer,
     lights: lightsReducer,
@@ -9,16 +10,36 @@ const rootReducer = combineReducers({
 
 export default rootReducer;
 
+function usersReducer(state = null, action) {
 
-function collectionsReducer(state = [], action) {
-//    let idx;
     switch(action.type) {
-        // case "ADD_COLLECTION":
-        //     return [...state, action.collection];
+         case "FETCH_USER":
+             return action.payload;
+             
+         default:
+             return state;
+     }
+ 
+ }
+function collectionsReducer(state = [], action) {
+    switch(action.type) {
+        case "FETCH_COLLECTIONS":
+            return action.payload
 
-        // case "REMOVE_COLLECTION":
-        //     idx = state.findIndex(collection => collection.id === action.id)
-        //     return [...state.slice(0, idx), ...state.slice(idx+1)];
+        case "ADD_COLLECTION":
+            return [...state, action.payload];
+
+        case "ADD_OR_DELETE_PLANT_OR_EDIT_COLLECTION":
+            const collections = state.filter(c => c.id !== action.payload.id)
+            return [...collections, action.payload];
+
+        // case "DELETE_PLANT_FROM_COLLECTION":
+        //     const theCollections = state.map(c => c.plants.filter(p => p.id !== action.payload))
+        //     return [...theCollections];
+
+        case "DELETE_COLLECTION":
+            const remainedCollections = state.filter(c => c.id !== action.payload);
+            return [...remainedCollections];
 
         default:
             return state;
@@ -26,7 +47,6 @@ function collectionsReducer(state = [], action) {
 }
 
 function plantsReducer(state = [], action) {
-    
    switch(action.type) {
         case "FETCH_PLANTS":
             return action.payload;
