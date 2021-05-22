@@ -48,7 +48,6 @@ class CollectionContainer extends React.Component {
      deletePlantfromCollection = (plantData) => {
        const collection = this.findCollection();
        this.props.user && (this.props.deletePlantfromCollection(this.props.user.id, collection.id, plantData));
-       this.props.history.push("/profile/collections");
      }
 
   render() {

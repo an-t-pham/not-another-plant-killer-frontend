@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PlantsContainer from '../plants/containers/PlantsContainer';
 import PlantContainer from '../plants/containers/PlantContainer';
-import UserPlants from '../plants/UserPlants';
+
 
 
 
@@ -15,7 +15,6 @@ import UserPlants from '../plants/UserPlants';
                 <Switch>
                 <Route exact path="/plants" render={() =><PlantsContainer /> } />
                 <Route path="/plants/:slug"  render={(routerProps) =><PlantContainer {...routerProps}/> }/>
-                <Route path="/plants/your-garden" render={() => <UserPlants/> }/>
                 </Switch>
            </div>
         )

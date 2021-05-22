@@ -6,12 +6,13 @@ import { addPlant } from '../../actions/addPlant';
 import PlantInput from '../PlantInput';
 
 
+
 class PlantsContainer extends React.Component {
 
   state = {
     showForm: false
  }
-
+ 
  
    handleSubmit = (plantData) => {
     this.props.addPlant(plantData);
@@ -23,9 +24,16 @@ class PlantsContainer extends React.Component {
   render() {
     return (
        <div>
-            <Plants plants={this.props.plants} /> 
-            <button onClick={() => this.setState({showForm: true}) }>Add a Plant </button>
-            { this.state.showForm && <PlantInput handleSubmit={this.handleSubmit} /> }
+          { 
+            !this.props.user ? <h1>loading...</h1> : (
+              <>
+                 <Plants plants={this.props.plants} user={this.props.user}/> 
+                 <button onClick={() => this.setState({showForm: true}) }>Add a Plant </button>
+                 { this.state.showForm && <PlantInput handleSubmit={this.handleSubmit} /> }
+              </>
+            )
+          }
+            
        </div>
     )
   }
@@ -35,6 +43,7 @@ class PlantsContainer extends React.Component {
 const mapStateToProps = state => {
     return {
         plants: state.plants,
+        user: state.user
     }
 }
 
