@@ -22,7 +22,7 @@ const Collection = ( props ) => {
                 <button onClick={() => props.deletePlantfromCollection(plant)}>Delete me</button>
               </>
                 )) : text} 
-            <AddPlantToCollection collection={props.collection}/>
+            <AddPlantToCollection collection={props.collection} plants={props.plants}/>
         </div>
     )
 }

@@ -1,4 +1,5 @@
 export const fetchPlants = () => {
+    console.log("here")
     return (dispatch) => {
         fetch('http://localhost:3000/api/v1/plants')
         .then(resp => resp.json())

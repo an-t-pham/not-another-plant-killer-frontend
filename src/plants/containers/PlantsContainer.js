@@ -27,7 +27,7 @@ class PlantsContainer extends React.Component {
           { 
             !this.props.user ? <h1>loading...</h1> : (
               <>
-                 <Plants plants={this.props.plants} user={this.props.user}/> 
+                 <Plants user={this.props.user}/> 
                  <button onClick={() => this.setState({showForm: true}) }>Add a Plant </button>
                  { this.state.showForm && <PlantInput handleSubmit={this.handleSubmit} /> }
               </>
@@ -42,7 +42,6 @@ class PlantsContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        plants: state.plants,
         user: state.user
     }
 }

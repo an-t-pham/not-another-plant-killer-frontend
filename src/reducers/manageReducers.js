@@ -69,10 +69,11 @@ function plantsReducer(state = [], action) {
             const remainedPlants = state.filter(p => p.id !== action.payload);
             return [...remainedPlants];
         
-        case "ADD_PLANT_TO_COLLECTION":
-            const existingPlants = state.filter(p => !action.payload.attributes.plants.some(cp => cp.id === p.id))
-            console.log(existingPlants)
-            return [...existingPlants];
+        // case "ADD_PLANT_TO_COLLECTION":
+        //     console.log(action.payload)
+        //     const existingPlants = state.map(p => p.attributes.collections.filter(c => action.payload.id !== c.id))
+            
+        //     return [...state];
 
         default:
             return state;

@@ -52,11 +52,11 @@ class CollectionContainer extends React.Component {
 
   render() {
      const collection = this.findCollection();
-     
+
     return (
       
        <div>
-            <Collection collection={collection} deletePlantfromCollection={this.deletePlantfromCollection}/>
+            <Collection collection={collection} plants={this.props.plants} deletePlantfromCollection={this.deletePlantfromCollection}/>
             <button onClick={() => this.setState({showEditForm: true}) }>Edit Collection</button>
             { this.state.showEditForm && <CollectionInput collection={collection} handleSubmit={this.handleSubmit} /> }
             <button onClick={this.deleteCollection}> Delete Collection</button>
@@ -69,7 +69,8 @@ class CollectionContainer extends React.Component {
 const mapStateToProps = state => {
     return {
         collections: state.collections,
-        user: state.user
+        user: state.user,
+        plants: state.plants
     }
 }
 
