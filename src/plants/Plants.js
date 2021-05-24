@@ -22,7 +22,7 @@ class Plants extends React.Component {
                             {plant.attributes.formatted_name}
                         </li>
                     </Link>
-                    <AddToCollection plant={plant} collections={this.props.collections}/>
+                    {this.props.collections.length > 0 && <AddToCollection plant={plant} collections={this.props.collections}/>}
                   </>
                     ))
                 } 

@@ -10,7 +10,7 @@ export const deletePlantfromCollection = (user_id, collection_id, plant) => {
         })
         .then(resp => resp.json())
         .then(collection => dispatch({
-            type: 'ADD_OR_DELETE_PLANT_OR_EDIT_COLLECTION',
+            type: 'DELETE_PLANT_FROM_COLLECTION',
             payload: collection.data
         }))
     }

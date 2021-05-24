@@ -4,12 +4,18 @@ import { addPlantToCollection } from '../actions/addPlantToCollection';
 
 class AddToCollection extends React.Component {
     state = {
-        collectionId: ""
+        collectionId: "", 
+        availableCollections: []
     };
     
+    componentDidMount() {
+        this.setState({
+            availableCollections: this.props.collections.filter(c => !this.props.plant.attributes.collections.some(cp => cp.id === c.id))
+        })
+    }
+
   
     handleChange = event => {
-        console.log(event.target.value)
       this.setState({
           collectionId: event.target.value
         });
@@ -20,20 +26,19 @@ class AddToCollection extends React.Component {
       const collection = this.props.collections.find(collection => collection.id === this.state.collectionId);
       this.props.addPlantToCollection(collection.attributes.user_id, collection.id, this.props.plant);
       this.setState({
-        collectionId: this.props.collections[0].id
+        collectionId: "",
+        availableCollections: this.state.availableCollections.filter(c => c.id !== collection.id)
       });
     }
     
     collectionOptions = () => {
-        console.log(this.props.collections)
-            return this.props.collections && this.props.collections.map(collection => (
+            return this.state.availableCollections.map(collection => (
                 <option name={collection.attributes.name} value={collection.id} key={`${collection.id}` + 'new'}>{collection.attributes.name}</option>
              ))
     }
 
   
     render() {
-        
       return (
         <> 
           {  (this.props.collections.length > 0) ? 
