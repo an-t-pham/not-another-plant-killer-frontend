@@ -15,6 +15,8 @@ import { connect, useDispatch } from 'react-redux';
 import { fetchUser } from './actions/fetchUser';
 import { fetchPlants } from './actions/fetchPlants';
 
+import { Typography } from '@material-ui/core';
+
 
   export const ProtectedRoute = (props) => {
     const { user } = useAuth0();
@@ -42,12 +44,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Typography variant="body1">
         <NavBar />
          <Switch>
             <Route exact path="/" render={() => <div> <LoginButton /> </div> }/> 
             <ProtectedRoute path="/plants" component={PlantsRouter} />
             <ProtectedRoute path="/profile" component={ProfileRouter} />
          </Switch>
+         </Typography>
     </div>
     );
   }

@@ -1,11 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/styles';
 
 import Plants from '../Plants';
 import { addPlant } from '../../actions/addPlant';
 import PlantInput from '../PlantInput';
 
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Modal from '@material-ui/core/Modal';
 
+const styles = {
+  root: {
+    position: 'fixed',
+    top: '50px',
+    right: '100px'
+  },
+
+  circle: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%'
+  }
+};
 
 class PlantsContainer extends React.Component {
 
@@ -21,15 +40,40 @@ class PlantsContainer extends React.Component {
     })
   }
 
+  handleOpen = () => {
+    this.setState({
+      showForm: true
+    })
+ }
+
+   handleClose = () => {
+      this.setState({
+        showForm: false
+      })
+   }
+
   render() {
+    const { classes } = this.props
+
     return (
        <div>
           { 
-            !this.props.user ? <h1>loading...</h1> : (
+            !this.props.user ? <CircularProgress color="secondary" className={classes.circle} /> : (
               <>
                  <Plants user={this.props.user}/> 
-                 <button onClick={() => this.setState({showForm: true}) }>Add a Plant </button>
-                 { this.state.showForm && <PlantInput handleSubmit={this.handleSubmit} /> }
+                 <Tooltip title="Add New Plant" aria-label="add">
+                   <Fab  color="secondary" className={classes.root}>
+                    <AddIcon onClick={this.handleOpen} />
+                   </Fab>
+                 </Tooltip>
+                 
+                <Modal
+                 open={this.state.showForm}
+                 onClose={this.handleClose}
+                >
+                   <PlantInput handleSubmit={this.handleSubmit} /> 
+                 </Modal>
+                 
               </>
             )
           }
@@ -46,4 +90,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { addPlant })(PlantsContainer);
+export default connect(mapStateToProps, { addPlant })(withStyles(styles)(PlantsContainer));

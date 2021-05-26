@@ -2,6 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addPlantToCollection } from '../actions/addPlantToCollection';
 
+import { withStyles } from '@material-ui/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+import Grid from '@material-ui/core/Grid';
+
+import SendIcon from '@material-ui/icons/Send';
+
+const styles = {
+    formControl: {
+        width: "100%",
+      },
+      select: {
+          width: 200
+      },
+ };
+
 class AddToCollection extends React.Component {
     state = {
         collectionId: "", 
@@ -33,32 +52,55 @@ class AddToCollection extends React.Component {
     
     collectionOptions = () => {
             return this.state.availableCollections.map(collection => (
-                <option name={collection.attributes.name} value={collection.id} key={`${collection.id}` + 'new'}>{collection.attributes.name}</option>
+                <MenuItem name={collection.attributes.name} value={collection.id} key={`${collection.id}` + 'new'}>{collection.attributes.name}</MenuItem>
              ))
     }
 
   
     render() {
+        const { classes } = this.props;
+        const text = "No Collection has been created" ;
       return (
         <> 
           {  (this.props.collections.length > 0) ? 
-                <form onSubmit={this.handleSubmit}>
-                  <label>
-                    Add To Collection:
-                    <select value={this.state.collectionId} onChange={this.handleChange}>
-                    <option value="">Select a Collection</option>
-                        {this.collectionOptions()}
-                    </select>
-                  </label>
-      
-                  <input type="submit" value="Submit" />
-                </form>  
-             :  "No Collection has been created" 
-            }
+          <FormControl className={classes.formControl}>
+              <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="flex-end"
+              xl
+              >
+                  <div>
+                   <InputLabel id="add-to-collection">Add To Collection:</InputLabel>
+                     <Select
+                     className={classes.select}
+                     value={this.state.collectionId}
+                     onChange={this.handleChange}
+                     autoWidth
+                     label="Add To Collection:"
+                     >  
+                       <MenuItem value="">
+                         <em>Select a Collection</em>
+                       </MenuItem>
+                         {this.collectionOptions()}
+                    </Select>
+                  </div>
+     
+
+                 <SendIcon style={{ paddingRight: "45px", color: "#f50057" }} onClick={(e) => this.handleSubmit(e)}/>
+       
+             </Grid>
+         
+            </FormControl>
+             :  <h1>{text}</h1>
+             }
+                
+            
        </>
       )
     }
 }
 
 
-export default connect(null, { addPlantToCollection })(AddToCollection);
+export default connect(null, { addPlantToCollection })(withStyles(styles)(AddToCollection));

@@ -15,8 +15,8 @@ const Profile = (props) => {
     isAuthenticated && props.user && (
       <div>
         <img src={user.picture} alt={user.name} />
-        <h2>{props.user.attributes.name}</h2>
-        <p>{props.user.attributes.email}</p>
+        <h2>Hi, {props.user.attributes.name}!</h2>
+        <p>Email: {props.user.attributes.email}</p>
       </div>
     )
   );

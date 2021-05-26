@@ -2,6 +2,7 @@ import React from 'react';
 import { fetchLights } from '../actions/fetchLights';
 import { fetchWaters } from '../actions/fetchWaters';
 import { connect } from 'react-redux';
+import teal from '@material-ui/core/colors/teal';
 
  class PlantInput extends React.Component {
 
@@ -72,18 +73,18 @@ import { connect } from 'react-redux';
 
     render() {
         return (
-               <form onSubmit={this.onSubmit}>
+               <form style={{ backgroundColor: 'teal', color: 'white', padding: '30px', width:'35%', margin:'auto', marginTop:'100px', fontFamily: 'Roboto' }} onSubmit={this.onSubmit}>
                    <label>Plant Name: </label>
-                   <input type="text" placeholder="Name" name="name" value={this.state.name} onChange={this.handleChange}/><br/>
+                   <input type="text" placeholder="name" name="name" value={this.state.name} onChange={this.handleChange}/><br/>
                    <br />
                    <label>AKA: </label>
                    <input type="text" placeholder="aka" name="aka" value={this.state.aka} onChange={this.handleChange} /><br/>
                    <br />
                    <label>Image URL: </label>
-                   <input type="text" placeholder="Image URL" name="image_url" value={this.state.image_url} onChange={this.handleChange} /><br/>
+                   <input type="text" placeholder="image url" name="image_url" value={this.state.image_url} onChange={this.handleChange} /><br/>
                    <br />
                    <label>Description: </label>
-                   <input type="text" placeholder="Description" name="description" value={this.state.description} onChange={this.handleChange} /><br/>
+                   <input type="text" placeholder="description" name="description" value={this.state.description} onChange={this.handleChange} /><br/>
                    <br />
                    <label>Recomended size pot in inch: </label>
                    <input type="text" placeholder="size pot" name="size_pot" value={this.state.size_pot} onChange={this.handleChange} /><br/>

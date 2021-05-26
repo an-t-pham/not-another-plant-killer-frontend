@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import CollectionContainer from '../collections/containers/CollectionContainer';
 import CollectionsContainer from '../collections/containers/CollectionsContainer';
+import LogoutButton from '../components/LogoutButton';
 import Profile from '../components/Profile';
 
 export default class ProfileRouter extends React.Component {

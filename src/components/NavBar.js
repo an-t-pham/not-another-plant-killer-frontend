@@ -3,37 +3,66 @@ import { NavLink } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from './LogoutButton';
 
+import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
+
+
 export const NavBar = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+ 
     const { isAuthenticated } = useAuth0();
+  
         return (
             <>
               { isAuthenticated && (
-                 <div style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }}>
-                  <NavLink 
-                    style={{ marginRight: '10px' }} 
-                    to="/profile"
+                <div>
+                  <MenuIcon
+                      aria-label='more'
+                      aria-controls='nav-bar'
+                      aria-haspopup='true'
+                      onClick={handleClick}
+                      style={{ color: '#f50057', width: '40px', height: '40px' }}
                   >
-                    Profile
-                  </NavLink>
-        
-
-                  <NavLink 
-                    style={{ marginRight: '10px' }} 
-                    to="/profile/collections"
+                  </MenuIcon>
+                  
+                  <Menu
+                     id='nav-bar'
+                     anchorEl={anchorEl}
+                     keepMounted
+                     open={open}
+                     onClose={handleClose}
+      
                   >
-                    Your Collections
-                  </NavLink>
+                      <MenuItem key='profile' selected='Profile' style={{ color: '#f50057' }} onClick={handleClose} component={NavLink} to='/profile'>
+                         Profile
+                      </MenuItem>
 
+                      <MenuItem key='my-collections' selected='My Collections' style={{ color: '#f50057' }} onClick={handleClose} component={NavLink} to='/profile/collections'>
+                         My Collections
+                      </MenuItem>
 
-                  <NavLink 
-                    style={{ marginRight: '10px' }} 
-                    to="/plants"
-                  >
-                    All Plants
-                  </NavLink>
-              
-                  <LogoutButton />
-                  </div>
+                      <MenuItem key='plants' selected='Plants' style={{ color: '#f50057' }} onClick={handleClose} component={NavLink} to='/plants'>
+                         All Plants
+                      </MenuItem>
+
+                      <MenuItem key='logout' selected='Log Out' style={{ color: '#f50057' }} onClick={handleClose} component={LogoutButton} >
+                         Log Out 
+                      </MenuItem>
+                  </Menu>
+                </div>
+
                      )}
              
             
