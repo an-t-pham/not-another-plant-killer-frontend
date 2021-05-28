@@ -10,6 +10,8 @@ import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/styles';
 
+import pink from '@material-ui/core/colors/pink';
+
 const styles = {
     root: {
         flexGrow: 1
@@ -46,7 +48,7 @@ class Plants extends React.Component {
               <Grid key={plant.id} className={classes.control} item> 
                   
                   <Paper className={classes.paper}>
-                    <Link to={`/plants/${plant.attributes.slug}`} component={RouterLink} style={{ color: "#f50057" }}> 
+                    <Link to={`/plants/${plant.attributes.slug}`} component={RouterLink} style={{ color: pink[200] }}> 
                        <img src={plant.attributes.image_url} width="100%" height="360px" alt={plant.attributes.name}/> <br />
                        <div className={classes.itemPadding}>{plant.attributes.formatted_name}</div>
                     </Link>

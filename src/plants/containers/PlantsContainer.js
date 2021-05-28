@@ -6,19 +6,13 @@ import Plants from '../Plants';
 import { addPlant } from '../../actions/addPlant';
 import PlantInput from '../PlantInput';
 
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
 
-const styles = {
-  root: {
-    position: 'fixed',
-    top: '50px',
-    right: '100px'
-  },
+import FabButton from '../../components/FabButton';
+import pink from '@material-ui/core/colors/pink';
 
+const styles = {
   circle: {
     position: 'absolute',
     top: '50%',
@@ -35,9 +29,7 @@ class PlantsContainer extends React.Component {
  
    handleSubmit = (plantData) => {
     this.props.addPlant(plantData);
-    this.setState({
-      showForm: false
-    })
+    this.handleClose();
   }
 
   handleOpen = () => {
@@ -58,21 +50,17 @@ class PlantsContainer extends React.Component {
     return (
        <div>
           { 
-            !this.props.user ? <CircularProgress color="secondary" className={classes.circle} /> : (
+            !this.props.user ? <CircularProgress style={{color: pink[200]}} className={classes.circle} /> : (
               <>
                  <Plants user={this.props.user}/> 
-                 <Tooltip title="Add New Plant" aria-label="add">
-                   <Fab  color="secondary" className={classes.root}>
-                    <AddIcon onClick={this.handleOpen} />
-                   </Fab>
-                 </Tooltip>
+                 <div style={{position: 'fixed', top: '50px', right: '20px'}}><FabButton title="Create New Plant" button="add" handleAction={this.handleOpen} /></div>
                  
-                <Modal
-                 open={this.state.showForm}
-                 onClose={this.handleClose}
-                >
-                   <PlantInput handleSubmit={this.handleSubmit} /> 
-                 </Modal>
+                  <Modal
+                   open={this.state.showForm}
+                   onClose={this.handleClose}
+                  >
+                     <PlantInput handleSubmit={this.handleSubmit} /> 
+                  </Modal>
                  
               </>
             )

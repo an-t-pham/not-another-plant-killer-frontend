@@ -31,7 +31,7 @@ class AddPlantToCollection extends React.Component {
     }
   
     render() {
-        console.log(this.props.plants)
+        
         const plantOptions = this.props.plants && this.state.availablePlants.map(plant => (
             <option name={plant.attributes.name} value={plant.id} key={`${plant.id}` + 'new'}>{plant.attributes.name}</option>
          ))

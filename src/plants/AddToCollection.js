@@ -11,10 +11,13 @@ import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
 
 import SendIcon from '@material-ui/icons/Send';
+import pink from '@material-ui/core/colors/pink';
+
 
 const styles = {
     formControl: {
-        width: "100%",
+        width: "100%"
+        
       },
       select: {
           width: 200
@@ -72,7 +75,7 @@ class AddToCollection extends React.Component {
               xl
               >
                   <div>
-                   <InputLabel id="add-to-collection">Add To Collection:</InputLabel>
+                   <InputLabel id="add-to-collection" style={{ color: pink[200] }} >Add To Collection:</InputLabel>
                      <Select
                      className={classes.select}
                      value={this.state.collectionId}
@@ -80,7 +83,7 @@ class AddToCollection extends React.Component {
                      autoWidth
                      label="Add To Collection:"
                      >  
-                       <MenuItem value="">
+                       <MenuItem value="" >
                          <em>Select a Collection</em>
                        </MenuItem>
                          {this.collectionOptions()}
@@ -88,7 +91,7 @@ class AddToCollection extends React.Component {
                   </div>
      
 
-                 <SendIcon style={{ paddingRight: "45px", color: "#f50057" }} onClick={(e) => this.handleSubmit(e)}/>
+                 <SendIcon style={{ paddingRight: "45px", color: pink[200] }} onClick={(e) => this.handleSubmit(e)}/>
        
              </Grid>
          

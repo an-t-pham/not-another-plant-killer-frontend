@@ -7,6 +7,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import pink from '@material-ui/core/colors/pink';
+
 
 
 export const NavBar = () => {
@@ -33,7 +35,7 @@ export const NavBar = () => {
                       aria-controls='nav-bar'
                       aria-haspopup='true'
                       onClick={handleClick}
-                      style={{ color: '#f50057', width: '40px', height: '40px' }}
+                      style={{ color: pink[200], width: '40px', height: '40px' }}
                   >
                   </MenuIcon>
                   
@@ -45,19 +47,19 @@ export const NavBar = () => {
                      onClose={handleClose}
       
                   >
-                      <MenuItem key='profile' selected='Profile' style={{ color: '#f50057' }} onClick={handleClose} component={NavLink} to='/profile'>
+                      <MenuItem key='profile' selected='Profile' style={{ color: pink[200] }} onClick={handleClose} component={NavLink} to='/profile'>
                          Profile
                       </MenuItem>
 
-                      <MenuItem key='my-collections' selected='My Collections' style={{ color: '#f50057' }} onClick={handleClose} component={NavLink} to='/profile/collections'>
+                      <MenuItem key='my-collections' selected='My Collections' style={{ color: pink[200] }} onClick={handleClose} component={NavLink} to='/profile/collections'>
                          My Collections
                       </MenuItem>
 
-                      <MenuItem key='plants' selected='Plants' style={{ color: '#f50057' }} onClick={handleClose} component={NavLink} to='/plants'>
+                      <MenuItem key='plants' selected='Plants' style={{ color: pink[200] }} onClick={handleClose} component={NavLink} to='/plants'>
                          All Plants
                       </MenuItem>
 
-                      <MenuItem key='logout' selected='Log Out' style={{ color: '#f50057' }} onClick={handleClose} component={LogoutButton} >
+                      <MenuItem key='logout' selected='Log Out' onClick={handleClose} component={LogoutButton} >
                          Log Out 
                       </MenuItem>
                   </Menu>

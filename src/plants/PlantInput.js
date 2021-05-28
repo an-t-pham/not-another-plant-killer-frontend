@@ -2,7 +2,11 @@ import React from 'react';
 import { fetchLights } from '../actions/fetchLights';
 import { fetchWaters } from '../actions/fetchWaters';
 import { connect } from 'react-redux';
+
+import pink from '@material-ui/core/colors/pink';
 import teal from '@material-ui/core/colors/teal';
+import SendIcon from '@material-ui/icons/Send';
+
 
  class PlantInput extends React.Component {
 
@@ -73,7 +77,7 @@ import teal from '@material-ui/core/colors/teal';
 
     render() {
         return (
-               <form style={{ backgroundColor: 'teal', color: 'white', padding: '30px', width:'35%', margin:'auto', marginTop:'100px', fontFamily: 'Roboto' }} onSubmit={this.onSubmit}>
+               <form style={{ backgroundColor: teal[900], color: pink[100], padding: '30px', width:'35%', margin:'auto', marginTop:'100px', fontFamily: 'Roboto' }} >
                    <label>Plant Name: </label>
                    <input type="text" placeholder="name" name="name" value={this.state.name} onChange={this.handleChange}/><br/>
                    <br />
@@ -110,7 +114,8 @@ import teal from '@material-ui/core/colors/teal';
                         )}
                      <br />
 
-                   <input type="submit" value="Submit" />
+                   {/* <input type="submit" value="Submit" /> */}
+                   <SendIcon  onClick={(e) => this.onSubmit(e)}/>
                  
                </form>
         )
