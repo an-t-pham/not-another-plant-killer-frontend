@@ -6,8 +6,6 @@ import { Route, Switch} from 'react-router-dom';
 import {  withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
 
 
-import LoginButton from './components/LoginButton';
-
 import ProfileRouter from './routers/ProfileRouter';
 import { NavBar } from './components/NavBar';
 import PlantsRouter from './routers/PlantsRouter';
@@ -15,7 +13,8 @@ import { connect, useDispatch } from 'react-redux';
 import { fetchUser } from './actions/fetchUser';
 import { fetchPlants } from './actions/fetchPlants';
 
-import { Typography } from '@material-ui/core';
+
+import HomePage from './components/HomePage';
 
 
   export const ProtectedRoute = (props) => {
@@ -44,14 +43,15 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Typography variant="body1">
+        {/* <Typography variant="body1"> */}
         <NavBar />
          <Switch>
-            <Route exact path="/" render={() => <div> <LoginButton /> </div> }/> 
+            <Route exact path="/" component={HomePage}/> 
+            {/* <Route exact path="/" render={() => <div> <LoginButton /> </div> }/>  */}
             <ProtectedRoute path="/plants" component={PlantsRouter} />
             <ProtectedRoute path="/profile" component={ProfileRouter} />
          </Switch>
-         </Typography>
+         {/* </Typography> */}
     </div>
     );
   }

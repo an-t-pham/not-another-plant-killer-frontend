@@ -73,20 +73,21 @@ class CollectionContainer extends React.Component {
        <div>
             <Collection collection={collection} plants={this.props.plants} deletePlantfromCollection={this.deletePlantfromCollection}/>
             <div style={{position: 'fixed', top: '120px', right: '20px'}}>
-              <FabButton title="Edit Collection Name" button="edit" handleAction={this.handleOpen} right="40px" />
+              <FabButton title="Edit Collection" button="edit" handleAction={this.handleOpen} right="40px" />
             </div>
-            {/* <button onClick={() => this.setState({showEditForm: true}) }>Edit Collection</button> */}
+            
             <Modal
               open={this.state.showEditForm}
               onClose={this.handleClose}
+              value={this.state.name}
             > 
-            <CollectionInput collection={collection} handleSubmit={this.handleSubmit} /> 
+            <CollectionInput collection={collection}  handleSubmit={this.handleSubmit} /> 
             </Modal>
 
             <div style={{position: 'fixed', top: '190px', right: '20px'}}>
-               <FabButton title="Delete Collection" button="delete" handleAction={this.handleOpen} right="50px" />
+               <FabButton title="Delete Collection" button="delete" handleAction={this.deleteCollection} right="50px" />
             </div>
-            {/* <button onClick={this.deleteCollection}> Delete Collection</button> */}
+           
        </div>
     )
   }

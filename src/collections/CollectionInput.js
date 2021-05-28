@@ -7,6 +7,15 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
 export default class CollectionInput extends React.Component {
+
+    componentDidMount() { 
+        this.props.collection && (
+            this.setState({
+                name: this.props.collection.attributes.name,
+            })
+        )
+    }
+
     state = {
         name: ""
     }

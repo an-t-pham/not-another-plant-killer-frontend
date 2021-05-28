@@ -11,7 +11,7 @@ const LoginButton = () => {
     return <Button 
             onClick={() => loginWithRedirect()} 
             variant="outlined" 
-            style={{color: pink[200], borderColor: pink[200], position: 'absolute', top: '50%', left: '50%'}}
+            style={{color: pink[200], borderColor: pink[200]}}
             >
               Log In
             </Button>

@@ -52,7 +52,7 @@ const Collection = ( props ) => {
     
     return (
         <div> 
-            <Typography variant="h5" style={{ color: pink[200] }}>
+            <Typography variant="h5" style={{ color: pink[200], paddingLeft: "40px" }}>
                 {props.collection.attributes.name}
             </Typography>
 
