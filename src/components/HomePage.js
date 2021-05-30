@@ -5,8 +5,8 @@ import Container from '@material-ui/core/Container';
 import { Typography } from '@material-ui/core';
 import pink from '@material-ui/core/colors/pink';
 
-export default class HomePage extends React.Component {
-    render() {
+ const HomePage = () => {
+  
         return (
             <div style={{ backgroundImage: `url(${background})`, height: "100vh", backgroundSize: 'cover', display: "flex", alignItems: "center" }}>
                <Container maxWidth={false} style={{ backgroundColor: pink[50], width: '100%', height: '200px', opacity: 0.8, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-evenly" }} >
@@ -19,5 +19,7 @@ export default class HomePage extends React.Component {
             </div>
         )
 
-    }
+    
 }
+
+export default HomePage;

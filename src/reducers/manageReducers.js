@@ -5,7 +5,8 @@ const rootReducer = combineReducers({
     collections: collectionsReducer,
     plants: plantsReducer,
     lights: lightsReducer,
-    waters: watersReducer
+    waters: watersReducer,
+    messages: messagesReducer
 });
 
 export default rootReducer;
@@ -29,9 +30,6 @@ function collectionsReducer(state = [], action) {
         case "ADD_COLLECTION":
             return [...state, action.payload];
 
-        // case "DELETE_PLANT_FROM_COLLECTION":
-        //     const theCollections = state.map(c => c.plants.filter(p => p.id !== action.payload))
-        //     return [...theCollections];
         case "EDIT_COLLECTION":
             const editedCollections = state.filter(c => c.id !== action.payload.id)
             return [...editedCollections, action.payload];
@@ -68,12 +66,6 @@ function plantsReducer(state = [], action) {
         case "DELETE_PLANT":
             const remainedPlants = state.filter(p => p.id !== action.payload);
             return [...remainedPlants];
-        
-        // case "ADD_PLANT_TO_COLLECTION":
-        //     console.log(action.payload)
-        //     const existingPlants = state.map(p => p.attributes.collections.filter(c => action.payload.id !== c.id))
-            
-        //     return [...state];
 
         default:
             return state;
@@ -100,5 +92,17 @@ function lightsReducer(state = [], action) {
          default:
              return state;
      }
+}
+     
+function messagesReducer(state = [], action) {
+    switch(action.type) {
+        
+        case "SET_ERRORS":
+         
+            return action.payload;
+                 
+    default:
+            return state;
+    }
  
  }

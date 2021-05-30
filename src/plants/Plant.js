@@ -64,7 +64,7 @@ const Plant = ( {plant} ) => {
                 <Typography gutterBottom variant="body2" style={{ color: teal[300] }}>
                   AKA: {plant.attributes.aka}
                 </Typography>
-                <Typography variant="body2" >
+                <Typography  >
                 {plant.attributes.description}
                 </Typography>
                 <Typography variant="body2" >
@@ -78,11 +78,11 @@ const Plant = ( {plant} ) => {
                 
                 <Typography variant="body2" >
                   <OpacityIcon /> <br />
-                  - Level {plant.attributes.water.level}: {plant.attributes.water.description}
+                  - {plant.attributes.water.description}
                 </Typography>
                 <Typography variant="body2">
                   <WbSunnyIcon /><br />
-                  - Level {plant.attributes.light.level}: {plant.attributes.light.description} <br />
+                  - {plant.attributes.light.description} <br />
                   - Ideal Location: {plant.attributes.light.ideal_location}
                 </Typography>
                 

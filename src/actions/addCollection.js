@@ -1,3 +1,5 @@
+import getErrors from './getErrors';
+
 export const addCollection = (collection, user_id) => {
     return (dispatch) => {
         fetch(`http://localhost:3000/api/v1/users/${user_id}/collections`, {
@@ -8,11 +10,12 @@ export const addCollection = (collection, user_id) => {
             method: 'POST',
             body: JSON.stringify(collection)
         })
-        .then(resp => resp.json())
+        .then(resp => getErrors(resp, dispatch))
         .then(collection => dispatch({
             type: 'ADD_COLLECTION',
             payload: collection.data
         }))
+        .catch(err => err.message)
     }
     
 }

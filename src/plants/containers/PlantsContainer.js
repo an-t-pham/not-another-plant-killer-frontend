@@ -74,7 +74,8 @@ class PlantsContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        errors: state.errors
     }
 }
 

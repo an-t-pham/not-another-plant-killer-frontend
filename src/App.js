@@ -12,7 +12,7 @@ import PlantsRouter from './routers/PlantsRouter';
 import { connect, useDispatch } from 'react-redux';
 import { fetchUser } from './actions/fetchUser';
 import { fetchPlants } from './actions/fetchPlants';
-
+import Messages from './components/Messages';
 
 import HomePage from './components/HomePage';
 
@@ -45,6 +45,7 @@ class App extends React.Component {
       <div className="App">
         {/* <Typography variant="body1"> */}
         <NavBar />
+        
          <Switch>
             <Route exact path="/" component={HomePage}/> 
             {/* <Route exact path="/" render={() => <div> <LoginButton /> </div> }/>  */}
@@ -52,6 +53,7 @@ class App extends React.Component {
             <ProtectedRoute path="/profile" component={ProfileRouter} />
          </Switch>
          {/* </Typography> */}
+         <Messages messages={this.props.messages}/>
     </div>
     );
   }
@@ -59,7 +61,8 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
-      plants: state.plants,    
+      plants: state.plants, 
+      messages: state.messages    
   }
 }
 
