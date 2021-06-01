@@ -1,4 +1,4 @@
-import getMessages from './getMessages';
+import getMessages from './getErrors';
 
 export const editPlant = (plant, id) => {
     return (dispatch) => {
