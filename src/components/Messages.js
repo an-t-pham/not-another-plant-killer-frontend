@@ -7,7 +7,7 @@ const Messages = ( {messages} ) => {
 
   useEffect(() => {
     if (messages.errors.length > 0 || messages.success ) {
-      setTimeout(clearMessages, 3000)
+      setTimeout(clearMessages, 4000)
     }
   }, [messages.errors.length, messages.success])
 
