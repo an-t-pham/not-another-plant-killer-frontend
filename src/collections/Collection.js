@@ -10,8 +10,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import pink from '@material-ui/core/colors/pink';
+import teal from '@material-ui/core/colors/teal';
+
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
+
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 
@@ -52,7 +55,7 @@ const Collection = ( props ) => {
     
     return (
         <div> 
-            <Typography variant="h5" style={{ color: pink[200], paddingLeft: "40px" }}>
+            <Typography variant="h4" style={{ color: pink[200], backgroundColor: teal[800], padding: '20px', marginLeft: '40px' }}>
                 {props.collection.attributes.name}
             </Typography>
 
