@@ -10,7 +10,7 @@ export const addPlantToCollection = (user_id, collection_id, plant) => {
             method: 'POST',
             body: JSON.stringify(plant)
         })
-        .then(resp => getMessages(resp, dispatch, "Plant has successfully been added to the Collection"))
+        .then(resp => getMessages(resp, dispatch, `${plant.attributes.name} has successfully been added to the Collection`))
         .then(collection => dispatch({
             type: 'ADD_PLANT_TO_COLLECTION',
             payload: collection.data
