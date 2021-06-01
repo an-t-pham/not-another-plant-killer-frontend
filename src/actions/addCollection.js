@@ -1,4 +1,4 @@
-import getErrors from './getErrors';
+import getMessages from './getMessages';
 
 export const addCollection = (collection, user_id) => {
     return (dispatch) => {
@@ -10,7 +10,7 @@ export const addCollection = (collection, user_id) => {
             method: 'POST',
             body: JSON.stringify(collection)
         })
-        .then(resp => getErrors(resp, dispatch))
+        .then(resp => getMessages(resp, dispatch, "Collection has successfully been created"))
         .then(collection => dispatch({
             type: 'ADD_COLLECTION',
             payload: collection.data

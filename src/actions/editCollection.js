@@ -1,4 +1,4 @@
-import getErrors from './getErrors';
+import getMessages from './getMessages';
 
 export const editCollection = (user_id, collection_id, collection) => {
     return (dispatch) => {
@@ -10,7 +10,7 @@ export const editCollection = (user_id, collection_id, collection) => {
             method: 'PATCH',
             body: JSON.stringify(collection)
         })
-        .then(resp => getErrors(resp, dispatch))
+        .then(resp => getMessages(resp, dispatch, "Collection has successfully been edited"))
         .then(collection => dispatch({
             type: 'EDIT_COLLECTION',
             payload: collection.data

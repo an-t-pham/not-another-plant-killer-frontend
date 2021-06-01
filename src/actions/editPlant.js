@@ -1,4 +1,4 @@
-import getErrors from './getErrors';
+import getMessages from './getMessages';
 
 export const editPlant = (plant, id) => {
     return (dispatch) => {
@@ -10,7 +10,7 @@ export const editPlant = (plant, id) => {
             method: 'PATCH',
             body: JSON.stringify(plant)
         })
-        .then(resp => getErrors(resp, dispatch))
+        .then(resp => getMessages(resp, dispatch, 'Plant has successfully been edited'))
         .then(plant => dispatch({
             type: 'EDIT_PLANT',
             payload: plant.data

@@ -6,22 +6,24 @@ const Messages = ( {messages} ) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (messages.length > 0 ) {
-      setTimeout(onClose, 3000)
+    if (messages.errors.length > 0 || messages.success ) {
+      setTimeout(clearMessages, 3000)
     }
-  }, [messages.length])
+  }, [messages.errors.length, messages.success])
 
 
-  const onClose = () => {
+  const clearMessages = () => {
     dispatch({
-      type: 'SET_ERRORS',
-      payload: []
-  })
+      type: 'CLEAR_MESSAGES'
+     })
   }
 
     return (
       <div style={{position: 'absolute', top: '100px', width: '80%', margin: 'auto', left: '10%'}}>
-        {messages.map(message => <Alert severity="error" onClose={onClose}>{message}</Alert>)}
+        {messages.errors.length > 0 &&
+              messages.errors.map(error => <Alert severity="error" onClose={clearMessages}>{error}</Alert>)}
+        {messages.success && <Alert severity="success" onClose={clearMessages}>{messages.success}</Alert>}
+        
       </div>
     )
 }

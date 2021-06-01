@@ -49,6 +49,7 @@ class AddPlantToCollection extends React.Component {
         plantId: this.props.plants[0].id,
         availablePlants: this.state.availablePlants.filter(p => p.id !== thePlant.id)
       });
+      this.props.handleClose();
     }
   
     render() {

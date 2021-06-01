@@ -4,7 +4,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import pink from '@material-ui/core/colors/pink';
-
+import teal from '@material-ui/core/colors/teal';
+import Typography from '@material-ui/core/Typography';
 
 
 const Collections = ( {collections} ) => {
@@ -21,9 +22,13 @@ const Collections = ( {collections} ) => {
             return ""
         }
     }
+
+    const text = <Typography variant="body1" style={{ color: pink[200] }}>No Collection has been created </Typography>
+
     return (
             <ul>
-                {collections.map(collection => collection && (
+                <Typography variant="h4" style={{ color: pink[200], backgroundColor: teal[800], padding: '20px' }}>My Collections</Typography>
+                {collections.length > 0 ? collections.map(collection => collection && (
                     <Link to={`/profile/collections/${collection.attributes.slug}`} key={collection.id} style={{ color: pink[200]}} component={RouterLink} >
 
                                 <Grid
@@ -36,7 +41,7 @@ const Collections = ( {collections} ) => {
                                 <div style={{ padding: '20px'}}> {collection.attributes.name} <br />  </div>
                                 </Grid>
                                 
-                    </Link>))
+                    </Link>)) : text
                 } 
             </ul>
     )

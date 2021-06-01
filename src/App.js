@@ -43,16 +43,16 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <Typography variant="body1"> */}
+        
         <NavBar />
         
          <Switch>
             <Route exact path="/" component={HomePage}/> 
-            {/* <Route exact path="/" render={() => <div> <LoginButton /> </div> }/>  */}
+           
             <ProtectedRoute path="/plants" component={PlantsRouter} />
             <ProtectedRoute path="/profile" component={ProfileRouter} />
          </Switch>
-         {/* </Typography> */}
+        
          <Messages messages={this.props.messages}/>
     </div>
     );
@@ -62,7 +62,10 @@ class App extends React.Component {
 const mapStateToProps = state => {
   return {
       plants: state.plants, 
-      messages: state.messages    
+      messages: {
+        errors: state.messages.errors,
+        success: state.messages.success   
+      } 
   }
 }
 

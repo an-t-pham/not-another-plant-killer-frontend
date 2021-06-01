@@ -19,13 +19,13 @@ class PlantContainer extends React.Component {
 
     handleOpen = () => {
       this.setState({
-        showForm: true
+        showEditForm: true
       })
     }
 
    handleClose = () => {
       this.setState({
-        showForm: false
+        showEditForm: false
       })
    }
      
@@ -60,7 +60,7 @@ class PlantContainer extends React.Component {
             
             <div style={{position: 'fixed', top: '50px', right: '20px'}}><FabButton title="Edit Plant" button="edit" handleAction={this.handleOpen} /> </div>
             <Modal
-              open={this.state.showForm}
+              open={this.state.showEditForm}
               onClose={this.handleClose}
             >
                 <PlantInput plant={plant} handleSubmit={this.handleSubmit} /> 

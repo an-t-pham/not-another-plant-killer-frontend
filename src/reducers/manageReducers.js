@@ -94,12 +94,25 @@ function lightsReducer(state = [], action) {
      }
 }
      
-function messagesReducer(state = [], action) {
+function messagesReducer(state = {
+                           errors: [],
+                           success: ""
+                         }, 
+                         action
+                        ) {
     switch(action.type) {
-        
         case "SET_ERRORS":
-         
-            return action.payload;
+            return {...state, errors: action.payload};
+
+        case "SET_SUCCESS":
+          
+            return {...state, success: action.payload};
+
+        case "CLEAR_MESSAGES":
+            return {
+                errors: [],
+                success: ""
+                };
                  
     default:
             return state;

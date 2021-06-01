@@ -3,10 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import PlantsContainer from '../plants/containers/PlantsContainer';
 import PlantContainer from '../plants/containers/PlantContainer';
 
-
-
-
-
  class PlantsRouter extends React.Component {
 
     render() {

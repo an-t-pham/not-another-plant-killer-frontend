@@ -7,5 +7,9 @@ export const deletePlant = (id) => {
             type: 'DELETE_PLANT',
             payload: id
         }))
+        .then(() => dispatch({
+            type: 'SET_SUCCESS',
+            payload: 'Plant has been successfully deleted'
+        }))
     }
 } 

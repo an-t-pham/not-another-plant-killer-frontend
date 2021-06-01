@@ -78,11 +78,11 @@ const Plant = ( {plant} ) => {
                 
                 <Typography variant="body2" >
                   <OpacityIcon /> <br />
-                  - {plant.attributes.water.description}
+                  - Level {plant.attributes.water.level}: {plant.attributes.water.description}
                 </Typography>
                 <Typography variant="body2">
                   <WbSunnyIcon /><br />
-                  - {plant.attributes.light.description} <br />
+                  - Level {plant.attributes.light.level}: {plant.attributes.light.description} <br />
                   - Ideal Location: {plant.attributes.light.ideal_location}
                 </Typography>
                 

@@ -48,7 +48,7 @@ const Collection = ( props ) => {
     };
 
     if(!props.collection) return null && <Redirect to="profile/collections" />;
-    const text = "No Plant has been added in Collection";
+    const text = <Typography variant="body1" style={{ color: pink[200] }}> No Plant has been added in Collection </Typography>
     
     return (
         <div> 
@@ -98,7 +98,7 @@ const Collection = ( props ) => {
                 open={open}
                 onClose={handleClose}
              >
-                <AddPlantToCollection collection={props.collection} plants={props.plants}/>
+                <AddPlantToCollection collection={props.collection} plants={props.plants} handleClose={handleClose}/>
             </Modal>
         </div>
     )
