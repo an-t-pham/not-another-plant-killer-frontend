@@ -7,5 +7,9 @@ export const deleteCollection = (user_id, collection_id) => {
             type: 'DELETE_COLLECTION',
             payload: collection_id
         }))
+        .then(() => dispatch({
+            type: 'SET_SUCCESS',
+            payload: 'Collection has been successfully deleted'
+        }))
     }
 } 

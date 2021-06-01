@@ -3,6 +3,11 @@ import { fetchLights } from '../actions/fetchLights';
 import { fetchWaters } from '../actions/fetchWaters';
 import { connect } from 'react-redux';
 
+import pink from '@material-ui/core/colors/pink';
+import teal from '@material-ui/core/colors/teal';
+import SendIcon from '@material-ui/icons/Send';
+
+
  class PlantInput extends React.Component {
 
     componentDidMount() { 
@@ -72,18 +77,18 @@ import { connect } from 'react-redux';
 
     render() {
         return (
-               <form onSubmit={this.onSubmit}>
+               <form style={{ backgroundColor: teal[900], color: pink[100], padding: '30px', width:'35%', margin:'auto', marginTop:'100px', fontFamily: 'Roboto' }} >
                    <label>Plant Name: </label>
-                   <input type="text" placeholder="Name" name="name" value={this.state.name} onChange={this.handleChange}/><br/>
+                   <input type="text" placeholder="name" name="name" value={this.state.name} onChange={this.handleChange}/><br/>
                    <br />
                    <label>AKA: </label>
                    <input type="text" placeholder="aka" name="aka" value={this.state.aka} onChange={this.handleChange} /><br/>
                    <br />
                    <label>Image URL: </label>
-                   <input type="text" placeholder="Image URL" name="image_url" value={this.state.image_url} onChange={this.handleChange} /><br/>
+                   <input type="text" placeholder="image url" name="image_url" value={this.state.image_url} onChange={this.handleChange} /><br/>
                    <br />
                    <label>Description: </label>
-                   <input type="text" placeholder="Description" name="description" value={this.state.description} onChange={this.handleChange} /><br/>
+                   <input type="text" placeholder="description" name="description" value={this.state.description} onChange={this.handleChange} /><br/>
                    <br />
                    <label>Recomended size pot in inch: </label>
                    <input type="text" placeholder="size pot" name="size_pot" value={this.state.size_pot} onChange={this.handleChange} /><br/>
@@ -109,7 +114,8 @@ import { connect } from 'react-redux';
                         )}
                      <br />
 
-                   <input type="submit" value="Submit" />
+                   {/* <input type="submit" value="Submit" /> */}
+                   <SendIcon  onClick={(e) => this.onSubmit(e)}/>
                  
                </form>
         )

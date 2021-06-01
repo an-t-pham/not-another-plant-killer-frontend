@@ -6,12 +6,28 @@ import PlantInput from '../PlantInput';
 import { editPlant } from '../../actions/editPlant';
 import { deletePlant } from '../../actions/deletePlant';
 
+import Modal from '@material-ui/core/Modal';
+import FabButton from '../../components/FabButton';
+
 
 class PlantContainer extends React.Component {
     
     state = {
         showEditForm: false
     }
+
+
+    handleOpen = () => {
+      this.setState({
+        showEditForm: true
+      })
+    }
+
+   handleClose = () => {
+      this.setState({
+        showEditForm: false
+      })
+   }
      
     findPlant = () => {
       let plantSlug = this.props.match && (this.props.match.params.slug);
@@ -23,9 +39,7 @@ class PlantContainer extends React.Component {
         const plant = this.findPlant();
         this.props.editPlant(plantData, plant.id);
         this.props.history.push("/plants");
-        this.setState({
-            showEditForm: false
-        })
+        this.handleClose();
     }
 
      deletePlant = () => {
@@ -34,6 +48,8 @@ class PlantContainer extends React.Component {
         this.props.history.push("/plants");
      }
 
+     
+
   render() {
      const plant = this.findPlant();
 
@@ -41,9 +57,16 @@ class PlantContainer extends React.Component {
      
        <div>
             <Plant plant={plant}/> 
-            <button onClick={() => this.setState({showEditForm: true}) }>Edit </button>
-            { this.state.showEditForm && <PlantInput plant={plant} handleSubmit={this.handleSubmit} /> }
-            <button onClick={this.deletePlant}> Delete </button>
+            
+            <div style={{position: 'fixed', top: '50px', right: '20px'}}><FabButton title="Edit Plant" button="edit" handleAction={this.handleOpen} /> </div>
+            <Modal
+              open={this.state.showEditForm}
+              onClose={this.handleClose}
+            >
+                <PlantInput plant={plant} handleSubmit={this.handleSubmit} /> 
+            </Modal> 
+            <div style={{position: 'fixed', top: '120px', right: '20px'}}><FabButton title="Delete Plant" button="delete" right="40px" handleAction={this.deletePlant} /></div>
+            
        </div>
     )
   }

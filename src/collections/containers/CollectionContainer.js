@@ -9,6 +9,11 @@ import { fetchCollections } from '../../actions/fetchCollections';
 import { editCollection } from '../../actions/editCollection';
 import { deletePlantfromCollection } from '../../actions/deletePlantfromCollection';
 
+import Modal from '@material-ui/core/Modal';
+
+import FabButton from '../../components/FabButton';
+import pink from '@material-ui/core/colors/pink';
+
 
 class CollectionContainer extends React.Component {
 
@@ -23,6 +28,18 @@ class CollectionContainer extends React.Component {
         showEditForm: false
     }
 
+    handleOpen = () => {
+      this.setState({
+        showEditForm: true
+      })
+   }
+  
+     handleClose = () => {
+        this.setState({
+          showEditForm: false
+        })
+     }
+
 
     findCollection = () => {
       let collectionSlug = this.props.match && (this.props.match.params.slug);
@@ -34,9 +51,7 @@ class CollectionContainer extends React.Component {
         const collection = this.findCollection();
         this.props.user && (this.props.editCollection(this.props.user.id, collection.id, collectionData));
         this.props.history.push("/profile/collections");
-        this.setState({
-            showEditForm: false
-        })
+        this.handleClose();
     }
 
      deleteCollection = () => {
@@ -52,14 +67,27 @@ class CollectionContainer extends React.Component {
 
   render() {
      const collection = this.findCollection();
-     
+
     return (
       
        <div>
-            <Collection collection={collection} deletePlantfromCollection={this.deletePlantfromCollection}/>
-            <button onClick={() => this.setState({showEditForm: true}) }>Edit Collection</button>
-            { this.state.showEditForm && <CollectionInput collection={collection} handleSubmit={this.handleSubmit} /> }
-            <button onClick={this.deleteCollection}> Delete Collection</button>
+            <Collection collection={collection} plants={this.props.plants} deletePlantfromCollection={this.deletePlantfromCollection}/>
+            <div style={{position: 'fixed', top: '120px', right: '20px'}}>
+              <FabButton title="Edit Collection" button="edit" handleAction={this.handleOpen} right="40px" />
+            </div>
+            
+            <Modal
+              open={this.state.showEditForm}
+              onClose={this.handleClose}
+              value={this.state.name}
+            > 
+            <CollectionInput collection={collection}  handleSubmit={this.handleSubmit} /> 
+            </Modal>
+
+            <div style={{position: 'fixed', top: '190px', right: '20px'}}>
+               <FabButton title="Delete Collection" button="delete" handleAction={this.deleteCollection} right="50px" />
+            </div>
+           
        </div>
     )
   }
@@ -69,7 +97,8 @@ class CollectionContainer extends React.Component {
 const mapStateToProps = state => {
     return {
         collections: state.collections,
-        user: state.user
+        user: state.user,
+        plants: state.plants
     }
 }
 

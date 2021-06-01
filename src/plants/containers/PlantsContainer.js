@@ -1,11 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/styles';
 
 import Plants from '../Plants';
 import { addPlant } from '../../actions/addPlant';
 import PlantInput from '../PlantInput';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Modal from '@material-ui/core/Modal';
 
+import FabButton from '../../components/FabButton';
+import pink from '@material-ui/core/colors/pink';
+
+const styles = {
+  circle: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%'
+  }
+};
 
 class PlantsContainer extends React.Component {
 
@@ -16,20 +29,39 @@ class PlantsContainer extends React.Component {
  
    handleSubmit = (plantData) => {
     this.props.addPlant(plantData);
-    this.setState({
-      showForm: false
-    })
+    this.handleClose();
   }
 
+  handleOpen = () => {
+    this.setState({
+      showForm: true
+    })
+ }
+
+   handleClose = () => {
+      this.setState({
+        showForm: false
+      })
+   }
+
   render() {
+    const { classes } = this.props
+
     return (
        <div>
           { 
-            !this.props.user ? <h1>loading...</h1> : (
+            !this.props.user ? <CircularProgress style={{color: pink[200]}} className={classes.circle} /> : (
               <>
-                 <Plants plants={this.props.plants} user={this.props.user}/> 
-                 <button onClick={() => this.setState({showForm: true}) }>Add a Plant </button>
-                 { this.state.showForm && <PlantInput handleSubmit={this.handleSubmit} /> }
+                 <Plants user={this.props.user}/> 
+                 <div style={{position: 'fixed', top: '50px', right: '20px'}}><FabButton title="Create New Plant" button="add" handleAction={this.handleOpen} /></div>
+                 
+                  <Modal
+                   open={this.state.showForm}
+                   onClose={this.handleClose}
+                  >
+                     <PlantInput handleSubmit={this.handleSubmit} /> 
+                  </Modal>
+                 
               </>
             )
           }
@@ -42,9 +74,9 @@ class PlantsContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        plants: state.plants,
-        user: state.user
+        user: state.user,
+        errors: state.errors
     }
 }
 
-export default connect(mapStateToProps, { addPlant })(PlantsContainer);
+export default connect(mapStateToProps, { addPlant })(withStyles(styles)(PlantsContainer));

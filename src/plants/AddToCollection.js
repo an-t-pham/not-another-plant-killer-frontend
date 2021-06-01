@@ -2,14 +2,42 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addPlantToCollection } from '../actions/addPlantToCollection';
 
+import { withStyles } from '@material-ui/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+import Grid from '@material-ui/core/Grid';
+
+import SendIcon from '@material-ui/icons/Send';
+import pink from '@material-ui/core/colors/pink';
+
+
+const styles = {
+    formControl: {
+        width: "100%"
+        
+      },
+      select: {
+          width: 200
+      },
+ };
+
 class AddToCollection extends React.Component {
     state = {
-        collectionId: ""
+        collectionId: "", 
+        availableCollections: []
     };
     
+    componentDidMount() {
+        this.setState({
+            availableCollections: this.props.collections.filter(c => !this.props.plant.attributes.collections.some(cp => cp.id === c.id))
+        })
+    }
+
   
     handleChange = event => {
-        console.log(event.target.value)
       this.setState({
           collectionId: event.target.value
         });
@@ -20,40 +48,62 @@ class AddToCollection extends React.Component {
       const collection = this.props.collections.find(collection => collection.id === this.state.collectionId);
       this.props.addPlantToCollection(collection.attributes.user_id, collection.id, this.props.plant);
       this.setState({
-        collectionId: this.props.collections[0].id
+        collectionId: "",
+        availableCollections: this.state.availableCollections.filter(c => c.id !== collection.id)
       });
     }
     
     collectionOptions = () => {
-        console.log(this.props.collections)
-            return this.props.collections && this.props.collections.map(collection => (
-                <option name={collection.attributes.name} value={collection.id} key={`${collection.id}` + 'new'}>{collection.attributes.name}</option>
+            return this.state.availableCollections.map(collection => (
+                <MenuItem name={collection.attributes.name} value={collection.id} key={`${collection.id}` + 'new'} style={{ color: pink[200] }}>{collection.attributes.name}</MenuItem>
              ))
     }
 
   
     render() {
-        
+        const { classes } = this.props;
+        const text = "No Collection has been created" ;
       return (
         <> 
           {  (this.props.collections.length > 0) ? 
-                <form onSubmit={this.handleSubmit}>
-                  <label>
-                    Add To Collection:
-                    <select value={this.state.collectionId} onChange={this.handleChange}>
-                    <option value="">Select a Collection</option>
-                        {this.collectionOptions()}
-                    </select>
-                  </label>
-      
-                  <input type="submit" value="Submit" />
-                </form>  
-             :  "No Collection has been created" 
-            }
+          <FormControl className={classes.formControl}>
+              <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="flex-end"
+              xl
+              >
+                  <div>
+                   <InputLabel id="add-to-collection" style={{ color: pink[200] }} >Add To Collection:</InputLabel>
+                     <Select
+                     className={classes.select}
+                     value={this.state.collectionId}
+                     onChange={this.handleChange}
+                     autoWidth
+                     label="Add To Collection:"
+                     >  
+                       <MenuItem style={{ color: pink[200] }} value="" >
+                         <em>Select a Collection</em>
+                       </MenuItem>
+                         {this.collectionOptions()}
+                    </Select>
+                  </div>
+     
+
+                 <SendIcon style={{ paddingRight: "45px", color: pink[200] }} onClick={(e) => this.handleSubmit(e)}/>
+       
+             </Grid>
+         
+            </FormControl>
+             :  <h1>{text}</h1>
+             }
+                
+            
        </>
       )
     }
 }
 
 
-export default connect(null, { addPlantToCollection })(AddToCollection);
+export default connect(null, { addPlantToCollection })(withStyles(styles)(AddToCollection));
