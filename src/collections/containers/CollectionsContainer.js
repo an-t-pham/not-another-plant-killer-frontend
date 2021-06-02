@@ -11,6 +11,7 @@ import FabButton from '../../components/FabButton';
 import Modal from '@material-ui/core/Modal';
 
 
+
 class CollectionsContainer extends React.Component {
 
   state = {
@@ -35,7 +36,11 @@ class CollectionsContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.user === null) {
+    const prevCollections = prevProps.collections.map(col => col.attributes.name)
+    const currentCollections = this.props.collections.map(col => col.attributes.name)
+    const hasChanged = prevCollections.every(col => currentCollections.includes(col))
+
+    if (prevProps.user === null || !hasChanged) {
       this.props.fetchCollections(this.props.user.id)
     }
   }
@@ -52,8 +57,7 @@ class CollectionsContainer extends React.Component {
             <div style={{position: 'fixed', top: '50px', right: '20px'}}>
               <FabButton title="Create New Collection" button="add" handleAction={this.handleOpen} />
             </div>
-            {/* <button onClick={() => this.setState({showCForm: true}) }> </button> */}
-            {/* { this.state.showCForm && <CollectionInput handleSubmit={this.handleSubmit} /> } */}
+            
                 <Modal
                   open={this.state.showCForm}
                   onClose={this.handleClose}
