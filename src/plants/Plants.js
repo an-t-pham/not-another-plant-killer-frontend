@@ -35,6 +35,16 @@ class Plants extends React.Component {
           this.props.fetchPlants();
     }
 
+    componentDidUpdate(prevProps) {
+      const prevPlants = prevProps.plants.map(p => p.attributes.name)
+      const currentPlants = this.props.plants.map(p => p.attributes.name)
+      const hasChanged = prevPlants.every(p => currentPlants.includes(p))
+  
+      if (prevProps.user === null || !hasChanged) {
+        this.props.fetchPlants();
+      }
+    }
+
     
     render() { 
         const { classes } = this.props

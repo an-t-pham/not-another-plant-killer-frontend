@@ -91,20 +91,7 @@ class AddPlantToCollection extends React.Component {
             </form>
 
          )
-    //   return (
-    //     <form onSubmit={this.handleSubmit}>
-    //       <label>
-    //         Add a Plant:
-    //         <select value={this.state.plantId} onChange={this.handleChange}>
-    //         <option value="">Select a Plant</option>
-    //             {plantOptions}
-    //         </select>
-    //       </label>
-        
 
-    //       <input type="submit" value="Submit" />
-    //     </form>
-    //   );
     }
 }
 
