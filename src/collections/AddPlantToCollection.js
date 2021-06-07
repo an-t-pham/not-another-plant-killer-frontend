@@ -54,7 +54,7 @@ class AddPlantToCollection extends React.Component {
     render() {
         const { classes } = this.props;
         const plantOptions = this.props.plants && this.state.availablePlants.map(plant => (
-            <MenuItem name={plant.attributes.name} value={plant.id} key={`${plant.id}` + 'new'} style={{ color: pink[200] }}>{plant.attributes.name}</MenuItem>
+            <MenuItem name={plant.attributes.name} value={plant.id} key={`${plant.id}new`} style={{ color: pink[200] }}>{plant.attributes.name}</MenuItem>
          ))
 
          return (

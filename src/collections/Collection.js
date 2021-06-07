@@ -62,7 +62,7 @@ const Collection = ( props ) => {
             <Grid container className={classes.root} justify="center" >
               {props.collection.attributes.plants.length > 0 ? (props.collection.attributes.plants.map(plant => 
            <>
-             <Grid key={`${plant.id}` + 'collection'} className={classes.control} item> 
+             <Grid key={`${plant.id}collection`} className={classes.control} item> 
              
                 <Paper className={classes.paper}>
                 <img src={plant.image_url}  width="100%" height="360px" alt={plant.name}/> <br />

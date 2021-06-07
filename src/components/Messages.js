@@ -9,7 +9,7 @@ const Messages = ( {messages} ) => {
     if (messages.errors.length > 0 || messages.success ) {
       setTimeout(clearMessages, 4000)
     }
-  }, [messages.errors.length, messages.success])
+  }, [messages.errors.length, messages.success, clearMessages])
 
 
   const clearMessages = () => {

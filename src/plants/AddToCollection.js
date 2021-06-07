@@ -55,7 +55,7 @@ class AddToCollection extends React.Component {
     
     collectionOptions = () => {
             return this.state.availableCollections.map(collection => (
-                <MenuItem name={collection.attributes.name} value={collection.id} key={`${collection.id}` + 'new'} style={{ color: pink[200] }}>{collection.attributes.name}</MenuItem>
+                <MenuItem name={collection.attributes.name} value={collection.id} key={`${collection.id}new`} style={{ color: pink[200] }}>{collection.attributes.name}</MenuItem>
              ))
     }
 
