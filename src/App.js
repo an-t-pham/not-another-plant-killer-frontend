@@ -28,7 +28,7 @@ import HomePage from './components/HomePage';
            email: user.email
           }));
         }
-     }, [user])
+     }, [user, dispatch])
 
       return <Route component={withAuthenticationRequired(props.component)} {...props} />
     }
