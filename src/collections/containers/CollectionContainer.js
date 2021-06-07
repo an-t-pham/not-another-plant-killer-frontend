@@ -12,7 +12,7 @@ import { deletePlantfromCollection } from '../../actions/deletePlantfromCollecti
 import Modal from '@material-ui/core/Modal';
 
 import FabButton from '../../components/FabButton';
-import pink from '@material-ui/core/colors/pink';
+
 
 
 class CollectionContainer extends React.Component {
