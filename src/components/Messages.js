@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import Alert from '@material-ui/lab/Alert';
 import { useDispatch } from "react-redux";
 
 const Messages = ( {messages} ) => {
   const dispatch = useDispatch();
-  
-  const clearMessages = () => {
+
+  const clearMessages = useCallback(() => {
     dispatch({
       type: 'CLEAR_MESSAGES'
      })
-  }
+  }, [dispatch])
 
   useEffect(() => {
     if (messages.errors.length > 0 || messages.success ) {
