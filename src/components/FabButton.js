@@ -27,7 +27,7 @@ const FabButton = ({title, button, handleAction}) => {
             break;
          
          default:
-            icon;
+           break;
      }
 
      return (
