@@ -5,7 +5,6 @@ import { addPlantToCollection } from '../actions/addPlantToCollection';
 import { withStyles } from '@material-ui/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
 
@@ -55,7 +54,7 @@ class AddPlantToCollection extends React.Component {
     render() {
         const { classes } = this.props;
         const plantOptions = this.props.plants && this.state.availablePlants.map(plant => (
-            <MenuItem name={plant.attributes.name} value={plant.id} key={`${plant.id}` + 'new'} style={{ color: pink[200] }}>{plant.attributes.name}</MenuItem>
+            <MenuItem name={plant.attributes.name} value={plant.id} key={`${plant.id}new`} style={{ color: pink[200] }}>{plant.attributes.name}</MenuItem>
          ))
 
          return (

@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -11,13 +10,6 @@ import teal from '@material-ui/core/colors/teal';
 
 
 
-// const useStyles = makeStyles({
-//     root: {
-//       position: 'fixed',
-//       top: '50px',
-//       right: '100px'
-//     }
-// });
 
 const FabButton = ({title, button, handleAction}) => {
      let icon;
@@ -33,6 +25,9 @@ const FabButton = ({title, button, handleAction}) => {
          case 'delete':
             icon = <DeleteIcon onClick={handleAction} />; 
             break;
+         
+         default:
+            icon;
      }
 
      return (
