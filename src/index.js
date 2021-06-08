@@ -29,10 +29,10 @@ ReactDOM.render(
 
     <Provider store={store}>
        <Auth0Provider
-         domain="an-tp.eu.auth0.com"
-         clientId="ODD637c2s38AAswbXggHMg8CEVVbl0IQ"
+         domain={process.env.REACT_APP_AUTH_DOMAIN}
+         clientId={process.env.REACT_APP_AUTH_CLIENTID}
          redirectUri={window.location.origin + "/profile"}
-         audience="https://an-tp.eu.auth0.com/api/v2/"
+         audience={process.env.REACT_APP_AUTH_AUDIENCE}
          scope="read:current_user update:current_user_metadata"
          onRedirectCallback={onRedirectCallback}
         > 
