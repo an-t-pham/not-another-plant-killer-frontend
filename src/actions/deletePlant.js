@@ -1,6 +1,8 @@
+import { BASE_URL } from './config';
+
 export const deletePlant = (id) => {
     return (dispatch) => {
-        fetch(`http://localhost:3000/api/v1/plants/${id}`, {
+        fetch(`${BASE_URL}/plants/${id}`, {
             method: 'DELETE'
         })
         .then(() => dispatch({
