@@ -1,6 +1,8 @@
+import { BASE_URL } from './config';
+
 export const fetchUser = (user) => {
     return (dispatch) => {
-        fetch('http://localhost:3000/api/v1/users', {
+        fetch(`${BASE_URL}/users`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'

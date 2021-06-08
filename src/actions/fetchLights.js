@@ -1,6 +1,8 @@
+import { BASE_URL } from './config';
+
 export const fetchLights = () => {
     return (dispatch) => {
-        fetch('http://localhost:3000/api/v1/lights')
+        fetch(`${BASE_URL}/lights`)
         .then(resp => resp.json())
         .then(lights => dispatch({
             type: 'FETCH_LIGHTS',

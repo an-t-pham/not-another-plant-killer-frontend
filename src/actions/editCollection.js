@@ -1,8 +1,9 @@
 import getMessages from './getMessages';
+import { BASE_URL } from './config';
 
 export const editCollection = (user_id, collection_id, collection) => {
     return (dispatch) => {
-        fetch(`http://localhost:3000/api/v1/users/${user_id}/collections/${collection_id}`, {
+        fetch(`${BASE_URL}/users/${user_id}/collections/${collection_id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'

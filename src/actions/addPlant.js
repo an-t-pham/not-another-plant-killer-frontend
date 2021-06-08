@@ -1,8 +1,9 @@
 import getMessages from './getMessages';
+import { BASE_URL } from './config';
 
 export const addPlant = (plant) => {
     return (dispatch) => {
-            fetch('http://localhost:3000/api/v1/plants', {
+            fetch(`${BASE_URL}/plants`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
