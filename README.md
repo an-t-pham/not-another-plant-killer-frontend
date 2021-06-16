@@ -1,5 +1,5 @@
 # WELCOME TO NOT ANOTHER PLANT KILLER!
-
+![alt text](https://github.com/anpham148/public/thumbnail.png "Logo Title Text 1")
  Summary
 
 A Single Application for Plant Information & Plant Organizer by creating your own plant collections. This is the frontend of the app. 
