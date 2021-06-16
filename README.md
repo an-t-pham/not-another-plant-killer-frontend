@@ -1,4 +1,4 @@
-# WELCOME TO NOT ANOTHER PLANT KILLER!
+# NOT ANOTHER PLANT KILLER
 ![alt text](./public/thumbnail.png) </br>
 
  Summary
