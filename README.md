@@ -3,7 +3,9 @@
 
  Summary
 
-A Single Application for Plant Information & Plant Organizer by creating your own plant collections. This is the frontend of the app. 
+Single Page Application for Plant Information & Plant Organizer. This is the frontend of the app which is built with ReactJS. Auth0 is used for user authentication. Upon logging in the user is redirected to their profile which shows their info including name and email. Users can navigate around with the menu drop down list view all existing plants from database or create a new plant. They also have the ability to create collections to group the plants they have together. Beside creating new plants and collections, users are able to edit/delete plants and collections. Plants can be added or removed from collections. 
+
+This application is hosted in Netlify: https://not-another-plant-killer.netlify.app/
 
  Installing
 
