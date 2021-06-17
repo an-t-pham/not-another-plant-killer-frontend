@@ -12,6 +12,8 @@ import { withStyles } from '@material-ui/styles';
 
 import pink from '@material-ui/core/colors/pink';
 
+import Plantbutton from './Plantbutton';
+
 const styles = {
     root: {
         flexGrow: 1
@@ -45,6 +47,8 @@ class Plants extends React.Component {
       }
     }
 
+   
+
     
     render() { 
         const { classes } = this.props
@@ -60,8 +64,10 @@ class Plants extends React.Component {
                   <Paper className={classes.paper}>
                     <Link to={`/plants/${plant.attributes.slug}`} component={RouterLink} style={{ color: pink[200] }}> 
                        <img src={plant.attributes.image_url} width="100%" height="360px" alt={plant.attributes.name}/> <br />
-                       <div className={classes.itemPadding}>{plant.attributes.formatted_name}</div>
+                       <div className={classes.itemPadding}>{plant.attributes.formatted_name}</div> 
+                       
                     </Link>
+                     
                     <div className={classes.itemPadding} style={{ paddingBottom: "10px" }}>{this.props.collections.length > 0 && <AddToCollection plant={plant} collections={this.props.collections}/>}</div>
                   </Paper>
               

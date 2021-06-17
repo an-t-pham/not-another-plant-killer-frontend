@@ -36,7 +36,10 @@ class PlantsContainer extends React.Component {
     this.setState({
       showForm: true
     })
+  
  }
+
+
 
    handleClose = () => {
       this.setState({
