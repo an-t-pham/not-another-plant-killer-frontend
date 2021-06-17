@@ -12,8 +12,6 @@ import { withStyles } from '@material-ui/styles';
 
 import pink from '@material-ui/core/colors/pink';
 
-import Plantbutton from './Plantbutton';
-
 const styles = {
     root: {
         flexGrow: 1
