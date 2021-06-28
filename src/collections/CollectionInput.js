@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState }  from 'react';
 
 import pink from '@material-ui/core/colors/pink';
 import teal from '@material-ui/core/colors/teal';
@@ -6,36 +6,41 @@ import SendIcon from '@material-ui/icons/Send';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-export default class CollectionInput extends React.Component {
+// export default class CollectionInput extends React.Component {
+const CollectionInput = (props) => {
+    // componentDidMount() { 
+    //     this.props.collection && (
+    //         this.setState({
+    //             name: this.props.collection.attributes.name,
+    //         })
+    //     )
+    // }
 
-    componentDidMount() { 
-        this.props.collection && (
-            this.setState({
-                name: this.props.collection.attributes.name,
-            })
-        )
-    }
+    const [name, setName] = useState("");
 
-    state = {
-        name: ""
-    }
+    useEffect(() => {
+       props.collection && setName(props.collection.attributes.name)
+      }, [props.collection])
 
-    handleChange = (e) => {
-        this.setState({
-          name: e.target.value
-        })
-    }
 
-    onSubmit = (e) => {
+    // handleChange = (e) => {
+    //     this.setState({
+    //       name: e.target.value
+    //     })
+    // }
+
+    const onSubmit = (e) => {
         e.preventDefault();
-        this.props.handleSubmit(this.state);
-        this.setState({
-            name: ""
-         })
+        props.handleSubmit(name);
+        this.setName("");
     }
+    const handleChange = (event) => {
+        setName(event.currentTarget);
+      };
+   
 
 
-    render() {
+
         return (
             <form style={{ backgroundColor: teal[900], color: pink[100], padding: '15px', width:'35%', margin:'auto', marginTop:'100px'}} >
                 <Grid
@@ -47,11 +52,13 @@ export default class CollectionInput extends React.Component {
                 >
                   <Typography>
                      <label>Collection Name: </label>
-                     <input type="text" placeholder="Name" name="name" value={this.state.name} onChange={this.handleChange}/>
+                     <input type="text" placeholder="Name" name="name" value={this.state.name} onChange={handleChange}/>
                   </Typography>
-                 <SendIcon  onClick={(e) => this.onSubmit(e)}/>
+                 <SendIcon  onClick={(e) => onSubmit(e)}/>
                 </Grid>
            </form>
         )
-    }
+    
 }
+
+export default CollectionInput;

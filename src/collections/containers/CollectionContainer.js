@@ -2,7 +2,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import Collection from '../Collection';
-import CollectionInput from '../CollectionInput';
+import CollectionInput  from '../CollectionInput';
 
 import { deleteCollection } from '../../actions/deleteCollection';
 import { fetchCollections } from '../../actions/fetchCollections';
