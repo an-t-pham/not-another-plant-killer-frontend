@@ -16,11 +16,11 @@ const CollectionInput = (props) => {
     //     )
     // }
 
-    const [name, setName] = React.useState("");
+    const [name, setName] = useState("");
 
     useEffect(() => {
        props.collection && setName(props.collection.attributes.name)
-      }, [])
+      }, [props.collection])
 
 
     // handleChange = (e) => {
