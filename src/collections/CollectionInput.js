@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
 // export default class CollectionInput extends React.Component {
-export const CollectionInput = (props) => {
+const CollectionInput = (props) => {
     // componentDidMount() { 
     //     this.props.collection && (
     //         this.setState({
@@ -60,3 +60,5 @@ export const CollectionInput = (props) => {
         )
     
 }
+
+export default CollectionInput;
