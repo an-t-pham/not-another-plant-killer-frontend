@@ -31,7 +31,6 @@ const CollectionInput = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(name)
         props.handleSubmit({name});
         setName("");
     }
