@@ -31,11 +31,11 @@ const CollectionInput = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        props.handleSubmit(name);
-        this.setName("");
+        props.handleSubmit({name});
+        setName("");
     }
     const handleChange = (event) => {
-        setName(event.currentTarget);
+        setName(event.currentTarget.value);
       };
    
 
@@ -52,7 +52,7 @@ const CollectionInput = (props) => {
                 >
                   <Typography>
                      <label>Collection Name: </label>
-                     <input type="text" placeholder="Name" name="name" value={this.state.name} onChange={handleChange}/>
+                     <input type="text" placeholder="Name" name="name" value={name} onChange={handleChange}/>
                   </Typography>
                  <SendIcon  onClick={(e) => onSubmit(e)}/>
                 </Grid>
