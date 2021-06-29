@@ -6,32 +6,18 @@ import SendIcon from '@material-ui/icons/Send';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-// export default class CollectionInput extends React.Component {
-const CollectionInput = (props) => {
-    // componentDidMount() { 
-    //     this.props.collection && (
-    //         this.setState({
-    //             name: this.props.collection.attributes.name,
-    //         })
-    //     )
-    // }
+const CollectionInput = ({collection, handleSubmit}) => {
 
     const [name, setName] = useState("");
 
     useEffect(() => {
-       props.collection && setName(props.collection.attributes.name)
-      }, [props.collection])
+       collection && setName(collection.attributes.name)
+      }, [collection])
 
-
-    // handleChange = (e) => {
-    //     this.setState({
-    //       name: e.target.value
-    //     })
-    // }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        props.handleSubmit({name});
+        handleSubmit({name});
         setName("");
     }
     const handleChange = (event) => {

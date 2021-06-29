@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { addPlantToCollection } from '../actions/addPlantToCollection';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { withStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -12,50 +12,45 @@ import SendIcon from '@material-ui/icons/Send';
 import pink from '@material-ui/core/colors/pink';
 import teal from '@material-ui/core/colors/teal';
 
-const styles = {
-    formControl: {
+  const AddPlantToCollection = ( {collection, plants, handleClose} ) => {
+
+    const useStyles = makeStyles({
+      formControl: {
         width: "100%"
         
       },
       select: {
           width: 200
       },
- };
+     });
 
-class AddPlantToCollection extends React.Component {
-    state = {
-        plantId: this.props.plants[0].id,
-        availablePlants: []
-    };
+    const [plantId, setPlantId] = useState(plants[0].id);
+    const [availablePlants, setAvailablePlants] = useState([]);
+    const user = useSelector((state) => state.user);
+    const dispatch = useDispatch();
     
-    componentDidMount() {
-        this.setState({
-            availablePlants: this.props.plants.filter(p => !this.props.collection.attributes.plants.some(pc => pc.id === p.id))
-        })
-    };
+    useEffect(() => {
+      setAvailablePlants(plants.filter(p => !collection.attributes.plants.some(pc => pc.id === p.id)))
+     }, [plants, collection])
   
-    handleChange = event => {
-      this.setState({
-          plantId: event.target.value
-        });
+    const handleChange = (event) => {
+      setPlantId(event.target.value);
     }
   
-    handleSubmit = event => {
+    const handleSubmit = (event) => {
       event.preventDefault();
-      const thePlant = this.props.plants.find(plant => plant.id === this.state.plantId);
-      this.props.addPlantToCollection(this.props.user.id, this.props.collection.id, thePlant);
-      this.setState({
-        plantId: this.props.plants[0].id,
-        availablePlants: this.state.availablePlants.filter(p => p.id !== thePlant.id)
-      });
-      this.props.handleClose();
+      const thePlant = plants.find(plant => plant.id === plantId);
+      dispatch(addPlantToCollection(user.id, collection.id, thePlant));
+      setPlantId(plants[0].id);
+      setAvailablePlants(availablePlants.filter(p => p.id !== thePlant.id))
+      handleClose();
     }
   
-    render() {
-        const { classes } = this.props;
-        const plantOptions = this.props.plants && this.state.availablePlants.map(plant => (
-            <MenuItem name={plant.attributes.name} value={plant.id} key={`${plant.id}new`} style={{ color: pink[200] }}>{plant.attributes.name}</MenuItem>
-         ))
+    const classes = useStyles();
+
+    const plantOptions = plants && availablePlants.map(plant => (
+      <MenuItem name={plant.attributes.name} value={plant.id} key={`${plant.id}new`} style={{ color: pink[200] }}>{plant.attributes.name}</MenuItem>
+    ));
 
          return (
             <form style={{ backgroundColor: teal[900], color: pink[100], padding: '15px', width:'15%', margin:'auto', marginTop:'100px'}} >
@@ -70,8 +65,8 @@ class AddPlantToCollection extends React.Component {
                  <InputLabel id="add-plant-to-collection" style={{ color: pink[200] }} >Add a Plant:</InputLabel>
                    <Select
                    className={classes.select}
-                   value={this.state.plantId}
-                   onChange={this.handleChange}
+                   value={plantId}
+                   onChange={handleChange}
                    autoWidth
                    label="Add a Plant"
                    >  
@@ -83,23 +78,13 @@ class AddPlantToCollection extends React.Component {
                 </div>
             
             
-               <SendIcon style={{ paddingRight: "45px", color: pink[200] }} onClick={(e) => this.handleSubmit(e)}/>
+               <SendIcon style={{ paddingRight: "45px", color: pink[200] }} onClick={(e) => handleSubmit(e)}/>
             
             </Grid>
             
             </form>
 
          )
-
-    }
 }
 
-
-
-const mapStateToProps = state => {
-    return {
-        user: state.user
-    }
-}
-
-export default connect(mapStateToProps, { addPlantToCollection })(withStyles(styles)(AddPlantToCollection));
+export default AddPlantToCollection;
