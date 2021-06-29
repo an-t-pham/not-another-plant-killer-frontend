@@ -6,18 +6,18 @@ import SendIcon from '@material-ui/icons/Send';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-const CollectionInput = (props) => {
+const CollectionInput = ({collection, handleSubmit}) => {
 
     const [name, setName] = useState("");
 
     useEffect(() => {
-       props.collection && setName(props.collection.attributes.name)
-      }, [props.collection])
+       collection && setName(collection.attributes.name)
+      }, [collection])
 
 
     const onSubmit = (e) => {
         e.preventDefault();
-        props.handleSubmit({name});
+        handleSubmit({name});
         setName("");
     }
     const handleChange = (event) => {
