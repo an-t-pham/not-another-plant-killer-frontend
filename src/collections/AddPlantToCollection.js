@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { connect } from 'react-redux';
 import { addPlantToCollection } from '../actions/addPlantToCollection';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -13,30 +12,8 @@ import SendIcon from '@material-ui/icons/Send';
 import pink from '@material-ui/core/colors/pink';
 import teal from '@material-ui/core/colors/teal';
 
-// const styles = {
-//     formControl: {
-//         width: "100%"
-        
-//       },
-//       select: {
-//           width: 200
-//       },
-//  };
-
-
-
-// class AddPlantToCollection extends React.Component {
   const AddPlantToCollection = ( {collection, plants, handleClose} ) => {
-    // state = {
-    //     plantId: this.props.plants[0].id,
-    //     availablePlants: []
-    // };
-    
-    // componentDidMount() {
-    //     this.setState({
-    //         availablePlants: this.props.plants.filter(p => !this.props.collection.attributes.plants.some(pc => pc.id === p.id))
-    //     })
-    // }
+
     const useStyles = makeStyles({
       formControl: {
         width: "100%"
@@ -63,20 +40,14 @@ import teal from '@material-ui/core/colors/teal';
     const handleSubmit = (event) => {
       event.preventDefault();
       const thePlant = plants.find(plant => plant.id === plantId);
-      // props.addPlantToCollection(user.id, props.collection.id, thePlant);
       dispatch(addPlantToCollection(user.id, collection.id, thePlant));
-      // this.setState({
-      //   plantId: this.props.plants[0].id,
-      //   availablePlants: this.state.availablePlants.filter(p => p.id !== thePlant.id)
-      // });
       setPlantId(plants[0].id);
       setAvailablePlants(availablePlants.filter(p => p.id !== thePlant.id))
       handleClose();
     }
   
-    // render() {
-        // const { classes } = this.props;
-        const classes = useStyles();
+    const classes = useStyles();
+
     const plantOptions = plants && availablePlants.map(plant => (
       <MenuItem name={plant.attributes.name} value={plant.id} key={`${plant.id}new`} style={{ color: pink[200] }}>{plant.attributes.name}</MenuItem>
     ));
@@ -114,17 +85,6 @@ import teal from '@material-ui/core/colors/teal';
             </form>
 
          )
-
-    // }
 }
 
-
-
-// const mapStateToProps = state => {
-//     return {
-//         user: state.user
-//     }
-// }
-
-// export default connect(mapStateToProps, { addPlantToCollection })(withStyles(styles)(AddPlantToCollection));
 export default AddPlantToCollection;
