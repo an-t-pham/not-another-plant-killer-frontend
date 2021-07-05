@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import { connect } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchCollections } from '../../actions/fetchCollections';
 import Collections from '../Collections';
@@ -14,13 +14,15 @@ import Modal from '@material-ui/core/Modal';
 
 
 // class CollectionsContainer extends React.Component {
-const CollectionsContainer = (props) => {
+const CollectionsContainer = () => {
   // state = {
   //   showCForm: false
   // }
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const collections = useSelector((state) => state.collections);
 
   const handleOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -43,8 +45,8 @@ const CollectionsContainer = (props) => {
 
 
   useEffect(() => {
-    props.user && (dispatch(fetchCollections(props.user.id)))
-  }, [props.user, props.collections])
+    user && (dispatch(fetchCollections(user.id)))
+  }, [user, collections])
 
   // componentDidMount() {
   //    this.props.user && (this.props.fetchCollections(this.props.user.id))
@@ -60,7 +62,7 @@ const CollectionsContainer = (props) => {
   //   }
   // }
   const handleSubmit = (collectionData) => {
-    dispatch(addCollection(collectionData, props.user.id));
+    dispatch(addCollection(collectionData, user.id));
     handleClose();
  }
   //  handleSubmit = (collectionData) => {
@@ -70,7 +72,7 @@ const CollectionsContainer = (props) => {
   // render() {
     return (
        <div>
-            <Collections collections={this.props.collections} /> 
+            <Collections collections={collections} /> 
 
             <div style={{position: 'fixed', top: '50px', right: '20px'}}>
               <FabButton title="Create New Collection" button="add" handleAction={handleOpen} />
