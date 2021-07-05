@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { connect } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchCollections } from '../../actions/fetchCollections';
@@ -13,14 +12,13 @@ import Modal from '@material-ui/core/Modal';
 
 
 
-// class CollectionsContainer extends React.Component {
 const CollectionsContainer = () => {
-  // state = {
-  //   showCForm: false
-  // }
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const dispatch = useDispatch();
+
   const user = useSelector((state) => state.user);
   const collections = useSelector((state) => state.collections);
 
@@ -31,17 +29,6 @@ const CollectionsContainer = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-//   handleOpen = () => {
-//     this.setState({
-//       showCForm: true
-//     })
-//  }
-
-//    handleClose = () => {
-//       this.setState({
-//         showCForm: false
-//       })
-//    }
 
 
   useEffect(() => {
@@ -65,11 +52,7 @@ const CollectionsContainer = () => {
     dispatch(addCollection(collectionData, user.id));
     handleClose();
  }
-  //  handleSubmit = (collectionData) => {
-  //     this.props.addCollection(collectionData, this.props.user.id);
-  //     this.handleClose();
-  //  }
-  // render() {
+
     return (
        <div>
             <Collections collections={collections} /> 
@@ -87,16 +70,7 @@ const CollectionsContainer = () => {
                  
        </div>
     )
-  // }
 
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         collections: state.collections,
-//         user: state.user
-//     }
-// }
-
-// export default connect(mapStateToProps, { addCollection, fetchCollections })(CollectionsContainer)
 export default CollectionsContainer
