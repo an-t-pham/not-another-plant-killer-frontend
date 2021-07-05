@@ -33,21 +33,8 @@ const CollectionsContainer = () => {
 
   useEffect(() => {
     user && (dispatch(fetchCollections(user.id)))
-  }, [user, collections, dispatch])
+  }, [user, collections, dispatch]);
 
-  // componentDidMount() {
-  //    this.props.user && (this.props.fetchCollections(this.props.user.id))
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   const prevCollections = prevProps.collections.map(col => col.attributes.name)
-  //   const currentCollections = this.props.collections.map(col => col.attributes.name)
-  //   const hasChanged = prevCollections.every(col => currentCollections.includes(col))
-
-  //   if (prevProps.user === null || !hasChanged) {
-  //     this.props.fetchCollections(this.props.user.id)
-  //   }
-  // }
   const handleSubmit = (collectionData) => {
     dispatch(addCollection(collectionData, user.id));
     handleClose();
