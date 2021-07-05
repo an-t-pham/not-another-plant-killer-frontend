@@ -12,18 +12,19 @@ import SendIcon from '@material-ui/icons/Send';
 import pink from '@material-ui/core/colors/pink';
 import teal from '@material-ui/core/colors/teal';
 
+const useStyles = makeStyles({
+  formControl: {
+    width: "100%"
+    
+  },
+  select: {
+      width: 200
+  },
+ });
+
   const AddPlantToCollection = ( {collection, plants, handleClose} ) => {
-
-    const useStyles = makeStyles({
-      formControl: {
-        width: "100%"
-        
-      },
-      select: {
-          width: 200
-      },
-     });
-
+    const classes = useStyles();
+    
     const [plantId, setPlantId] = useState(plants[0].id);
     const [availablePlants, setAvailablePlants] = useState([]);
     const user = useSelector((state) => state.user);
@@ -46,7 +47,7 @@ import teal from '@material-ui/core/colors/teal';
       handleClose();
     }
   
-    const classes = useStyles();
+    
 
     const plantOptions = plants && availablePlants.map(plant => (
       <MenuItem name={plant.attributes.name} value={plant.id} key={`${plant.id}new`} style={{ color: pink[200] }}>{plant.attributes.name}</MenuItem>
