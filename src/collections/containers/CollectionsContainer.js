@@ -33,7 +33,7 @@ const CollectionsContainer = () => {
 
   useEffect(() => {
     user && (dispatch(fetchCollections(user.id)))
-  }, [user, collections])
+  }, [user, collections, dispatch])
 
   // componentDidMount() {
   //    this.props.user && (this.props.fetchCollections(this.props.user.id))
