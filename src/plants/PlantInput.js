@@ -61,9 +61,10 @@ import SendIcon from '@material-ui/icons/Send';
     //     light: "1"
     // }
     const handleChange = (e) => {
-        setPlantForm({
+        setPlantForm(prevState => ({
+          ...prevState,
           [e.target.name]: e.target.value
-        })
+        }));
      }
     // handleChange = (e) => {
     //    this.setState({
