@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   formControl: {
     width: "100%"
     
-  },
+  }, 
   select: {
       width: 200
   },
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
   const AddPlantToCollection = ( {collection, plants, handleClose} ) => {
     const classes = useStyles();
-    
+
     const [plantId, setPlantId] = useState(plants[0].id);
     const [availablePlants, setAvailablePlants] = useState([]);
     const user = useSelector((state) => state.user);
