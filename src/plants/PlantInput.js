@@ -6,12 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import pink from '@material-ui/core/colors/pink';
 import teal from '@material-ui/core/colors/teal';
 import SendIcon from '@material-ui/icons/Send';
+import { StarsTwoTone } from '@material-ui/icons';
 
 
 //  class PlantInput extends React.Component {
  const PlantInput = ({ plant, handleSubmit }) => {
 
-    const [plantForm, setPlantForm] = useState({
+    const [state, setState] = useState({
                                       name: "",
                                       aka: "",
                                       image_url: "",
@@ -21,7 +22,7 @@ import SendIcon from '@material-ui/icons/Send';
                                       water: "1",
                                       light: "1"
                                     });
-                        
+    const { name, value, checked } = e.target;
     const dispatch = useDispatch();
     const lights = useSelector((state) => state.lights)
     const waters = useSelector((state) => state.waters)
@@ -30,11 +31,11 @@ import SendIcon from '@material-ui/icons/Send';
        dispatch(fetchLights());
        dispatch(fetchWaters());
        plant && (
-           setPlantForm({
-               ...plant.attributes,
+           setState(prevState => ({
+               ...prevState,
                water: "" + plant.attributes.water.level,
                light: "" + plant.attributes.light.level
-           })
+           }))
        )
     }, [plant, lights, waters, dispatch])
 
@@ -61,9 +62,9 @@ import SendIcon from '@material-ui/icons/Send';
     //     light: "1"
     // }
     const handleChange = (e) => {
-        setPlantForm(prevState => ({
+        setState(prevState => ({
           ...prevState,
-          [e.target.name]: e.target.value
+          [name]: value
         }));
      }
     // handleChange = (e) => {
@@ -72,9 +73,10 @@ import SendIcon from '@material-ui/icons/Send';
     //    })
     // }
     const handleChecked = (e) => {
-        setPlantForm({
-          pet_friendly: e.target.checked
-        })
+        setState(prevState => ({
+          ...prevState,
+          pet_friendly: checked
+        }))
     }
     // handleChecked = (e) => {
     //     this.setState({
@@ -83,9 +85,10 @@ import SendIcon from '@material-ui/icons/Send';
     // }
     
     const handleWaterLevel = (e) => {
-        setPlantForm({
-          water: e.target.value
-        })
+        setState(prevState => ({
+          ...prevState,
+          water: value
+        }))
     }
     // handleWaterLevel = (e) => {
     //     this.setState({
@@ -93,9 +96,10 @@ import SendIcon from '@material-ui/icons/Send';
     //     })
     // }
     const handleLightLevel = (e) => {
-        setPlantForm({
-          light: e.target.value
-        })
+        setState(prevState => ({
+          ...prevState,
+          light: value
+        }))
     }
     // handleLightLevel = (e) => {
     //     this.setState({
@@ -104,8 +108,8 @@ import SendIcon from '@material-ui/icons/Send';
     // }
     const onSubmit = (e) => {
         e.preventDefault();
-        handleSubmit(plantForm);
-        setPlantForm({
+        handleSubmit(state);
+        setState({
             name: "",
             aka: "",
             image_url: "",
@@ -138,26 +142,26 @@ import SendIcon from '@material-ui/icons/Send';
         return (
                <form style={{ backgroundColor: teal[900], color: pink[100], padding: '30px', width:'35%', margin:'auto', marginTop:'100px', fontFamily: 'Roboto' }} >
                    <label>Plant Name: </label>
-                   <input type="text" placeholder="name" name="name" value={plantForm.name} onChange={handleChange}/><br/>
+                   <input type="text" placeholder="name" name="name" value={state.name} onChange={handleChange}/><br/>
                    <br />
                    <label>AKA: </label>
-                   <input type="text" placeholder="aka" name="aka" value={plantForm.aka} onChange={handleChange} /><br/>
+                   <input type="text" placeholder="aka" name="aka" value={state.aka} onChange={handleChange} /><br/>
                    <br />
                    <label>Image URL: </label>
-                   <input type="text" placeholder="image url" name="image_url" value={plantForm.image_url} onChange={handleChange} /><br/>
+                   <input type="text" placeholder="image url" name="image_url" value={state.image_url} onChange={handleChange} /><br/>
                    <br />
                    <label>Description: </label>
-                   <input type="text" placeholder="description" name="description" value={plantForm.description} onChange={handleChange} /><br/>
+                   <input type="text" placeholder="description" name="description" value={state.description} onChange={handleChange} /><br/>
                    <br />
                    <label>Recomended size pot in inch: </label>
-                   <input type="text" placeholder="size pot" name="size_pot" value={plantForm.size_pot} onChange={handleChange} /><br/>
+                   <input type="text" placeholder="size pot" name="size_pot" value={state.size_pot} onChange={handleChange} /><br/>
                    <br />
                    <label>Pet Friendly: </label>
-                   <input type="checkbox" name="pet_friendly" onChange={handleChecked} checked={plantForm.pet_friendly} /><br/>
+                   <input type="checkbox" name="pet_friendly" onChange={handleChecked} checked={state.pet_friendly} /><br/>
                    <p>Watering:</p>
                    { waters && waters.map(water => (
                         <div key={water.id}>
-                            <input type="radio" name="water" checked={plantForm.water === "" + water.attributes.level} value={water.attributes.level} onChange={handleWaterLevel} />
+                            <input type="radio" name="water" checked={state.water === "" + water.attributes.level} value={water.attributes.level} onChange={handleWaterLevel} />
                             <label>Level {water.attributes.level} - {water.attributes.description}.</label>
                             <br />
                         </div>)
@@ -166,7 +170,7 @@ import SendIcon from '@material-ui/icons/Send';
                     <p>Light Condition:</p>
                       { lights && lights.map(light => (
                         <div key={light.id}>
-                            <input type="radio" name="light" checked={plantForm.light === "" + light.attributes.level} value={light.attributes.level} onChange={handleLightLevel} />
+                            <input type="radio" name="light" checked={state.light === "" + light.attributes.level} value={light.attributes.level} onChange={handleLightLevel} />
                             <label>Level {light.attributes.level} - {light.attributes.description}. Ideal location: {light.attributes.ideal_location} </label>
                             <br />
                         </div>)
