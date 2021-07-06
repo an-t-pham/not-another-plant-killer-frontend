@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchLights } from '../actions/fetchLights';
 import { fetchWaters } from '../actions/fetchWaters';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import pink from '@material-ui/core/colors/pink';
 import teal from '@material-ui/core/colors/teal';
