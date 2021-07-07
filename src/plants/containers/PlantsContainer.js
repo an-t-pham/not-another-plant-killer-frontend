@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/styles';
 import Plants from '../Plants';
 import { addPlant } from '../../actions/addPlant';
 import PlantInput from '../PlantInput';
+import { fetchLights } from '../../actions/fetchLights';
+import { fetchWaters } from '../../actions/fetchWaters';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
@@ -17,10 +19,18 @@ const styles = {
     position: 'absolute',
     top: '50%',
     left: '50%'
+  },
+  modal: {
+    overflow:'scroll'
   }
 };
 
 class PlantsContainer extends React.Component {
+
+  componentDidMount() { 
+    this.props.fetchLights()
+    this.props.fetchWaters()
+}
 
   state = {
     showForm: false
@@ -61,6 +71,7 @@ class PlantsContainer extends React.Component {
                   <Modal
                    open={this.state.showForm}
                    onClose={this.handleClose}
+                   style={{overflow:'scroll'}}
                   >
                      <PlantInput handleSubmit={this.handleSubmit} /> 
                   </Modal>
@@ -82,4 +93,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { addPlant })(withStyles(styles)(PlantsContainer));
+export default connect(mapStateToProps, { addPlant, fetchWaters, fetchLights })(withStyles(styles)(PlantsContainer));

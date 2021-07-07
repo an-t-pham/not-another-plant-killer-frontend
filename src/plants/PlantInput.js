@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { fetchLights } from '../actions/fetchLights';
-import { fetchWaters } from '../actions/fetchWaters';
 import { useSelector, useDispatch } from 'react-redux';
 
 import pink from '@material-ui/core/colors/pink';
 import teal from '@material-ui/core/colors/teal';
 import SendIcon from '@material-ui/icons/Send';
 
-
-//  class PlantInput extends React.Component {
  const PlantInput = ({ plant, handleSubmit }) => {
 
     const [plantForm, setPlantForm] = useState({
@@ -21,86 +17,50 @@ import SendIcon from '@material-ui/icons/Send';
                                       water: "1",
                                       light: "1"
                                     });
-                        
+    
     const dispatch = useDispatch();
     const lights = useSelector((state) => state.lights)
+    console.log(lights)
     const waters = useSelector((state) => state.waters)
 
     useEffect(() => {
-       dispatch(fetchLights());
-       dispatch(fetchWaters());
        plant && (
-           setPlantForm({
-               ...plant.attributes,
+           setPlantForm(prevState => ({
+               ...prevState,
                water: "" + plant.attributes.water.level,
                light: "" + plant.attributes.light.level
-           })
+           }))
        )
-    }, [plant, lights, waters, dispatch])
+    }, [plant, lights, waters, dispatch, setPlantForm])
 
-    // componentDidMount() { 
-    //     this.props.fetchLights()
-    //     this.props.fetchWaters()
-    //     this.props.plant && (
-    //         this.setState({
-    //             ...this.props.plant.attributes,
-    //             water: "" + this.props.plant.attributes.water.level,
-    //             light: "" + this.props.plant.attributes.light.level
-    //         })
-    //     )
-    // }
-
-    // state = {
-    //     name: "",
-    //     aka: "",
-    //     image_url: "",
-    //     description: "",
-    //     size_pot: "",
-    //     pet_friendly: false,
-    //     water: "1",
-    //     light: "1"
-    // }
     const handleChange = (e) => {
-        setPlantForm({
+        setPlantForm(prevState => ({
+          ...prevState,
           [e.target.name]: e.target.value
-        })
+        }));
      }
-    // handleChange = (e) => {
-    //    this.setState({
-    //      [e.target.name]: e.target.value
-    //    })
-    // }
+
     const handleChecked = (e) => {
-        setPlantForm({
+        setPlantForm(prevState => ({
+          ...prevState,
           pet_friendly: e.target.checked
-        })
+        }))
     }
-    // handleChecked = (e) => {
-    //     this.setState({
-    //       pet_friendly: e.target.checked
-    //     })
-    // }
     
     const handleWaterLevel = (e) => {
-        setPlantForm({
+        setPlantForm(prevState => ({
+          ...prevState,
           water: e.target.value
-        })
+        }))
     }
-    // handleWaterLevel = (e) => {
-    //     this.setState({
-    //       water: e.target.value
-    //     })
-    // }
+
     const handleLightLevel = (e) => {
-        setPlantForm({
+        setPlantForm(prevState => ({
+          ...prevState,
           light: e.target.value
-        })
+        }))
     }
-    // handleLightLevel = (e) => {
-    //     this.setState({
-    //       light: e.target.value
-    //     })
-    // }
+
     const onSubmit = (e) => {
         e.preventDefault();
         handleSubmit(plantForm);
@@ -115,27 +75,9 @@ import SendIcon from '@material-ui/icons/Send';
             light: "1"
          })
     }
-    // onSubmit = (e) => {
-    //     e.preventDefault();
-    //     this.props.handleSubmit(this.state);
-    //     this.setState({
-    //         name: "",
-    //         aka: "",
-    //         image_url: "",
-    //         description: "",
-    //         size_pot: "",
-    //         pet_friendly: false,
-    //         water: "1",
-    //         light: "1"
-    //      })
-    // }
 
-    
-   
-
-    // render() {
         return (
-               <form style={{ backgroundColor: teal[900], color: pink[100], padding: '30px', width:'35%', margin:'auto', marginTop:'100px', fontFamily: 'Roboto' }} >
+               <form style={{ backgroundColor: teal[900], color: pink[100], padding: '30px', width:'35%', margin:'100px auto', fontFamily: 'Roboto' }} >
                    <label>Plant Name: </label>
                    <input type="text" placeholder="name" name="name" value={plantForm.name} onChange={handleChange}/><br/>
                    <br />
@@ -175,15 +117,5 @@ import SendIcon from '@material-ui/icons/Send';
                  
                </form>
         )
-    // }
 }
-
-// const mapStateToProps = state => {
-//     return {
-//         lights: state.lights,
-//         waters: state.waters
-//     }
-// }
-
-
 export default PlantInput;
