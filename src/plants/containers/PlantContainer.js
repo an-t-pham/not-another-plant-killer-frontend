@@ -6,12 +6,13 @@ import PlantInput from '../PlantInput';
 import { editPlant } from '../../actions/editPlant';
 import { deletePlant } from '../../actions/deletePlant';
 
+
 import Modal from '@material-ui/core/Modal';
 import FabButton from '../../components/FabButton';
 
 
 class PlantContainer extends React.Component {
-    
+
     state = {
         showEditForm: false
     }
@@ -75,7 +76,7 @@ class PlantContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        plants: state.plants,
+        plants: state.plants
     }
 }
 
