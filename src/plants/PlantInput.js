@@ -20,7 +20,6 @@ import SendIcon from '@material-ui/icons/Send';
     
     const dispatch = useDispatch();
     const lights = useSelector((state) => state.lights)
-    console.log(lights)
     const waters = useSelector((state) => state.waters)
 
     useEffect(() => {

@@ -25,8 +25,8 @@ const styles = {
   }
 };
 
-class PlantsContainer extends React.Component {
-
+// class PlantsContainer extends React.Component {
+const PlantsContainer = () => {
   componentDidMount() { 
     this.props.fetchLights()
     this.props.fetchWaters()
@@ -57,7 +57,7 @@ class PlantsContainer extends React.Component {
       })
    }
 
-  render() {
+  // render() {
     const { classes } = this.props
 
     return (
@@ -82,15 +82,15 @@ class PlantsContainer extends React.Component {
             
        </div>
     )
-  }
+  // }
 
 }
 
-const mapStateToProps = state => {
-    return {
-        user: state.user,
-        errors: state.errors
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         user: state.user,
+//         errors: state.errors
+//     }
+// }
 
 export default connect(mapStateToProps, { addPlant, fetchWaters, fetchLights })(withStyles(styles)(PlantsContainer));
