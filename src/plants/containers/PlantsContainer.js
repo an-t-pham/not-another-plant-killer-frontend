@@ -34,9 +34,6 @@ const PlantsContainer = () => {
   }, [dispatch]);
 
   const user = useSelector(state => state.user)
-  const errors = useSelector(state => state.errors)
-
- 
   const handleSubmit = (plantData) => {
     dispatch(addPlant(plantData));
     handleClose();
