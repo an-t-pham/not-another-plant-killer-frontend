@@ -47,7 +47,7 @@ const CollectionsContainer = () => {
             <Collections collections={collections} /> 
 
             <div style={{position: 'fixed', top: '50px', right: '20px'}}>
-              <FabButton title="Create New Collection" button="add" handleAction={handleOpen} />
+              <FabButton title="Create New Collection" button="add" />
             </div>
             
                 <Modal

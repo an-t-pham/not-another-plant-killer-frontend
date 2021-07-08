@@ -12,11 +12,11 @@ import { deletePlantfromCollection } from '../../actions/deletePlantfromCollecti
 import Modal from '@material-ui/core/Modal';
 
 import FabButton from '../../components/FabButton';
-
+import useForm from '../../hooks/useForm';
 
 const CollectionContainer = ({ match, history }) => {
     const dispatch = useDispatch();
-
+    const { handleClose, open } = useForm();
     const collections = useSelector((state) => state.collections);    
     const user = useSelector((state) => state.user);  
     const plants = useSelector((state) => state.plants);  
@@ -27,22 +27,9 @@ const CollectionContainer = ({ match, history }) => {
      }
   },[user, collections.length, dispatch])
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-
   const collection = useMemo(() => {
     let collectionSlug = match && (match.params.slug);
-    let collection = collections && (collections.find(collection => collection.attributes.slug === collectionSlug)) ;
-    return collection
+    return collections && (collections.find(collection => collection.attributes.slug === collectionSlug)) ;
   }, [collections, match])
  
 
@@ -66,7 +53,7 @@ const CollectionContainer = ({ match, history }) => {
     <div>
         <Collection collection={collection} plants={plants} deletePlantfromCollection={deleteThePlantfromCollection}/>
           <div style={{position: 'fixed', top: '120px', right: '20px'}}>
-            <FabButton title="Edit Collection" button="edit" handleAction={handleOpen} right="40px" />
+            <FabButton title="Edit Collection" button="edit" right="40px" />
           </div>
             
         <Modal

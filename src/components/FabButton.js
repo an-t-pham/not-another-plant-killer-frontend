@@ -8,22 +8,25 @@ import Tooltip from '@material-ui/core/Tooltip';
 import pink from '@material-ui/core/colors/pink';
 import teal from '@material-ui/core/colors/teal';
 
+import useForm from '../hooks/useForm';
 
 
 
-const FabButton = ({title, button, handleAction}) => {
+
+const FabButton = ({title, button}) => {
+     const { handleOpen } = useForm();
      let icon;
      switch(button) {
          case 'add':
-            icon = <AddIcon onClick={handleAction} />;
+            icon = <AddIcon onClick={handleOpen} />;
             break;
 
          case 'edit':
-            icon = <EditIcon onClick={handleAction} />; 
+            icon = <EditIcon onClick={handleOpen} />; 
             break;
         
          case 'delete':
-            icon = <DeleteIcon onClick={handleAction} />; 
+            icon = <DeleteIcon onClick={handleOpen} />; 
             break;
          
          default:
