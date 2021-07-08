@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchCollections } from '../../actions/fetchCollections';
@@ -10,26 +10,17 @@ import CollectionInput from '../CollectionInput';
 import FabButton from '../../components/FabButton';
 import Modal from '@material-ui/core/Modal';
 
+import useForm from '../../hooks/useForm';
+
 
 
 const CollectionsContainer = () => {
-
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const { handleClose, open } = useForm();
 
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
   const collections = useSelector((state) => state.collections);
-
-  const handleOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
 
   useEffect(() => {
     user && (dispatch(fetchCollections(user.id)))
@@ -45,7 +36,7 @@ const CollectionsContainer = () => {
             <Collections collections={collections} /> 
 
             <div style={{position: 'fixed', top: '50px', right: '20px'}}>
-              <FabButton title="Create New Collection" button="add" handleAction={handleOpen} />
+              <FabButton title="Create New Collection" button="add" />
             </div>
             
                 <Modal

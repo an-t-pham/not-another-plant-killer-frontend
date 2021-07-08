@@ -13,10 +13,6 @@ import pink from '@material-ui/core/colors/pink';
 import teal from '@material-ui/core/colors/teal';
 
 const useStyles = makeStyles({
-  formControl: {
-    width: "100%"
-    
-  }, 
   select: {
       width: 200
   },
@@ -47,8 +43,6 @@ const useStyles = makeStyles({
       handleClose();
     }
   
-    
-
     const plantOptions = plants && availablePlants.map(plant => (
       <MenuItem name={plant.attributes.name} value={plant.id} key={`${plant.id}new`} style={{ color: pink[200] }}>{plant.attributes.name}</MenuItem>
     ));

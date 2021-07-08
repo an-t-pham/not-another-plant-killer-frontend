@@ -18,6 +18,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 
+import useForm from '../hooks/useForm';
+
 
 const useStyles = makeStyles({
   root: {
@@ -35,33 +37,21 @@ const useStyles = makeStyles({
   }
  });
 
-const Collection = ( props ) => {
+const Collection = ( { collection, plants, deletePlantfromCollection } ) => {
     const classes = useStyles();
+    const { handleClose, open } = useForm();
 
-    
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-
-  
-    const handleOpen = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-
-    if(!props.collection) return null && <Redirect to="profile/collections" />;
+    if(!collection) return null && <Redirect to="profile/collections" />;
     const text = <Typography variant="body1" style={{ color: pink[200] }}> No Plant has been added in Collection </Typography>
     
     return (
         <div> 
             <Typography variant="h4" style={{ color: pink[200], backgroundColor: teal[800], padding: '20px', marginLeft: '40px' }}>
-                {props.collection.attributes.name}
+                {collection.attributes.name}
             </Typography>
 
             <Grid container className={classes.root} justify="center" >
-              {props.collection.attributes.plants.length > 0 ? (props.collection.attributes.plants.map(plant => 
+              {collection.attributes.plants.length > 0 ? (collection.attributes.plants.map(plant => 
            <>
              <Grid key={`${plant.id}collection`} className={classes.control} item> 
              
@@ -79,7 +69,7 @@ const Collection = ( props ) => {
                       </Link>
                 
                       <Tooltip title="Delete from Collection" aria-label="delete">
-                         <DeleteIcon onClick={() => props.deletePlantfromCollection(plant)} />
+                         <DeleteIcon onClick={() => deletePlantfromCollection(plant)} />
                      </Tooltip>
 
                     </Grid>
@@ -95,14 +85,14 @@ const Collection = ( props ) => {
           </Grid>
             
           <div style={{position: 'fixed', top: '50px', right: '20px'}}>
-             <FabButton title="Add a Plant" button="add" handleAction={handleOpen} /> 
+             <FabButton title="Add a Plant" button="add"/> 
           </div>
 
              <Modal
                 open={open}
                 onClose={handleClose}
              >
-                <AddPlantToCollection collection={props.collection} plants={props.plants} handleClose={handleClose}/>
+                <AddPlantToCollection collection={collection} plants={plants} handleClose={handleClose}/>
             </Modal>
         </div>
     )
