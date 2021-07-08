@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Plants from '../Plants';
@@ -37,7 +37,7 @@ const PlantsContainer = () => {
   const errors = useSelector(state => state.errors)
 
  
-   handleSubmit = (plantData) => {
+  const handleSubmit = (plantData) => {
     dispatch(addPlant(plantData));
     handleClose();
   }
