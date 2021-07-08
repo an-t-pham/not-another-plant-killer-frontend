@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Collection from '../Collection';
 import CollectionInput  from '../CollectionInput';
 
@@ -15,73 +15,90 @@ import FabButton from '../../components/FabButton';
 
 
 
-class CollectionContainer extends React.Component {
+// class CollectionContainer extends React.Component {
+const CollectionContainer = ({ match, history }) => {
+  const dispatch = useDispatch();
 
-     componentDidUpdate() {
-       if (this.props.user && this.props.collections.length === 0) {
-         return this.props.fetchCollections(this.props.user.id)
-       } 
-     }
+  const collections = useSelector((state) => state.collections);    
+  const user = useSelector((state) => state.user);  
+  const plants = useSelector((state) => state.plants);  
 
-    
-    state = {
-        showEditForm: false
-    }
-
-    handleOpen = () => {
-      this.setState({
-        showEditForm: true
-      })
+    //  componentDidUpdate() {
+    //    if (this.props.user && this.props.collections.length === 0) {
+    //      return this.props.fetchCollections(this.props.user.id)
+    //    } 
+    //  }
+useEffect(() => {
+   if (user && collections.length === 0) {
+     return dispatch(fetchCollections(user.id))
    }
+},[])
+
+const [anchorEl, setAnchorEl] = useState(null);
+const open = Boolean(anchorEl);
+
+const handleOpen = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+
+const handleClose = () => {
+  setAnchorEl(null);
+};
+
+    // state = {
+    //     showEditForm: false
+    // }
+
+  //   handleOpen = () => {
+  //     this.setState({
+  //       showEditForm: true
+  //     })
+  //  }
   
-     handleClose = () => {
-        this.setState({
-          showEditForm: false
-        })
-     }
+  //    handleClose = () => {
+  //       this.setState({
+  //         showEditForm: false
+  //       })
+  //    }
 
 
-    findCollection = () => {
-      let collectionSlug = this.props.match && (this.props.match.params.slug);
-      let collection = this.props.collections && (this.props.collections.find(collection => collection.attributes.slug === collectionSlug)) ;
+  const collection = useMemo(() => {
+      let collectionSlug = match && (match.params.slug);
+      let collection = collections && (collections.find(collection => collection.attributes.slug === collectionSlug)) ;
       return collection
+    }, [collections, match])
+ 
+
+  const handleSubmit = (collectionData) => {
+        user && (dispatch(editCollection(user.id, collection.id, collectionData)));
+        history.push("/profile/collections");
+        handleClose();
     }
 
-     handleSubmit = (collectionData) => {
-        const collection = this.findCollection();
-        this.props.user && (this.props.editCollection(this.props.user.id, collection.id, collectionData));
-        this.props.history.push("/profile/collections");
-        this.handleClose();
-    }
-
-     deleteCollection = () => {
-        const collection = this.findCollection();
-        this.props.deleteCollection(this.props.user.id, collection.id);
-        this.props.history.push("/profile/collections");
+  const deleteCollection = () => {
+        dispatch(deleteCollection(user.id, collection.id));
+        history.push("/profile/collections");
      }
 
-     deletePlantfromCollection = (plantData) => {
-       const collection = this.findCollection();
-       this.props.user && (this.props.deletePlantfromCollection(this.props.user.id, collection.id, plantData));
+  const deletePlantfromCollection = (plantData) => {
+        user && (dispatch(deletePlantfromCollection(user.id, collection.id, plantData)));
      }
 
-  render() {
-     const collection = this.findCollection();
-
+  // render() {
     return (
       
        <div>
-            <Collection collection={collection} plants={this.props.plants} deletePlantfromCollection={this.deletePlantfromCollection}/>
+            <Collection collection={collection} plants={plants} deletePlantfromCollection={deletePlantfromCollection}/>
             <div style={{position: 'fixed', top: '120px', right: '20px'}}>
-              <FabButton title="Edit Collection" button="edit" handleAction={this.handleOpen} right="40px" />
+              <FabButton title="Edit Collection" button="edit" handleAction={handleOpen} right="40px" />
             </div>
             
             <Modal
-              open={this.state.showEditForm}
-              onClose={this.handleClose}
+              open={open}
+              onClose={handleClose}
               value={this.state.name}
             > 
-            <CollectionInput collection={collection}  handleSubmit={this.handleSubmit} /> 
+            <CollectionInput collection={collection}  handleSubmit={handleSubmit} /> 
             </Modal>
 
             <div style={{position: 'fixed', top: '190px', right: '20px'}}>
@@ -90,17 +107,17 @@ class CollectionContainer extends React.Component {
            
        </div>
     )
-  }
+  // }
 
 }
 
-const mapStateToProps = state => {
-    return {
-        collections: state.collections,
-        user: state.user,
-        plants: state.plants
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         collections: state.collections,
+//         user: state.user,
+//         plants: state.plants
+//     }
+// }
 
 
-export default connect(mapStateToProps, { fetchCollections, editCollection, deleteCollection, deletePlantfromCollection }) (CollectionContainer);
+export default CollectionContainer;
