@@ -25,7 +25,7 @@ const CollectionContainer = ({ match, history }) => {
      if (user && collections.length === 0) {
        return dispatch(fetchCollections(user.id))
      }
-  },[])
+  },[user, collections.length, dispatch])
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
