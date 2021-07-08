@@ -66,29 +66,29 @@ const handleClose = () => {
       let collectionSlug = match && (match.params.slug);
       let collection = collections && (collections.find(collection => collection.attributes.slug === collectionSlug)) ;
       return collection
-    }, [collections, match])
+  }, [collections, match])
  
 
   const handleSubmit = (collectionData) => {
-        user && (dispatch(editCollection(user.id, collection.id, collectionData)));
+        user && dispatch(editCollection(user.id, collection.id, collectionData));
         history.push("/profile/collections");
         handleClose();
-    }
+  }
 
-  const deleteCollection = () => {
-        dispatch(deleteCollection(user.id, collection.id));
+  const deleteTheCollection = () => {
+        user && dispatch(deleteCollection(user.id, collection.id));
         history.push("/profile/collections");
-     }
+  }
 
-  const deletePlantfromCollection = (plantData) => {
-        user && (dispatch(deletePlantfromCollection(user.id, collection.id, plantData)));
-     }
+  const deleteThePlantfromCollection = (plantData) => {
+        user && dispatch(deletePlantfromCollection(user.id, collection.id, plantData));
+  }
 
   // render() {
     return (
       
        <div>
-            <Collection collection={collection} plants={plants} deletePlantfromCollection={deletePlantfromCollection}/>
+            <Collection collection={collection} plants={plants} deletePlantfromCollection={deleteThePlantfromCollection}/>
             <div style={{position: 'fixed', top: '120px', right: '20px'}}>
               <FabButton title="Edit Collection" button="edit" handleAction={handleOpen} right="40px" />
             </div>
@@ -96,13 +96,12 @@ const handleClose = () => {
             <Modal
               open={open}
               onClose={handleClose}
-              value={this.state.name}
             > 
             <CollectionInput collection={collection}  handleSubmit={handleSubmit} /> 
             </Modal>
 
             <div style={{position: 'fixed', top: '190px', right: '20px'}}>
-               <FabButton title="Delete Collection" button="delete" handleAction={this.deleteCollection} right="50px" />
+               <FabButton title="Delete Collection" button="delete" handleAction={deleteTheCollection} right="50px" />
             </div>
            
        </div>
