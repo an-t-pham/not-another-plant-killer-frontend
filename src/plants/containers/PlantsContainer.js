@@ -66,4 +66,4 @@ const PlantsContainer = () => {
 
 }
 
-export default connect(mapStateToProps, { addPlant, fetchWaters, fetchLights })(withStyles(styles)(PlantsContainer));
+export default PlantsContainer;
