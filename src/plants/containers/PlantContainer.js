@@ -44,6 +44,7 @@ const PlantContainer = ( { match, history }) => {
             <Modal
               open={open}
               onClose={handleClose}
+              style={{overflow:'scroll'}}
             >
                 <PlantInput plant={plant} handleSubmit={handleSubmit} /> 
             </Modal> 

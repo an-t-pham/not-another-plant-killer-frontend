@@ -24,11 +24,11 @@ import SendIcon from '@material-ui/icons/Send';
 
     useEffect(() => {
        plant && (
-           setPlantForm(prevState => ({
-               ...prevState,
+           setPlantForm({
+               ...plant.attributes,
                water: "" + plant.attributes.water.level,
                light: "" + plant.attributes.light.level
-           }))
+           })
        )
     }, [plant, lights, waters, dispatch, setPlantForm])
 
@@ -74,7 +74,7 @@ import SendIcon from '@material-ui/icons/Send';
             light: "1"
          })
     }
-
+   console.log(plantForm)
         return (
                <form style={{ backgroundColor: teal[900], color: pink[100], padding: '30px', width:'35%', margin:'100px auto', fontFamily: 'Roboto' }} >
                    <label>Plant Name: </label>
