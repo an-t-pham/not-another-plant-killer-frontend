@@ -16,7 +16,7 @@ import useForm from '../../hooks/useForm';
 
 const CollectionContainer = ({ match, history }) => {
     const dispatch = useDispatch();
-    const { handleClose, open } = useForm();
+    const { handleOpen, handleClose, open } = useForm();
     const collections = useSelector((state) => state.collections);    
     const user = useSelector((state) => state.user);  
     const plants = useSelector((state) => state.plants);  
@@ -53,7 +53,7 @@ const CollectionContainer = ({ match, history }) => {
     <div>
         <Collection collection={collection} plants={plants} deletePlantfromCollection={deleteThePlantfromCollection}/>
           <div style={{position: 'fixed', top: '120px', right: '20px'}}>
-            <FabButton title="Edit Collection" button="edit" right="40px" />
+            <FabButton title="Edit Collection" button="edit" right="40px" handleAction={handleOpen}/>
           </div>
             
         <Modal

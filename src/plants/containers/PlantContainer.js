@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Plant from '../Plant';
 import PlantInput from '../PlantInput';
 import { editPlant } from '../../actions/editPlant';
@@ -10,75 +10,65 @@ import { deletePlant } from '../../actions/deletePlant';
 import Modal from '@material-ui/core/Modal';
 import FabButton from '../../components/FabButton';
 
+import useForm from '../../hooks/useForm';
 
-class PlantContainer extends React.Component {
+// class PlantContainer extends React.Component {
+const PlantContainer = ( { match, history }) => {
+  //   state = {
+  //       showEditForm: false
+  //   }
 
-    state = {
-        showEditForm: false
+
+  //   handleOpen = () => {
+  //     this.setState({
+  //       showEditForm: true
+  //     })
+  //   }
+
+  //  handleClose = () => {
+  //     this.setState({
+  //       showEditForm: false
+  //     })
+  //  }
+   const { handleClose, open } = useForm();
+   const dispatch = useDispatch();
+   const plants = useSelector(state => state.plants)
+   const plant = useMemo(() => {
+      let plantSlug = match && (match.params.slug);
+      return this.props.plants && (this.props.plants.find(plant => plant.attributes.slug === plantSlug)) ;
+    }, [match, plants])
+
+   const handleSubmit = (plantData) => {
+       dispatch(editPlant(plantData, plant.id));
+       history.push("/plants");
+       handleClose();
     }
 
-
-    handleOpen = () => {
-      this.setState({
-        showEditForm: true
-      })
-    }
-
-   handleClose = () => {
-      this.setState({
-        showEditForm: false
-      })
-   }
-     
-    findPlant = () => {
-      let plantSlug = this.props.match && (this.props.match.params.slug);
-      let plant = this.props.plants && (this.props.plants.find(plant => plant.attributes.slug === plantSlug)) ;
-      return plant
-    }
-
-     handleSubmit = (plantData) => {
-        const plant = this.findPlant();
-        this.props.editPlant(plantData, plant.id);
-        this.props.history.push("/plants");
-        this.handleClose();
-    }
-
-     deletePlant = () => {
-        const plant = this.findPlant();
-        this.props.deletePlant(plant.id);
-        this.props.history.push("/plants");
+    const deleteThePlant = () => {
+        dispatch(deletePlant(plant.id));
+        history.push("/plants");
      }
 
      
-
-  render() {
-     const plant = this.findPlant();
 
     return (
      
        <div>
             <Plant plant={plant}/> 
             
-            <div style={{position: 'fixed', top: '50px', right: '20px'}}><FabButton title="Edit Plant" button="edit" handleAction={this.handleOpen} /> </div>
+            <div style={{position: 'fixed', top: '50px', right: '20px'}}><FabButton title="Edit Plant" button="edit"/> </div>
             <Modal
-              open={this.state.showEditForm}
-              onClose={this.handleClose}
+              open={open}
+              onClose={handleClose}
             >
-                <PlantInput plant={plant} handleSubmit={this.handleSubmit} /> 
+                <PlantInput plant={plant} handleSubmit={handleSubmit} /> 
             </Modal> 
-            <div style={{position: 'fixed', top: '120px', right: '20px'}}><FabButton title="Delete Plant" button="delete" right="40px" handleAction={this.deletePlant} /></div>
+            <div style={{position: 'fixed', top: '120px', right: '20px'}}><FabButton title="Delete Plant" button="delete" right="40px" handleAction={deletePlant} /></div>
             
        </div>
     )
-  }
+ 
 
 }
 
-const mapStateToProps = state => {
-    return {
-        plants: state.plants
-    }
-}
-
-
-export default connect(mapStateToProps, { editPlant, deletePlant }) (PlantContainer);
+export default PlantContainer;

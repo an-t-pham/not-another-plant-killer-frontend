@@ -13,20 +13,19 @@ import useForm from '../hooks/useForm';
 
 
 
-const FabButton = ({title, button}) => {
-     const { handleOpen } = useForm();
+const FabButton = ({title, button, handleAction}) => {
      let icon;
      switch(button) {
          case 'add':
-            icon = <AddIcon onClick={handleOpen} />;
+            icon = <AddIcon onClick={handleAction} />;
             break;
 
          case 'edit':
-            icon = <EditIcon onClick={handleOpen} />; 
+            icon = <EditIcon onClick={handleAction} />; 
             break;
         
          case 'delete':
-            icon = <DeleteIcon onClick={handleOpen} />; 
+            icon = <DeleteIcon onClick={handleAction} />; 
             break;
          
          default:
