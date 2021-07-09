@@ -12,30 +12,14 @@ import FabButton from '../../components/FabButton';
 
 import useForm from '../../hooks/useForm';
 
-// class PlantContainer extends React.Component {
 const PlantContainer = ( { match, history }) => {
-  //   state = {
-  //       showEditForm: false
-  //   }
 
-
-  //   handleOpen = () => {
-  //     this.setState({
-  //       showEditForm: true
-  //     })
-  //   }
-
-  //  handleClose = () => {
-  //     this.setState({
-  //       showEditForm: false
-  //     })
-  //  }
    const { handleOpen, handleClose, open } = useForm();
    const dispatch = useDispatch();
    const plants = useSelector(state => state.plants)
    const plant = useMemo(() => {
       let plantSlug = match && (match.params.slug);
-      return this.props.plants && (this.props.plants.find(plant => plant.attributes.slug === plantSlug)) ;
+      return plants && (plants.find(plant => plant.attributes.slug === plantSlug)) ;
     }, [match, plants])
 
    const handleSubmit = (plantData) => {
