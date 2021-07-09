@@ -39,7 +39,7 @@ const useStyles = makeStyles({
 
 const Collection = ( { collection, plants, deletePlantfromCollection } ) => {
     const classes = useStyles();
-    const { handleClose, open } = useForm();
+    const { handleOpen, handleClose, open } = useForm();
 
     if(!collection) return null && <Redirect to="profile/collections" />;
     const text = <Typography variant="body1" style={{ color: pink[200] }}> No Plant has been added in Collection </Typography>
@@ -85,7 +85,7 @@ const Collection = ( { collection, plants, deletePlantfromCollection } ) => {
           </Grid>
             
           <div style={{position: 'fixed', top: '50px', right: '20px'}}>
-             <FabButton title="Add a Plant" button="add"/> 
+             <FabButton title="Add a Plant" button="add" handleAction={handleOpen}/> 
           </div>
 
              <Modal

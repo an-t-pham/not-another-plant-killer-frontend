@@ -30,7 +30,7 @@ const PlantContainer = ( { match, history }) => {
   //       showEditForm: false
   //     })
   //  }
-   const { handleClose, open } = useForm();
+   const { handleOpen, handleClose, open } = useForm();
    const dispatch = useDispatch();
    const plants = useSelector(state => state.plants)
    const plant = useMemo(() => {
@@ -56,14 +56,14 @@ const PlantContainer = ( { match, history }) => {
        <div>
             <Plant plant={plant}/> 
             
-            <div style={{position: 'fixed', top: '50px', right: '20px'}}><FabButton title="Edit Plant" button="edit"/> </div>
+            <div style={{position: 'fixed', top: '50px', right: '20px'}}><FabButton title="Edit Plant" button="edit" handleAction={handleOpen}/> </div>
             <Modal
               open={open}
               onClose={handleClose}
             >
                 <PlantInput plant={plant} handleSubmit={handleSubmit} /> 
             </Modal> 
-            <div style={{position: 'fixed', top: '120px', right: '20px'}}><FabButton title="Delete Plant" button="delete" right="40px" handleAction={deletePlant} /></div>
+            <div style={{position: 'fixed', top: '120px', right: '20px'}}><FabButton title="Delete Plant" button="delete" right="40px" handleAction={deleteThePlant} /></div>
             
        </div>
     )
