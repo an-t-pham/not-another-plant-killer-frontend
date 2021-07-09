@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 const PlantsContainer = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { handleClose, open } = useForm();
+  const { handleOpen, handleClose, open } = useForm();
   useEffect(() => {
      dispatch(fetchLights());
      dispatch(fetchWaters())
@@ -44,7 +44,7 @@ const PlantsContainer = () => {
             !user ? <CircularProgress style={{color: pink[200]}} className={classes.circle} /> : (
               <>
                  <Plants user={user}/> 
-                 <div style={{position: 'fixed', top: '50px', right: '20px'}}><FabButton title="Create New Plant" button="add" /></div>
+                 <div style={{position: 'fixed', top: '50px', right: '20px'}}><FabButton title="Create New Plant" button="add" handleAction={handleOpen}/></div>
                  
                   <Modal
                    open={open}
