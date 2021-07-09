@@ -12,7 +12,7 @@ import FabButton from '../../components/FabButton';
 
 import useForm from '../../hooks/useForm';
 
-const PlantContainer = ( { match, history }) => {
+const PlantContainer = ( { match, history } ) => {
 
    const { handleOpen, handleClose, open } = useForm();
    const dispatch = useDispatch();

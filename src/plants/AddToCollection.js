@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { addPlantToCollection } from '../actions/addPlantToCollection';
 
-import { withStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -14,7 +14,7 @@ import SendIcon from '@material-ui/icons/Send';
 import pink from '@material-ui/core/colors/pink';
 
 
-const styles = {
+const useStyles = makeStyles({
     formControl: {
         width: "100%"
         
@@ -22,50 +22,42 @@ const styles = {
       select: {
           width: 200
       },
- };
+ });
 
-class AddToCollection extends React.Component {
-    state = {
-        collectionId: "", 
-        availableCollections: []
-    };
-    
-    componentDidMount() {
-        this.setState({
-            availableCollections: this.props.collections.filter(c => !this.props.plant.attributes.collections.some(cp => cp.id === c.id))
-        })
-    }
+const AddToCollection = ( { plant, collections } ) => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const [collectionId, setCollectionId] = useState("")
+  const [availableCollections, setAvailableCollections] = useState([]);
+
+  useEffect(() => {
+     setAvailableCollections(collections.filter(c => !plant.attributes.collections.some(cp => cp.id === c.id)))
+  }, [collections, plant]);
 
   
-    handleChange = event => {
-      this.setState({
-          collectionId: event.target.value
-        });
+  const handleChange = event => {
+      setCollectionId(event.target.value);
     }
   
-    handleSubmit = event => {
+  const handleSubmit = event => {
       event.preventDefault();
-      const collection = this.props.collections.find(collection => collection.id === this.state.collectionId);
-      this.props.addPlantToCollection(collection.attributes.user_id, collection.id, this.props.plant);
-      this.setState({
-        collectionId: "",
-        availableCollections: this.state.availableCollections.filter(c => c.id !== collection.id)
-      });
+      const collection = collections.find(collection => collection.id === collectionId);
+      dispatch(addPlantToCollection(collection.attributes.user_id, collection.id, plant));
+      setCollectionId("");
+      setAvailableCollections(availableCollections.filter(c => c.id !== collection.id));
     }
     
-    collectionOptions = () => {
-            return this.state.availableCollections.map(collection => (
+    const collectionOptions = () => {
+            return availableCollections.map(collection => (
                 <MenuItem name={collection.attributes.name} value={collection.id} key={`${collection.id}new`} style={{ color: pink[200] }}>{collection.attributes.name}</MenuItem>
              ))
     }
 
-  
-    render() {
-        const { classes } = this.props;
-        const text = "No Collection has been created" ;
+    const text = "No Collection has been created" ;
       return (
         <> 
-          {  (this.props.collections.length > 0) ? 
+          {  (collections.length > 0) ? 
           <FormControl className={classes.formControl}>
               <Grid
               container
@@ -78,20 +70,20 @@ class AddToCollection extends React.Component {
                    <InputLabel id="add-to-collection" style={{ color: pink[200] }} >Add To Collection:</InputLabel>
                      <Select
                      className={classes.select}
-                     value={this.state.collectionId}
-                     onChange={this.handleChange}
+                     value={collectionId}
+                     onChange={handleChange}
                      autoWidth
                      label="Add To Collection:"
                      >  
                        <MenuItem style={{ color: pink[200] }} value="" >
                          <em>Select a Collection</em>
                        </MenuItem>
-                         {this.collectionOptions()}
+                         {collectionOptions()}
                     </Select>
                   </div>
      
 
-                 <SendIcon style={{ paddingRight: "45px", color: pink[200] }} onClick={(e) => this.handleSubmit(e)}/>
+                 <SendIcon style={{ paddingRight: "45px", color: pink[200] }} onClick={(e) => handleSubmit(e)}/>
        
              </Grid>
          
@@ -102,8 +94,7 @@ class AddToCollection extends React.Component {
             
        </>
       )
-    }
 }
 
 
-export default connect(null, { addPlantToCollection })(withStyles(styles)(AddToCollection));
+export default AddToCollection;
