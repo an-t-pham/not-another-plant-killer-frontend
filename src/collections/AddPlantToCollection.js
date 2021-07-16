@@ -64,6 +64,7 @@ const useStyles = makeStyles({
                    onChange={handleChange}
                    autoWidth
                    label="Add a Plant"
+                   style={{ color: pink[200] }}
                    >  
                      <MenuItem value="" style={{ color: pink[200] }} >
                        <em>Select a Plant</em>
