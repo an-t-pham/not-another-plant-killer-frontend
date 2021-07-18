@@ -15,11 +15,11 @@
       "semi": ["error", "always"],
       "indent": ["error", "tab"],
       "comma-dangle": ["error", "never"],
-      "padding-line-between-statements": [
-        "error",
-        { "blankLine": "always", "prev": "*", "next": "return" },
-        { "blankLine": "always", "prev": "*", "next": "const" }
-    ]
+    //   "padding-line-between-statements": [
+    //     "error",
+    //     { "blankLine": "always", "prev": "*", "next": "return" },
+    //     { "blankLine": "always", "prev": "*", "next": "const" }
+    // ]
     },
     "parserOptions": {
         "ecmaVersion": 2015
