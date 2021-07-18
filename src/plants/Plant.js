@@ -35,6 +35,7 @@ const useStyles = makeStyles({
 		maxHeight: "100%"
 	}
 });
+
 const Plant = ( {plant} ) => {
 	const classes = useStyles();
 	if(!plant) return null && <Redirect to="/plants" />;
