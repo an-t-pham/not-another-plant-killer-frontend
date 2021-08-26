@@ -17,7 +17,7 @@ const CollectionsContainer = () => {
 
 	const collections = useSelector((state) => state.collections);
 	useEffect(() => {
-		user && (dispatch(fetchCollections(user.id)));
+		user && !collections && (dispatch(fetchCollections(user.id)));
 	}, [user, collections, dispatch]);
 
 	const handleSubmit = (collectionData) => {

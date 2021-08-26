@@ -35,9 +35,9 @@ const Plants = ( { user } ) => {
 
 	const plants = useSelector(state => state.plants);
 	useEffect(() => {
-		dispatch(fetchCollections(user.id));
-		dispatch(fetchPlants());
-	}, [dispatch, user, plants]);
+		!collections && dispatch(fetchCollections(user.id));
+		!plants && dispatch(fetchPlants());
+	}, [dispatch, user, plants, collections]);
 
 	return (
 		<div>
